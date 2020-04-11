@@ -47,7 +47,7 @@ from the root of the repository.
 
 1. Clone the Xaya source code:
     ```shell
-    git clone https://github.com/xcrc/xcrc.git
+    git clone https://github.com/cryptocrowd-city/xcrc-core-wallet.git
     cd xcrc
     ```
 

@@ -26,7 +26,7 @@ enum class Fork
   /**
    * Fork done after the token sale.  This removed the requirement that the
    * main (non-fakeheader) nonce must be zero in order to resolve
-   * https://github.com/xcrc/xcrc/issues/50.
+   * https://github.com/cryptocrowd-city/xcrc-core-wallet/issues/50.
    *
    * It also increases the block reward from 1 CHI to a value calculated to
    * yield the correct total PoW supply.

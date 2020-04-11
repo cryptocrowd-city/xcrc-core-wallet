@@ -1,4 +1,4 @@
-# See https://github.com/xcrc/xcrc/issues/8#issuecomment-375992872.
+# See https://github.com/cryptocrowd-city/xcrc-core-wallet/issues/8#issuecomment-375992872.
 
 46.101.15.140
 178.62.99.51

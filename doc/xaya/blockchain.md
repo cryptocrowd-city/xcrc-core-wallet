@@ -68,7 +68,7 @@ The current parameters for `mainnet` are:
   and halves every **4.2 million** blocks, which corresponds to Bitcoin's
   halving of once every four years.  This reward was chosen to yield the
   [correct total coin
-  supply](https://github.com/xcrc/xcrc/issues/70#issuecomment-441292533)
+  supply](https://github.com/cryptocrowd-city/xcrc-core-wallet/issues/70#issuecomment-441292533)
   following the token sale.
 * The genesis block's coinbase transaction pays to a multisig address owned
   by the Xaya team.  Unlike Bitcoin and Namecoin, it is actually spendable,

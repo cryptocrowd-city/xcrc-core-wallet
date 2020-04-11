@@ -46,7 +46,7 @@ The following are developer notes on how to build Bitcoin Core on your native pl
 
 Development
 ---------------------
-The Xaya repo's [root README](https://github.com/xcrc/xcrc/blob/master/README.md) contains relevant information on the development process and automated testing.
+The Xaya repo's [root README](https://github.com/cryptocrowd-city/xcrc-core-wallet/blob/master/README.md) contains relevant information on the development process and automated testing.
 
 - [Developer Notes](developer-notes.md)
 - [Productivity Notes](productivity.md)

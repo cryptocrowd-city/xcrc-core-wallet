@@ -165,7 +165,7 @@ public:
         /* The value of ~3.8 CHI is calculated to yield the desired total
            PoW coin supply.  For the calculation, see here:
 
-           https://github.com/xcrc/xcrc/issues/70#issuecomment-441292533
+           https://github.com/cryptocrowd-city/xcrc-core-wallet/issues/70#issuecomment-441292533
         */
         consensus.initialSubsidy = 382934346;
         consensus.BIP16Height = 0;

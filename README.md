@@ -37,10 +37,10 @@ More Information
 
 XCRC Core includes the base elements required for Experienced users, Miners and Exchanges. xcrcd, xcrc-qt, xcrc-cli and the usual.
 
-You may check https://github.com/xcrc/xcrc/tree/master/doc/xcrc for more XCRC specs and additional information.
+You may check https://github.com/cryptocrowd-city/xcrc-core-wallet/tree/master/doc/xcrc for more XCRC specs and additional information.
 
 Several tutorials and more information are here:
-https://github.com/xcrc/xcrc_tutorials/wiki
+https://github.com/cryptocrowd-city/xcrc-core-wallet_tutorials/wiki
 
 For compiling on Ubuntu you can use this guide:
 https://forum.xcrc.io/topic/59-guide-building-xcrc-on-ubuntu/
@@ -52,6 +52,6 @@ https://github.com/bitcoin/bitcoin/blob/master/doc/build-unix.md
 https://github.com/bitcoin/bitcoin/blob/master/doc/build-osx.md
 
 
-Standard users should use the XCRC Electron Wallet which is a front end to xcrcd here https://github.com/xcrc/xcrc_electron
+Standard users should use the XCRC Electron Wallet which is a front end to xcrcd here https://github.com/cryptocrowd-city/xcrc-core-wallet_electron
 
 for issues with XCRC Core you can create an issue in Github or ask on the forum https://forum.xcrc.io
