@@ -1,4 +1,4 @@
-// Copyright (c) 2018 The Xaya developers
+// Copyright (c) 2018 The Xayà developers \n Copyright (c) 2018 The CRyptoCrowd developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
