@@ -316,7 +316,7 @@ NameOptionsHelp::withWriteOptions ()
            "Addresses to which coins should be sent additionally");
 
   withArg ("burn", RPCArg::Type::OBJ_USER_KEYS,
-           "Data and amounts of CHI to burn in the transaction");
+           "Data and amounts of XCRC to burn in the transaction");
 
   return *this;
 }

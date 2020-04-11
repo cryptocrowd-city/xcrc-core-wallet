@@ -915,7 +915,7 @@
     </message>
     <message>
         <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the bitcoin network, as detailed below.</source>
-        <translation>Giao dịch gần đây có thể chưa được hiển thị, và vì vậy số dư wallet của bạn có thể không dúng. Thông tin này sẽ được làm đúng khi wallet hoàn thành đồng bộ với bitcoin network, như chi tiết bên dưới.</translation>
+        <translation>Giao dịch gần đây có thể chưa được hiển thị, và vì vậy số dư wallet của bạn có thể không dúng. Thông tin này sẽ được làm đúng khi wallet hoàn thành đồng bộ với bitcoin network, như xcrc tiết bên dưới.</translation>
     </message>
     <message>
         <source>Attempting to spend bitcoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
@@ -1279,7 +1279,7 @@
     </message>
     <message>
         <source>Total of transactions that have yet to be confirmed, and do not yet count toward the spendable balance</source>
-        <translation>Tất cả giao dịch vẫn chưa được confirmed, và chưa tính vào số dư có thể chi tiêu</translation>
+        <translation>Tất cả giao dịch vẫn chưa được confirmed, và chưa tính vào số dư có thể xcrc tiêu</translation>
     </message>
     <message>
         <source>Immature:</source>
@@ -1622,7 +1622,7 @@
     </message>
     <message>
         <source>Select a peer to view detailed information.</source>
-        <translation>Chọn một peer để xem thông tin chi tiết.</translation>
+        <translation>Chọn một peer để xem thông tin xcrc tiết.</translation>
     </message>
     <message>
         <source>Whitelisted</source>
@@ -2218,7 +2218,7 @@ Lưu ý: Vì phí được tính trên cơ sở mỗi byte, nên phí "100 satos
     </message>
     <message>
         <source>To review recipient list click "Show Details..."</source>
-        <translation>Để xem nhận xét người nhận, nhấn "Xem chi tiết..."</translation>
+        <translation>Để xem nhận xét người nhận, nhấn "Xem xcrc tiết..."</translation>
     </message>
     <message>
         <source>Confirm send coins</source>

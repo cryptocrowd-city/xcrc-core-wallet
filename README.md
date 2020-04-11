@@ -14,7 +14,7 @@ What does it do?
 ----------------
 
 * Securely record and transfer arbitrary names (keys).
-* Transact CHI Coins, the digital currency (CHI).
+* Transact XCRC Coins, the digital currency (XCRC).
 * Store Data.
 * Allow creation of Tokens.
 * and more
