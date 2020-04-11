@@ -33,12 +33,12 @@ void auxMiningCheck()
   if (g_rpc_node->connman->GetNodeCount (CConnman::CONNECTIONS_ALL) == 0
         && !Params ().MineBlocksOnDemand ())
     throw JSONRPCError (RPC_CLIENT_NOT_CONNECTED,
-                        "Xaya is not connected!");
+                        "CRyptoCrowd is not connected!");
 
   if (::ChainstateActive ().IsInitialBlockDownload ()
         && !Params ().MineBlocksOnDemand ())
     throw JSONRPCError (RPC_CLIENT_IN_INITIAL_DOWNLOAD,
-                        "Xaya is downloading blocks...");
+                        "CRyptoCrowd is downloading blocks...");
 }
 
 }  // anonymous namespace

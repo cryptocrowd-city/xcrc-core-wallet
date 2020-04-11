@@ -85,7 +85,7 @@ BOOST_AUTO_TEST_CASE(GetFeeTest)
     // Maximum size in bytes, should not crash
     CFeeRate(MAX_MONEY, std::numeric_limits<size_t>::max() >> 1).GetFeePerK();
 
-    /* Test for the special handling of overflows in Xaya.  */
+    /* Test for the special handling of overflows in CRyptoCrowd.  */
     BOOST_CHECK(CFeeRate(MAX_MONEY, 1) == CFeeRate(MAX_MONEY));
     BOOST_CHECK(CFeeRate(MAX_MONEY, 1000) == CFeeRate(MAX_MONEY));
     BOOST_CHECK(CFeeRate(MAX_MONEY, 2000) == CFeeRate(MAX_MONEY / 2));

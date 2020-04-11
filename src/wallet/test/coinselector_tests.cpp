@@ -294,7 +294,7 @@ BOOST_AUTO_TEST_CASE(bnb_search_test)
         wallet->LoadWallet(firstRun);
         wallet->SetupLegacyScriptPubKeyMan();
 
-        /* In Xaya, the minimum / default wallet version already supports HD,
+        /* In CRyptoCrowd, the minimum / default wallet version already supports HD,
            unlike upstream Bitcoin/Namecoin.  Thus we have to set an HD seed
            as well, otherwise the wallet won't generate keys.  */
         {

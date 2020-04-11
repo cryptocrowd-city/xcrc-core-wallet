@@ -271,7 +271,7 @@ SKIPPED = [
     'mempool_expiry.py',
     # Disabled, as they take too long with neoscrypt (they mine a lot of
     # blocks).  They are also not relevant, since all BIP34-activated forks
-    # are active from the start in Xaya.
+    # are active from the start in CRyptoCrowd.
     'feature_dersig.py',
     'feature_cltv.py',
 ]

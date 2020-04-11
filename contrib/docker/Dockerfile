@@ -1,4 +1,4 @@
-# Builds a Docker image that has Xaya Core (and all its dependencies)
+# Builds a Docker image that has CRyptoCrowd Core (and all its dependencies)
 # installed.  It allows running xcrcd, xcrc-cli and xcrc-tx when executed.
 #
 # The Docker build with this file should be run from the source repository
@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install -y \
   libzmq3-dev \
   pkg-config
 
-# Build and install Xaya Core itself.  Make sure to clean up any build artefacts
+# Build and install CRyptoCrowd Core itself.  Make sure to clean up any build artefacts
 # that may have been copied over from the host machine.
 WORKDIR /usr/src/xcrc
 COPY . .
@@ -49,7 +49,7 @@ RUN apt-get update && apt-get install -y \
   libevent-pthreads-2.1-6 \
   libzmq5
 COPY --from=build /usr/local/bin/stripped /usr/local/bin/
-LABEL description="Debian-based image with Xaya Core and utilities."
+LABEL description="Debian-based image with CRyptoCrowd Core and utilities."
 
 # Set up the runtime environment.
 RUN  useradd xcrc \

@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2020 The Xaya developers
+// Copyright (c) 2018-2020 The CRyptoCrowd developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -336,7 +336,7 @@ game_sendupdates (const JSONRPCRequest& request)
 
   return result;
 #else // ENABLE_ZMQ
-  throw JSONRPCError (RPC_MISC_ERROR, "ZMQ is not built into Xaya");
+  throw JSONRPCError (RPC_MISC_ERROR, "ZMQ is not built into CRyptoCrowd");
 #endif // ENABLE_ZMQ
 }
 
@@ -396,7 +396,7 @@ trackedgames (const JSONRPCRequest& request)
 
   return NullUniValue;
 #else // ENABLE_ZMQ
-  throw JSONRPCError (RPC_MISC_ERROR, "ZMQ is not built into Xaya");
+  throw JSONRPCError (RPC_MISC_ERROR, "ZMQ is not built into CRyptoCrowd");
 #endif // ENABLE_ZMQ
 }
 

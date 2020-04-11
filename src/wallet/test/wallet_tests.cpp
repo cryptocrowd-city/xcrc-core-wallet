@@ -460,7 +460,7 @@ public:
         bool firstRun;
         wallet->LoadWallet(firstRun);
 
-        /* In Xaya, the minimum / default wallet version already supports HD,
+        /* In CRyptoCrowd, the minimum / default wallet version already supports HD,
            unlike upstream Bitcoin/Namecoin.  Thus we have to set an HD seed
            as well, otherwise the wallet won't generate keys.  */
         {

@@ -42,7 +42,7 @@ static const int TOOLTIP_WRAP_THRESHOLD = 80;
 /* Number of frames in spinner animation */
 #define SPINNER_FRAMES 36
 
-#define QAPP_ORG_NAME "Xaya"
+#define QAPP_ORG_NAME "CRyptoCrowd"
 #define QAPP_ORG_DOMAIN "xcrc.io"
 #define QAPP_APP_NAME_DEFAULT "Xaya-Qt"
 #define QAPP_APP_NAME_TESTNET "Xaya-Qt-testnet"

@@ -302,7 +302,7 @@ class MempoolAcceptanceTest(BitcoinTestFramework):
             result_expected=[{'txid': tx.rehash(), 'allowed': False, 'reject-reason': 'dust'}],
             rawtxs=[tx.serialize().hex()],
         )
-        # Unlike upstream, Xaya allows multiple OP_RETURN outputs.  So no test for this.
+        # Unlike upstream, CRyptoCrowd allows multiple OP_RETURN outputs.  So no test for this.
 
         self.log.info('A timelocked transaction')
         tx.deserialize(BytesIO(hex_str_to_bytes(raw_tx_reference)))

@@ -150,7 +150,7 @@ void TestGUI(interfaces::Node& node)
         wallet->SetAddressBook(GetDestinationForKey(test.coinbaseKey.GetPubKey(), wallet->m_default_address_type), "", "receive");
         spk_man->AddKeyPubKey(test.coinbaseKey, test.coinbaseKey.GetPubKey());
         wallet->SetLastBlockProcessed(105, ::ChainActive().Tip()->GetBlockHash());
-        /* In Xaya, the minimum / default wallet version already supports HD,
+        /* In CRyptoCrowd, the minimum / default wallet version already supports HD,
            unlike upstream Bitcoin/Namecoin.  Thus we have to set an HD seed
            as well, otherwise the wallet won't generate keys.  */
         spk_man->SetHDSeed(spk_man->GenerateNewSeed());

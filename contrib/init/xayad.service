@@ -10,7 +10,7 @@
 # config file.
 
 [Unit]
-Description=Xaya Core daemon
+Description=CRyptoCrowd Core daemon
 After=network.target
 
 [Service]

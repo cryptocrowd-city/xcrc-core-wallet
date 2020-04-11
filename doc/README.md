@@ -3,13 +3,13 @@ XCRC
 
 Setup
 ---------------------
-[Xaya](https://xcrc.io/) provides the official Xaya client and it builds the backbone of the network. However, it downloads and stores the entire history of Xaya transactions; depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more.
+[CRyptoCrowd](https://xcrc.io/) provides the official CRyptoCrowd client and it builds the backbone of the network. However, it downloads and stores the entire history of CRyptoCrowd transactions; depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more.
 
 To download Namecoin Core, visit [namecoin.org](https://namecoin.org/download/).
 
 Running
 ---------------------
-The following are some helpful notes on how to run Xaya on your native platform.
+The following are some helpful notes on how to run CRyptoCrowd on your native platform.
 
 ### Unix
 
@@ -28,7 +28,7 @@ Drag Xaya-Qt to your applications folder, and then run Xaya-Qt.
 
 ### Need Help?
 
-* See the documentation at the [Xaya Site](https://xcrc.io)
+* See the documentation at the [CRyptoCrowd Site](https://xcrc.io)
 for help and more information.
 
 Building
@@ -46,7 +46,7 @@ The following are developer notes on how to build Bitcoin Core on your native pl
 
 Development
 ---------------------
-The Xaya repo's [root README](https://github.com/cryptocrowd-city/xcrc-core-wallet/blob/master/README.md) contains relevant information on the development process and automated testing.
+The CRyptoCrowd repo's [root README](https://github.com/cryptocrowd-city/xcrc-core-wallet/blob/master/README.md) contains relevant information on the development process and automated testing.
 
 - [Developer Notes](developer-notes.md)
 - [Productivity Notes](productivity.md)

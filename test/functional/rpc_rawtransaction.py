@@ -76,7 +76,7 @@ class RawTransactionsTest(BitcoinTestFramework):
         self.sync_all()
 
         # Here, upstream code checks that getrawtransactions throws an error
-        # for the genesis coinbase tx.  This is perfectly fine in Xaya.
+        # for the genesis coinbase tx.  This is perfectly fine in CRyptoCrowd.
 
         self.log.info('Check parameter types and required parameters of createrawtransaction')
         # Test `createrawtransaction` required parameters

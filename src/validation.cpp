@@ -1958,7 +1958,7 @@ bool CChainState::ConnectBlock(const CBlock& block, BlockValidationState& state,
 
     nBlocksTotal++;
 
-    /* In Xaya, the genesis block tx is spendable (premine).  Thus no
+    /* In CRyptoCrowd, the genesis block tx is spendable (premine).  Thus no
        special rule is needed here (as in Bitcoin and Namecoin).  */
 
     bool fScriptChecks = true;
@@ -1995,7 +1995,7 @@ bool CChainState::ConnectBlock(const CBlock& block, BlockValidationState& state,
     int64_t nTime1 = GetTimeMicros(); nTimeCheck += nTime1 - nTimeStart;
     LogPrint(BCLog::BENCH, "    - Sanity checks: %.2fms [%.2fs (%.2fms/blk)]\n", MILLI * (nTime1 - nTimeStart), nTimeCheck * MICRO, nTimeCheck * MILLI / nBlocksTotal);
 
-    // Xaya has BIP34 activated from the start, so there's no need for the
+    // CRyptoCrowd has BIP34 activated from the start, so there's no need for the
     // BIP30 checks.
 
     // Start enforcing BIP68 (sequence locks) and BIP112 (CHECKSEQUENCEVERIFY)
@@ -3384,7 +3384,7 @@ static bool ContextualCheckBlockHeader(const CBlockHeader& block, BlockValidatio
     assert(pindexPrev != nullptr);
     const int nHeight = pindexPrev->nHeight + 1;
 
-    /* Verify Xaya's requirement that the main block header must have zero bits
+    /* Verify CRyptoCrowd's requirement that the main block header must have zero bits
        (the difficulty is in the powdata instead).  */
     if (block.nBits != 0)
         return state.Invalid(BlockValidationResult::BLOCK_INVALID_HEADER,

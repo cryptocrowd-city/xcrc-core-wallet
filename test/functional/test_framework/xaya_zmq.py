@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-# Copyright (c) 2018-2019 The Xaya developers
+# Copyright (c) 2018-2019 The CRyptoCrowd developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-"""Framework for Xaya ZMQ tests."""
+"""Framework for CRyptoCrowd ZMQ tests."""
 
 from .test_framework import (
   BitcoinTestFramework,
@@ -20,7 +20,7 @@ import struct
 class ZmqSubscriber:
   """
   Helper class that implements subscription to one of the game ZMQ
-  notifiers of Xaya Core.
+  notifiers of CRyptoCrowd Core.
   """
 
   def __init__ (self, ctx, addr, game):

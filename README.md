@@ -1,14 +1,14 @@
-Xaya Core
+CRyptoCrowd Core
 =========
 
 https://xcrc.io
 (Formerly Chimaera)
 
-What is Xaya?
+What is CRyptoCrowd?
 -------------
 
-Xaya Core is a decentralized open source information registration and transfer system based on the Namecoin cryptocurrency. It is primarily aimed at decentralised blockchain gaming.
-This is the first layer of the Xaya Platform.
+CRyptoCrowd Core is a decentralized open source information registration and transfer system based on the Namecoin cryptocurrency. It is primarily aimed at decentralised blockchain gaming.
+This is the first layer of the CRyptoCrowd Platform.
 
 What does it do?
 ----------------
@@ -19,7 +19,7 @@ What does it do?
 * Allow creation of Tokens.
 * and more
 
-What can Xaya be used for?
+What can CRyptoCrowd be used for?
 --------------------------
 
 * Along with some of Namecoin's uses cases, it is designed especially with gaming and complex decentralised applications in mind.

@@ -59,7 +59,7 @@ constexpr const char hexPremineAddressRegtest[]
 
 /*
 The premine on testnet and mainnet is sent to a 2-of-4 multisig address.  The
-keys are held by the founding members of the Xaya team.
+keys are held by the founding members of the CRyptoCrowd team.
 
 The address is:
   DHy2615XKevE23LVRVZVxGeqxadRGyiFW4
@@ -184,7 +184,7 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
 
         // The best chain should have at least this much work.
-        // The value is the chain work of the Xaya mainnet chain at height
+        // The value is the chain work of the CRyptoCrowd mainnet chain at height
         // 1'730'000, with best block hash:
         // 1d7b45e30aaa261f63f638d26e78ed198bd8e9f5311b8d68458fb26685714098
         consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000c211132e9dd1d3ddaba8c2");
@@ -283,7 +283,7 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
 
-        // The value is the chain work of the Xaya testnet chain at height
+        // The value is the chain work of the CRyptoCrowd testnet chain at height
         // 110'000 with best block hash:
         // 01547d538737e01d81d207e7d2f4c8f2510c6b82f0ee5dd8cd6c26bed5a03d0f
         consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000e59eda1191b9");

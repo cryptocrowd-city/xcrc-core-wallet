@@ -555,13 +555,13 @@ void PrintExceptionContinue(const std::exception* pex, const char* pszThread)
 
 fs::path GetDefaultDataDir()
 {
-    // Windows < Vista: C:\Documents and Settings\Username\Application Data\Xaya
-    // Windows >= Vista: C:\Users\Username\AppData\Roaming\Xaya
-    // Mac: ~/Library/Application Support/Xaya
+    // Windows < Vista: C:\Documents and Settings\Username\Application Data\CRyptoCrowd
+    // Windows >= Vista: C:\Users\Username\AppData\Roaming\CRyptoCrowd
+    // Mac: ~/Library/Application Support/CRyptoCrowd
     // Unix: ~/.xcrc
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "Xaya";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "CRyptoCrowd";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
@@ -571,7 +571,7 @@ fs::path GetDefaultDataDir()
         pathRet = fs::path(pszHome);
 #ifdef MAC_OSX
     // Mac
-    return pathRet / "Library/Application Support/Xaya";
+    return pathRet / "Library/Application Support/CRyptoCrowd";
 #else
     // Unix
     return pathRet / ".xcrc";

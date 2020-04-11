@@ -377,7 +377,7 @@ name_show (const JSONRPCRequest& request)
 
   if (::ChainstateActive ().IsInitialBlockDownload ())
     throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD,
-                       "Xaya is downloading blocks...");
+                       "CRyptoCrowd is downloading blocks...");
 
   UniValue options(UniValue::VOBJ);
   if (request.params.size () >= 2)
@@ -438,7 +438,7 @@ name_history (const JSONRPCRequest& request)
 
   if (::ChainstateActive ().IsInitialBlockDownload ())
     throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD,
-                       "Xaya is downloading blocks...");
+                       "CRyptoCrowd is downloading blocks...");
 
   UniValue options(UniValue::VOBJ);
   if (request.params.size () >= 2)
@@ -521,7 +521,7 @@ name_scan (const JSONRPCRequest& request)
 
   if (::ChainstateActive ().IsInitialBlockDownload ())
     throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD,
-                       "Xaya is downloading blocks...");
+                       "CRyptoCrowd is downloading blocks...");
 
   UniValue options(UniValue::VOBJ);
   if (request.params.size () >= 3)

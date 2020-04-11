@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-# Copyright (c) 2018-2019 The Xaya developers
+# Copyright (c) 2018-2019 The CRyptoCrowd developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
-"""Tests the POST_ICO hard fork in Xaya."""
+"""Tests the POST_ICO hard fork in CRyptoCrowd."""
 
 from test_framework.test_framework import BitcoinTestFramework
 from test_framework.blocktools import (

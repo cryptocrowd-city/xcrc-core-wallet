@@ -43,9 +43,9 @@ from the root of the repository.
 
 **Note**: You only need Berkeley DB if the wallet is enabled (see [*Disable-wallet mode*](/doc/build-osx.md#disable-wallet-mode)).
 
-## Build Xaya
+## Build CRyptoCrowd
 
-1. Clone the Xaya source code:
+1. Clone the CRyptoCrowd source code:
     ```shell
     git clone https://github.com/cryptocrowd-city/xcrc-core-wallet.git
     cd xcrc
@@ -84,15 +84,15 @@ In this case there is no dependency on Berkeley DB 4.8.
 Mining is also possible in disable-wallet mode using the `getblocktemplate` RPC call.
 
 ## Running
-Xaya is now available at `./src/xcrcd`
+CRyptoCrowd is now available at `./src/xcrcd`
 
 Before running, you may create an empty configuration file:
 ```shell
 mkdir -p "/Users/${USER}/Library/Application Support/Bitcoin"
 
-touch "/Users/${USER}/Library/Application Support/Xaya/xcrc.conf"
+touch "/Users/${USER}/Library/Application Support/CRyptoCrowd/xcrc.conf"
 
-chmod 600 "/Users/${USER}/Library/Application Support/Xaya/xcrc.conf"
+chmod 600 "/Users/${USER}/Library/Application Support/CRyptoCrowd/xcrc.conf"
 ```
 
 The first time you run xcrcd, it will start downloading the blockchain. This process could
@@ -105,7 +105,7 @@ tail -f $HOME/Library/Application\ Support/Bitcoin/debug.log
 
 ## Other commands:
 ```shell
-./src/xcrcd -daemon      # Starts the Xaya daemon.
+./src/xcrcd -daemon      # Starts the CRyptoCrowd daemon.
 ./src/xcrc-cli --help    # Outputs a list of command-line options.
 ./src/xcrc-cli help      # Outputs a list of RPC commands when the daemon is running.
 ```
