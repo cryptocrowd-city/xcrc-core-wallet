@@ -8,9 +8,9 @@ branches:
   only:
   - master
   - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
-#  - /^deploy-.*$/
-  except:
-  - /^v\d+\.\d+\.\d+(\.\d+)?(-\S*)?$/
+  - /^travis*$/
+# except:
+#  - /^v\d+\.\d+\.\d+(\.\d+)?(-\S*)?$/
 cache:
   timeout: 1000
   ccache: true
