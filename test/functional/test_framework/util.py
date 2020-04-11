@@ -23,7 +23,7 @@ from io import BytesIO
 logger = logging.getLogger("TestFramework.utils")
 
 # Added in Namecoin for easier rebranding to other projects.
-config_file = "xaya.conf"
+config_file = "xcrc.conf"
 
 # Assert functions
 ##################

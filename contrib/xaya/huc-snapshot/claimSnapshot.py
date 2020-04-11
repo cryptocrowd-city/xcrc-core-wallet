@@ -19,7 +19,7 @@
 # applicable, e.g.
 #
 #   http://huc:password@localhost:8399
-#   http://xaya:password@localhost:8396/wallet/walletname
+#   http://xcrc:password@localhost:8396/wallet/walletname
 
 from decimal import Decimal
 import json
@@ -39,19 +39,19 @@ logging.basicConfig (level=logging.INFO, stream=sys.stderr)
 log = logging.getLogger ()
 
 if len (sys.argv) != 3:
-  sys.exit ("Usage: buildTransactions.py HUC-JSON-RPC XAYA-JSON-RPC")
+  sys.exit ("Usage: buildTransactions.py HUC-JSON-RPC XCRC-JSON-RPC")
 
 hucUrl = sys.argv[1]
-xayaUrl = sys.argv[2]
+xcrcUrl = sys.argv[2]
 
 with open (INPUT_FILE) as f:
   snapshot = json.load (f)
 
 huc = jsonrpclib.Server (hucUrl)
-xaya = jsonrpclib.Server (xayaUrl)
+xcrc = jsonrpclib.Server (xcrcUrl)
 
 # Check that the wallet is unlocked.
-for rpc in [huc, xaya]:
+for rpc in [huc, xcrc]:
   info = rpc.getwalletinfo ()
   if 'unlocked_until' in info and info['unlocked_until'] < 1000000000:
     sys.exit ("The wallets must be unlocked")
@@ -76,6 +76,6 @@ log.info ("Total CHI amount claimed: %s" % totalChi)
 
 # Import the found addresses.
 for pk in privkeys:
-  xaya.importprivkey (pk, LABEL, False)
+  xcrc.importprivkey (pk, LABEL, False)
 log.info ("Imported %d private keys.  You need to manually rescan now."
             % len (privkeys))

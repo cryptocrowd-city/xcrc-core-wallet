@@ -1,27 +1,27 @@
 #!/bin/sh -e
 
 case $1 in
-  xaya-tx)
+  xcrc-tx)
     exec "$@"
     ;;
 
-  xaya-cli)
+  xcrc-cli)
     shift
-    exec xaya-cli \
-      --datadir="/var/lib/xaya" \
+    exec xcrc-cli \
+      --datadir="/var/lib/xcrc" \
       --rpcconnect="${HOST}" \
       --rpcpassword="${RPC_PASSWORD}" \
       --rpcport="${RPC_PORT}" \
       "$@"
     ;;
 
-  xayad)
+  xcrcd)
     bin=$1
     shift
     ;;
 
   *)
-    bin=xayad
+    bin=xcrcd
     ;;
 esac
 
@@ -32,7 +32,7 @@ then
 fi
 
 exec $bin \
-  --datadir="/var/lib/xaya" \
+  --datadir="/var/lib/xcrc" \
   --rpcpassword="${RPC_PASSWORD}" \
   --rpcbind="${HOST}" \
   --rpcallowip="${RPC_ALLOW_IP}" \

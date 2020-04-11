@@ -45,7 +45,7 @@ TEST_EXIT_PASSED = 0
 TEST_EXIT_FAILED = 1
 TEST_EXIT_SKIPPED = 77
 
-TMPDIR_PREFIX = "xaya_func_test_"
+TMPDIR_PREFIX = "xcrc_func_test_"
 
 
 class SkipTest(Exception):
@@ -139,9 +139,9 @@ class BitcoinTestFramework(metaclass=BitcoinTestMetaClass):
     def parse_args(self):
         parser = argparse.ArgumentParser(usage="%(prog)s [options]")
         parser.add_argument("--nocleanup", dest="nocleanup", default=False, action="store_true",
-                            help="Leave xayads and test.* datadir on exit or error")
+                            help="Leave xcrcds and test.* datadir on exit or error")
         parser.add_argument("--noshutdown", dest="noshutdown", default=False, action="store_true",
-                            help="Don't stop xayads after the test execution")
+                            help="Don't stop xcrcds after the test execution")
         parser.add_argument("--cachedir", dest="cachedir", default=os.path.abspath(os.path.dirname(os.path.realpath(__file__)) + "/../../cache"),
                             help="Directory for caching pregenerated datadirs (default: %(default)s)")
         parser.add_argument("--tmpdir", dest="tmpdir", help="Root directory for datadirs")
@@ -159,7 +159,7 @@ class BitcoinTestFramework(metaclass=BitcoinTestMetaClass):
         parser.add_argument("--pdbonfailure", dest="pdbonfailure", default=False, action="store_true",
                             help="Attach a python debugger if test fails")
         parser.add_argument("--usecli", dest="usecli", default=False, action="store_true",
-                            help="use xaya-cli instead of RPC for all commands")
+                            help="use xcrc-cli instead of RPC for all commands")
         parser.add_argument("--perf", dest="perf", default=False, action="store_true",
                             help="profile running nodes with perf for the duration of the test")
         parser.add_argument("--valgrind", dest="valgrind", default=False, action="store_true",
@@ -181,9 +181,9 @@ class BitcoinTestFramework(metaclass=BitcoinTestMetaClass):
         config = configparser.ConfigParser()
         config.read_file(open(self.options.configfile))
         self.config = config
-        self.options.bitcoind = os.getenv("BITCOIND", default=config["environment"]["BUILDDIR"] + '/src/xayad' + config["environment"]["EXEEXT"])
-        self.options.bitcoincli = os.getenv("BITCOINCLI", default=config["environment"]["BUILDDIR"] + '/src/xaya-cli' + config["environment"]["EXEEXT"])
-        powhash.xayahash = os.getenv("XAYA-HASH", default=config["environment"]["BUILDDIR"] + '/src/xaya-hash' + config["environment"]["EXEEXT"])
+        self.options.bitcoind = os.getenv("BITCOIND", default=config["environment"]["BUILDDIR"] + '/src/xcrcd' + config["environment"]["EXEEXT"])
+        self.options.bitcoincli = os.getenv("BITCOINCLI", default=config["environment"]["BUILDDIR"] + '/src/xcrc-cli' + config["environment"]["EXEEXT"])
+        powhash.xcrchash = os.getenv("XCRC-HASH", default=config["environment"]["BUILDDIR"] + '/src/xcrc-hash' + config["environment"]["EXEEXT"])
 
         os.environ['PATH'] = os.pathsep.join([
             os.path.join(config['environment']['BUILDDIR'], 'src'),

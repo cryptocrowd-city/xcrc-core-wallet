@@ -71,7 +71,7 @@
 // Application startup time (used for uptime calculation)
 const int64_t nStartupTime = GetTime();
 
-const char * const BITCOIN_CONF_FILENAME = "xaya.conf";
+const char * const BITCOIN_CONF_FILENAME = "xcrc.conf";
 
 ArgsManager gArgs;
 
@@ -536,7 +536,7 @@ static std::string FormatException(const std::exception* pex, const char* pszThr
     char pszModule[MAX_PATH] = "";
     GetModuleFileNameA(nullptr, pszModule, sizeof(pszModule));
 #else
-    const char* pszModule = "xaya";
+    const char* pszModule = "xcrc";
 #endif
     if (pex)
         return strprintf(
@@ -558,7 +558,7 @@ fs::path GetDefaultDataDir()
     // Windows < Vista: C:\Documents and Settings\Username\Application Data\Xaya
     // Windows >= Vista: C:\Users\Username\AppData\Roaming\Xaya
     // Mac: ~/Library/Application Support/Xaya
-    // Unix: ~/.xaya
+    // Unix: ~/.xcrc
 #ifdef WIN32
     // Windows
     return GetSpecialFolderPath(CSIDL_APPDATA) / "Xaya";
@@ -574,7 +574,7 @@ fs::path GetDefaultDataDir()
     return pathRet / "Library/Application Support/Xaya";
 #else
     // Unix
-    return pathRet / ".xaya";
+    return pathRet / ".xcrc";
 #endif
 #endif
 }

@@ -254,14 +254,14 @@ BASE_SCRIPTS = [
     'name_wallet.py',
 
     # Xaya-specific tests
-    'xaya_create_burns.py',
-    'xaya_dualalgo.py',
-    'xaya_gameblocks.py',
-    'xaya_gamepending.py',
-    'xaya_postico_fork.py',
-    'xaya_premine.py',
-    'xaya_trackedgames.py',
-    'xaya_trading.py',
+    'xcrc_create_burns.py',
+    'xcrc_dualalgo.py',
+    'xcrc_gameblocks.py',
+    'xcrc_gamepending.py',
+    'xcrc_postico_fork.py',
+    'xcrc_premine.py',
+    'xcrc_trackedgames.py',
+    'xcrc_trading.py',
 ]
 
 # Tests that are currently being skipped (e. g., because of BIP9).
@@ -424,8 +424,8 @@ def run_tests(*, test_list, src_dir, build_dir, tmpdir, jobs=1, enable_coverage=
     # Warn if bitcoind is already running
     # pidof might fail or return an empty string if bitcoind is not running
     try:
-        if subprocess.check_output(["pidof", "xayad"]) not in [b'']:
-            print("%sWARNING!%s There is already a xayad process running on this system. Tests may fail unexpectedly due to resource contention!" % (BOLD[1], BOLD[0]))
+        if subprocess.check_output(["pidof", "xcrcd"]) not in [b'']:
+            print("%sWARNING!%s There is already a xcrcd process running on this system. Tests may fail unexpectedly due to resource contention!" % (BOLD[1], BOLD[0]))
     except (OSError, subprocess.SubprocessError):
         pass
 
@@ -657,7 +657,7 @@ class TestResult():
 def check_script_prefixes():
     """Check that test scripts start with one of the allowed name prefixes."""
 
-    good_prefixes_re = re.compile("^(example|feature|interface|mempool|mining|p2p|rpc|wallet|tool|framework_test|auxpow|name|xaya)_")
+    good_prefixes_re = re.compile("^(example|feature|interface|mempool|mining|p2p|rpc|wallet|tool|framework_test|auxpow|name|xcrc)_")
     bad_script_names = [script for script in ALL_SCRIPTS if good_prefixes_re.match(script) is None]
 
     if bad_script_names:

@@ -24,7 +24,7 @@ from test_framework.script import (
   OP_RETURN,
   OP_TRUE,
 )
-from test_framework.xaya_zmq import (
+from test_framework.xcrc_zmq import (
   XayaZmqTest,
   ZmqSubscriber,
 )
@@ -345,7 +345,7 @@ class GameBlocksTest (XayaZmqTest):
     # We send a tx that includes moves for two games as well as some CHI burns
     # related to the games and not related to them.  We build the transaction
     # directly, so that we can test edge cases not available with the
-    # name_update options argument.  xaya_gamepending.py verifies that the
+    # name_update options argument.  xcrc_gamepending.py verifies that the
     # ZMQ handling works with basic name_update transactions.
     #
     # The transaction also sends the name itself to a burn output.  This should

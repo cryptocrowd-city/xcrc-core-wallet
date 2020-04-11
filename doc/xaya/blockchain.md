@@ -57,7 +57,7 @@ The current parameters for `mainnet` are:
 
 * PoW mining is done based on [**triple-purpose mining**](mining.md).
 * The difficulty is updated for each block using the [**Dark Gravity Wave
-  (DGW)**](https://github.com/xayaplatform/xaya/blob/a4ebc9b0daf72c79d3997901aadef0ca6bd01085/src/test/dualalgo_tests.cpp#L29)
+  (DGW)**](https://github.com/xcrcplatform/xcrc/blob/a4ebc9b0daf72c79d3997901aadef0ca6bd01085/src/test/dualalgo_tests.cpp#L29)
   formula.
 * Blocks are scheduled to be produced, on average, every **30 seconds**
   instead of every 10 minutes.  Difficulty retargets independently for
@@ -68,7 +68,7 @@ The current parameters for `mainnet` are:
   and halves every **4.2 million** blocks, which corresponds to Bitcoin's
   halving of once every four years.  This reward was chosen to yield the
   [correct total coin
-  supply](https://github.com/xaya/xaya/issues/70#issuecomment-441292533)
+  supply](https://github.com/xcrc/xcrc/issues/70#issuecomment-441292533)
   following the token sale.
 * The genesis block's coinbase transaction pays to a multisig address owned
   by the Xaya team.  Unlike Bitcoin and Namecoin, it is actually spendable,

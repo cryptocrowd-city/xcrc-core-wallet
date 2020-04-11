@@ -106,7 +106,7 @@ static const char* DEFAULT_ASMAP_FILENAME="ip_asn.map";
 /**
  * The PID file facilities.
  */
-static const char* BITCOIN_PID_FILENAME = "xayad.pid";
+static const char* BITCOIN_PID_FILENAME = "xcrcd.pid";
 
 static fs::path GetPidFile()
 {
@@ -582,7 +582,7 @@ void SetupServerArgs()
 
 std::string LicenseInfo()
 {
-    const std::string URL_SOURCE_CODE = "<https://github.com/xaya/xaya>";
+    const std::string URL_SOURCE_CODE = "<https://github.com/xcrc/xcrc>";
 
     return CopyrightHolders(strprintf(_("Copyright (C) %i-%i").translated, 2009, COPYRIGHT_YEAR) + " ") + "\n" +
            "\n" +

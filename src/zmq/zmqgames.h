@@ -82,7 +82,7 @@ public:
 
 /**
  * ZMQ publisher that handles the attach/detach messages for the Xaya game
- * interface (see doc/xaya/interface.md).
+ * interface (see doc/xcrc/interface.md).
  */
 class ZMQGameBlocksNotifier : public ZMQGameNotifier
 {

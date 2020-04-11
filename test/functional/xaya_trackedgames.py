@@ -9,7 +9,7 @@ from test_framework.util import (
   assert_equal,
   zmq_port,
 )
-from test_framework.xaya_zmq import (
+from test_framework.xcrc_zmq import (
   XayaZmqTest,
   ZmqSubscriber,
 )

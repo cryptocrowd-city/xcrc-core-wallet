@@ -43,7 +43,7 @@ static const int TOOLTIP_WRAP_THRESHOLD = 80;
 #define SPINNER_FRAMES 36
 
 #define QAPP_ORG_NAME "Xaya"
-#define QAPP_ORG_DOMAIN "xaya.io"
+#define QAPP_ORG_DOMAIN "xcrc.io"
 #define QAPP_APP_NAME_DEFAULT "Xaya-Qt"
 #define QAPP_APP_NAME_TESTNET "Xaya-Qt-testnet"
 #define QAPP_APP_NAME_REGTEST "Xaya-Qt-regtest"

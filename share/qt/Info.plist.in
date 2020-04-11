@@ -38,7 +38,7 @@
   <true/>
 
   <key>CFBundleIdentifier</key>
-  <string>io.xaya.Xaya-Qt</string>
+  <string>io.xcrc.Xaya-Qt</string>
 
   <key>CFBundleURLTypes</key>
   <array>
@@ -46,10 +46,10 @@
       <key>CFBundleTypeRole</key>
       <string>Editor</string>
       <key>CFBundleURLName</key>
-      <string>io.xaya.XayaPayment</string>
+      <string>io.xcrc.XayaPayment</string>
       <key>CFBundleURLSchemes</key>
       <array>
-        <string>xaya</string>
+        <string>xcrc</string>
       </array>
     </dict>
   </array>

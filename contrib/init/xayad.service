@@ -1,11 +1,11 @@
 # It is not recommended to modify this file in-place, because it will
 # be overwritten during package upgrades. If you want to add further
 # options or overwrite existing ones then use
-# $ systemctl edit xayad.service
+# $ systemctl edit xcrcd.service
 # See "man systemd.service" for details.
 
 # Note that almost all daemon options could be specified in
-# /etc/xaya/xaya.conf, but keep in mind those explicitly
+# /etc/xcrc/xcrc.conf, but keep in mind those explicitly
 # specified as arguments in ExecStart= will override those in the
 # config file.
 
@@ -14,40 +14,40 @@ Description=Xaya Core daemon
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/xayad -daemon \
-                         -pid=/run/xayad/xayad.pid \
-                         -conf=/etc/xaya/xaya.conf \
-                         -datadir=/var/lib/xayad
+ExecStart=/usr/bin/xcrcd -daemon \
+                         -pid=/run/xcrcd/xcrcd.pid \
+                         -conf=/etc/xcrc/xcrc.conf \
+                         -datadir=/var/lib/xcrcd
 
 # Make sure the config directory is readable by the service user
 PermissionsStartOnly=true
-ExecStartPre=/bin/chgrp xaya /etc/xaya
+ExecStartPre=/bin/chgrp xcrc /etc/xcrc
 
 # Process management
 ####################
 
 Type=forking
-PIDFile=/run/xayad/xayad.pid
+PIDFile=/run/xcrcd/xcrcd.pid
 Restart=on-failure
 TimeoutStopSec=600
 
 # Directory creation and permissions
 ####################################
 
-# Run as xaya:xaya
-User=xaya
-Group=xaya
+# Run as xcrc:xcrc
+User=xcrc
+Group=xcrc
 
-# /run/xayad
-RuntimeDirectory=xayad
+# /run/xcrcd
+RuntimeDirectory=xcrcd
 RuntimeDirectoryMode=0710
 
-# /etc/xaya
-ConfigurationDirectory=xaya
+# /etc/xcrc
+ConfigurationDirectory=xcrc
 ConfigurationDirectoryMode=0710
 
-# /var/lib/xayad
-StateDirectory=xayad
+# /var/lib/xcrcd
+StateDirectory=xcrcd
 StateDirectoryMode=0710
 
 # Hardening measures

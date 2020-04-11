@@ -11,4 +11,4 @@ In particular, important topics are:
 * In-game trading of assets for CHI using [atomic name updates](trading.md)
 * The core daemon [interface](interface.md) for game engines
 
-You can access Xaya tutorials here > https://github.com/xaya/xaya_tutorials/wiki
+You can access Xaya tutorials here > https://github.com/xcrc/xcrc_tutorials/wiki

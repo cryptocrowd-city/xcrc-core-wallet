@@ -113,9 +113,9 @@ static int AppInitRawTx(int argc, char* argv[])
 
     if (argc < 2 || HelpRequested(gArgs)) {
         // First part of help message is specific to this utility
-        std::string strUsage = PACKAGE_NAME " xaya-tx utility version " + FormatFullVersion() + "\n\n" +
-            "Usage:  xaya-tx [options] <hex-tx> [commands]  Update hex-encoded transaction\n" +
-            "or:     xaya-tx [options] -create [commands]   Create hex-encoded transaction\n" +
+        std::string strUsage = PACKAGE_NAME " xcrc-tx utility version " + FormatFullVersion() + "\n\n" +
+            "Usage:  xcrc-tx [options] <hex-tx> [commands]  Update hex-encoded transaction\n" +
+            "or:     xcrc-tx [options] -create [commands]   Create hex-encoded transaction\n" +
             "\n";
         strUsage += gArgs.GetHelpMessage();
 

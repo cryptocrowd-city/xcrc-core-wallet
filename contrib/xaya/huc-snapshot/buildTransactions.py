@@ -45,15 +45,15 @@ rpcUrl = sys.argv[2]
 with open (dataFile) as f:
   snapshot = json.load (f)
 
-xaya = jsonrpclib.Server (rpcUrl)
+xcrc = jsonrpclib.Server (rpcUrl)
 
 # Check that the wallet is unlocked.
-info = xaya.getwalletinfo ()
+info = xcrc.getwalletinfo ()
 if 'unlocked_until' in info and info['unlocked_until'] < 1000000000:
   sys.exit ("The Xaya Core wallet must be unlocked")
 
 # Query the original CHI output that will be spent.
-originalInput = xaya.gettxout (INPUT_TXID, INPUT_VOUT)
+originalInput = xcrc.gettxout (INPUT_TXID, INPUT_VOUT)
 inputValue = Decimal (originalInput['value']).quantize (PRECISION)
 
 # Extract the address to be used for intermediate change and verify that
@@ -61,7 +61,7 @@ inputValue = Decimal (originalInput['value']).quantize (PRECISION)
 assert len (originalInput['scriptPubKey']['addresses']) == 1
 myAddress = originalInput['scriptPubKey']['addresses'][0]
 log.info ("Intermediate change will be sent to: %s" % myAddress)
-info = xaya.getaddressinfo (myAddress)
+info = xcrc.getaddressinfo (myAddress)
 assert info['ismine']
 myScriptPubKey = info['scriptPubKey']
 
@@ -96,11 +96,11 @@ def buildTx (inp, destinations):
   change -= FEE_PER_TX
   outs[myAddress] = float (change)
 
-  tx = xaya.createrawtransaction ([inp], outs)
-  tx = xaya.signrawtransactionwithwallet (tx, [inp])
+  tx = xcrc.createrawtransaction ([inp], outs)
+  tx = xcrc.signrawtransactionwithwallet (tx, [inp])
   assert tx['complete']
 
-  decoded = xaya.decoderawtransaction (tx['hex'])
+  decoded = xcrc.decoderawtransaction (tx['hex'])
   vout = None
   for ind, out in enumerate (decoded['vout']):
     if out['scriptPubKey']['hex'] == myScriptPubKey:
@@ -145,7 +145,7 @@ assert len (expectedPayments) == len (snapshot)
 
 actualPayments = {}
 for tx in txs:
-  data = xaya.decoderawtransaction (tx)
+  data = xcrc.decoderawtransaction (tx)
   foundChange = False
   for out in data['vout']:
     if out['scriptPubKey']['hex'] == myScriptPubKey:
@@ -168,7 +168,7 @@ for filename in glob.glob ("tx/*.hex"):
 
 # Save all transactions to the tx directory.
 for ind, tx in enumerate (txs):
-  data = xaya.decoderawtransaction (tx)
+  data = xcrc.decoderawtransaction (tx)
   filename = "tx/%02d_%s.hex" % ((ind + 1), data['txid'])
   with open (filename, "w") as f:
     f.write (tx)

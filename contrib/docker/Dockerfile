@@ -1,5 +1,5 @@
 # Builds a Docker image that has Xaya Core (and all its dependencies)
-# installed.  It allows running xayad, xaya-cli and xaya-tx when executed.
+# installed.  It allows running xcrcd, xcrc-cli and xcrc-tx when executed.
 #
 # The Docker build with this file should be run from the source repository
 # root file.  It will copy over the current folder as source, and thus build
@@ -23,14 +23,14 @@ RUN apt-get update && apt-get install -y \
 
 # Build and install Xaya Core itself.  Make sure to clean up any build artefacts
 # that may have been copied over from the host machine.
-WORKDIR /usr/src/xaya
+WORKDIR /usr/src/xcrc
 COPY . .
 RUN (make distclean || true) \
   && ./autogen.sh \
   && ./configure --disable-tests --disable-bench --disable-wallet \
                  --without-gui \
   && make && make install
-ARG binaries="xayad xaya-cli xaya-tx"
+ARG binaries="xcrcd xcrc-cli xcrc-tx"
 RUN mkdir /usr/local/bin/stripped && \
     for b in $binaries; do \
       echo $b; \
@@ -52,13 +52,13 @@ COPY --from=build /usr/local/bin/stripped /usr/local/bin/
 LABEL description="Debian-based image with Xaya Core and utilities."
 
 # Set up the runtime environment.
-RUN  useradd xaya \
-  && mkdir -p /var/lib/xaya \
-  && chown xaya:xaya -R /var/lib/xaya
-COPY contrib/docker/xaya.conf /var/lib/xaya/
+RUN  useradd xcrc \
+  && mkdir -p /var/lib/xcrc \
+  && chown xcrc:xcrc -R /var/lib/xcrc
+COPY contrib/docker/xcrc.conf /var/lib/xcrc/
 COPY contrib/docker/entrypoint.sh /usr/local/bin/
-USER xaya
-VOLUME ["/var/lib/xaya"]
+USER xcrc
+VOLUME ["/var/lib/xcrc"]
 ENV HOST 127.0.0.1
 ENV P2P_PORT=8394 RPC_PORT=8396 ZMQ_PORT=28555
 ENV RPC_PASSWORD=

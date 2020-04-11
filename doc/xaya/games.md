@@ -176,7 +176,7 @@ like that (i.e. `{"x": 1, "x": 2}`) as move to the game.  **Games must
 be prepared for this situation, and handle it gracefully in some
 well-defined way.**
 
-For instance, [`libxayagame`](https://github.com/xaya/libxayagame) will
+For instance, [`libxcrcgame`](https://github.com/xcrc/libxcrcgame) will
 de-dup keys (keeping only the last within each JSON object) before passing
 data on to the individual game logic.
 

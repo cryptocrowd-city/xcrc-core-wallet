@@ -10,7 +10,7 @@ from test_framework.util import (
   assert_greater_than,
   zmq_port,
 )
-from test_framework.xaya_zmq import (
+from test_framework.xcrc_zmq import (
   XayaZmqTest,
   ZmqSubscriber,
 )
@@ -29,7 +29,7 @@ def assertMove (obj, txid, name, move):
   assert_equal (obj["move"], move)
 
   # Inputs and outputs should be reported, but we do not care about the
-  # exact form for this test (this is verified in xaya_gameblocks.py in
+  # exact form for this test (this is verified in xcrc_gameblocks.py in
   # more detail).
   assert "inputs" in obj
   assert "out" in obj

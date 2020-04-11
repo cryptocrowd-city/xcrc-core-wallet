@@ -66,7 +66,7 @@
 void ForceActivation();
 #endif
 
-#define URI_SCHEME "xaya"
+#define URI_SCHEME "xcrc"
 
 namespace GUIUtil {
 
@@ -640,8 +640,8 @@ fs::path static GetAutostartFilePath()
 {
     std::string chain = gArgs.GetChainName();
     if (chain == CBaseChainParams::MAIN)
-        return GetAutostartDir() / "xaya.desktop";
-    return GetAutostartDir() / strprintf("xaya-%s.desktop", chain);
+        return GetAutostartDir() / "xcrc.desktop";
+    return GetAutostartDir() / strprintf("xcrc-%s.desktop", chain);
 }
 
 bool GetStartOnSystemStartup()

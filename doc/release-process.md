@@ -5,7 +5,7 @@ Release Process
 
 ### Before every release candidate
 
-* Update manpages, see [gen-manpages.sh](https://github.com/xaya/xaya/blob/master/contrib/devtools/README.md#gen-manpagessh).
+* Update manpages, see [gen-manpages.sh](https://github.com/xcrc/xcrc/blob/master/contrib/devtools/README.md#gen-manpagessh).
 * ( **Not in Namecoin yet.** ) Update translations (ping wumpus on IRC) see [translation_process.md](https://github.com/bitcoin/bitcoin/blob/master/doc/translation_process.md#synchronising-translations).
 * Update release candidate version in `configure.ac` (`CLIENT_VERSION_RC`).
 
@@ -65,7 +65,7 @@ Check out the source code in the following directory hierarchy.
     git clone https://github.com/namecoin/gitian.sigs.git
     #git clone https://github.com/namecoin/namecoin-detached-sigs.git # Namecoin doesn't use detached sigs yet, so don't do this.
     git clone https://github.com/devrandom/gitian-builder.git
-    git clone https://github.com/xaya/xaya.git
+    git clone https://github.com/xcrc/xcrc.git
 
 ### Write the release notes
 

@@ -1,7 +1,7 @@
 Xaya Core
 =========
 
-https://xaya.io
+https://xcrc.io
 (Formerly Chimaera)
 
 What is Xaya?
@@ -35,23 +35,23 @@ What can Xaya be used for?
 More Information
 ----------------
 
-XAYA Core includes the base elements required for Experienced users, Miners and Exchanges. xayad, xaya-qt, xaya-cli and the usual.
+XCRC Core includes the base elements required for Experienced users, Miners and Exchanges. xcrcd, xcrc-qt, xcrc-cli and the usual.
 
-You may check https://github.com/xaya/xaya/tree/master/doc/xaya for more XAYA specs and additional information.
+You may check https://github.com/xcrc/xcrc/tree/master/doc/xcrc for more XCRC specs and additional information.
 
 Several tutorials and more information are here:
-https://github.com/xaya/xaya_tutorials/wiki
+https://github.com/xcrc/xcrc_tutorials/wiki
 
 For compiling on Ubuntu you can use this guide:
-https://forum.xaya.io/topic/59-guide-building-xaya-on-ubuntu/
+https://forum.xcrc.io/topic/59-guide-building-xcrc-on-ubuntu/
 
 
-you can also follow any Bitcoin guide, just replace the repo with XAYA's:
+you can also follow any Bitcoin guide, just replace the repo with XCRC's:
 https://github.com/bitcoin/bitcoin/blob/master/doc/build-windows.md
 https://github.com/bitcoin/bitcoin/blob/master/doc/build-unix.md
 https://github.com/bitcoin/bitcoin/blob/master/doc/build-osx.md
 
 
-Standard users should use the XAYA Electron Wallet which is a front end to xayad here https://github.com/xaya/xaya_electron
+Standard users should use the XCRC Electron Wallet which is a front end to xcrcd here https://github.com/xcrc/xcrc_electron
 
-for issues with XAYA Core you can create an issue in Github or ask on the forum https://forum.xaya.io
+for issues with XCRC Core you can create an issue in Github or ask on the forum https://forum.xcrc.io

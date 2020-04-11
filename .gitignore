@@ -2,16 +2,16 @@
 
 *.exe
 *.pdb
-src/xaya
-src/xayad
-src/xaya-cli
-src/xaya-tx
-src/xaya-wallet
-src/xaya-hash
+src/xcrc
+src/xcrcd
+src/xcrc-cli
+src/xcrc-tx
+src/xcrc-wallet
+src/xcrc-hash
 src/test/fuzz
 !src/test/fuzz/*.*
-src/test/test_xaya
-src/qt/test/test_xaya-qt
+src/test/test_xcrc
+src/qt/test/test_xcrc-qt
 
 # autoreconf
 Makefile.in
@@ -110,7 +110,7 @@ ipch/
 *.qm
 Makefile
 !depends/Makefile
-src/qt/xaya-qt
+src/qt/xcrc-qt
 Xaya-Qt.app
 background.tiff*
 
