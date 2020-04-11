@@ -10,12 +10,12 @@ from test_framework.util import (
   zmq_port,
 )
 from test_framework.xcrc_zmq import (
-  XayaZmqTest,
+  CRyptoCrowdZmqTest,
   ZmqSubscriber,
 )
 
 
-class TrackedGamesTest (XayaZmqTest):
+class TrackedGamesTest (CRyptoCrowdZmqTest):
 
   def set_test_params (self):
     self.num_nodes = 1

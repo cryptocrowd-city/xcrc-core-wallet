@@ -67,7 +67,7 @@ class ZmqSubscriber:
       pass
 
 
-class XayaZmqTest (BitcoinTestFramework):
+class CRyptoCrowdZmqTest (BitcoinTestFramework):
 
   def skip_test_if_missing_module (self):
     self.skip_if_no_py3_zmq ()

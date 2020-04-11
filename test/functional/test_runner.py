@@ -253,7 +253,7 @@ BASE_SCRIPTS = [
     'name_utxo.py',
     'name_wallet.py',
 
-    # Xaya-specific tests
+    # CRyptoCrowd-specific tests
     'xcrc_create_burns.py',
     'xcrc_dualalgo.py',
     'xcrc_gameblocks.py',

@@ -44,9 +44,9 @@ static const int TOOLTIP_WRAP_THRESHOLD = 80;
 
 #define QAPP_ORG_NAME "CRyptoCrowd"
 #define QAPP_ORG_DOMAIN "xcrc.io"
-#define QAPP_APP_NAME_DEFAULT "Xaya-Qt"
-#define QAPP_APP_NAME_TESTNET "Xaya-Qt-testnet"
-#define QAPP_APP_NAME_REGTEST "Xaya-Qt-regtest"
+#define QAPP_APP_NAME_DEFAULT "CRyptoCrowd-Qt"
+#define QAPP_APP_NAME_TESTNET "CRyptoCrowd-Qt-testnet"
+#define QAPP_APP_NAME_REGTEST "CRyptoCrowd-Qt-regtest"
 
 /* One gigabyte (GB) in bytes */
 static constexpr uint64_t GB_BYTES{1000000000};

@@ -13,7 +13,7 @@ import codecs
 MAX_DATA_LEN = 80
 
 
-class XayaCreateBurnsTest (NameTestFramework):
+class CRyptoCrowdCreateBurnsTest (NameTestFramework):
 
   def set_test_params (self):
     self.setup_name_test ([["-debug"]] * 1)
@@ -107,4 +107,4 @@ class XayaCreateBurnsTest (NameTestFramework):
 
 
 if __name__ == '__main__':
-  XayaCreateBurnsTest ().main ()
+  CRyptoCrowdCreateBurnsTest ().main ()

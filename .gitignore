@@ -111,7 +111,7 @@ ipch/
 Makefile
 !depends/Makefile
 src/qt/xcrc-qt
-Xaya-Qt.app
+CRyptoCrowd-Qt.app
 background.tiff*
 
 # Qt Creator

@@ -24,7 +24,7 @@ Unpack the files into a directory, and then run xcrc-qt.exe.
 
 ### macOS
 
-Drag Xaya-Qt to your applications folder, and then run Xaya-Qt.
+Drag CRyptoCrowd-Qt to your applications folder, and then run CRyptoCrowd-Qt.
 
 ### Need Help?
 

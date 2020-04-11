@@ -11,7 +11,7 @@ from test_framework.util import (
   zmq_port,
 )
 from test_framework.xcrc_zmq import (
-  XayaZmqTest,
+  CRyptoCrowdZmqTest,
   ZmqSubscriber,
 )
 
@@ -35,7 +35,7 @@ def assertMove (obj, txid, name, move):
   assert "out" in obj
 
 
-class GamePendingTest (XayaZmqTest):
+class GamePendingTest (CRyptoCrowdZmqTest):
 
   def set_test_params (self):
     self.num_nodes = 1

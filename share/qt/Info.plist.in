@@ -29,16 +29,16 @@
   <string>????</string>
 
   <key>CFBundleExecutable</key>
-  <string>Xaya-Qt</string>
+  <string>CRyptoCrowd-Qt</string>
 
   <key>CFBundleName</key>
-  <string>Xaya-Qt</string>
+  <string>CRyptoCrowd-Qt</string>
 
   <key>LSHasLocalizedDisplayName</key>
   <true/>
 
   <key>CFBundleIdentifier</key>
-  <string>io.xcrc.Xaya-Qt</string>
+  <string>io.xcrc.CRyptoCrowd-Qt</string>
 
   <key>CFBundleURLTypes</key>
   <array>
@@ -46,7 +46,7 @@
       <key>CFBundleTypeRole</key>
       <string>Editor</string>
       <key>CFBundleURLName</key>
-      <string>io.xcrc.XayaPayment</string>
+      <string>io.xcrc.CRyptoCrowdPayment</string>
       <key>CFBundleURLSchemes</key>
       <array>
         <string>xcrc</string>

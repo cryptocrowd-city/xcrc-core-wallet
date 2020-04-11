@@ -25,7 +25,7 @@ from test_framework.script import (
   OP_TRUE,
 )
 from test_framework.xcrc_zmq import (
-  XayaZmqTest,
+  CRyptoCrowdZmqTest,
   ZmqSubscriber,
 )
 
@@ -44,7 +44,7 @@ def assertMove (obj, txid, name, move):
   assert_equal (obj["move"], move)
 
 
-class GameBlocksTest (XayaZmqTest):
+class GameBlocksTest (CRyptoCrowdZmqTest):
 
   def set_test_params (self):
     self.num_nodes = 1
