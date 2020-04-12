@@ -37,7 +37,6 @@ addons:
     - libboost-all-dev
     - libbz2-dev
     - libcap-dev
-    - libdb4.8
     - libevent-dev
     - libssl-dev
     - libtool
@@ -98,6 +97,7 @@ matrix:
         - libboost-filesystem-dev
         - libboost-test-dev
         - libboost-thread-dev
+        - libdb4.8
         - qttools5-dev-tools
         - libevent-dev
         - libqrencode-dev
