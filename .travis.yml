@@ -44,8 +44,7 @@ addons:
     - linux-libc-dev
     - miniupnpc
     - libminiupnpc-dev
-    - libdb4.8-dev 
-    - libdb4.8++-dev
+    - qttools5-dev-tools
     - pkg-config
     - python-dev
     - python-setuptools
@@ -97,7 +96,6 @@ matrix:
         packages:
         - bc
         - libprotobuf-dev
-        - qttools5-dev-tools
         - libqrencode-dev
         - python3-zmq
         - qtdeclarative5-dev
@@ -168,7 +166,7 @@ before_script:
 - GLOBAL_CONFIG="--enable-reduce-exports --prefix=$TRAVIS_BUILD_DIR/depends/$HOST"
 script:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make $MAKEJOBS -C depends HOST="$HOST";
-  depends/$HOST/native/bin/ccache --max-size=$CCACHE_SIZE; sh ./autogen.sh; ./configure
+  depends/$HOST/native/bin/ccache --max-size=$CCACHE_SIZE; sh ./autogen.sh; ./configure --disable-wallet
   --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; make $MAKEJOBS; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sh ./autogen.sh; ./configure --enable-reduce-exports;
   make deploy; fi
