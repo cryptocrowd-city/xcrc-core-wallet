@@ -1,6 +1,8 @@
 language: cpp
 dist: bionic
 os: linux
+#language: minimal
+arch: amd64
 #sudo: true
 git:
   quiet: true
@@ -19,9 +21,17 @@ cache:
   - depends/built
   - depends/work/build
   - depends/sdk-sources
+#  - $TRAVIS_BUILD_DIR/depends/built
+#  - $TRAVIS_BUILD_DIR/depends/sdk-sources
+#  - $TRAVIS_BUILD_DIR/ci/scratch/.ccache
+#  - $TRAVIS_BUILD_DIR/releases/$HOST
+#  - depends/i686-w64-mingw32
   - "$HOME/.ccache"
 #  - usr/local/Homebrew
 #    - $HOME/Library/Caches/Homebrew
+#    - /usr/local/Homebrew
+#before_cache:
+#  - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then brew cleanup; fi
 addons:
   apt:
     sources:
@@ -52,6 +62,9 @@ addons:
     - zlib1g-dev
 env:     
   global:
+#  - CI_RETRY_EXE="travis_retry"
+#  - CI_WAIT="while sleep 500; do echo .; done"
+#  - CACHE_ERR_MSG="Error! Initial build successful, but not enough time remains to run later build stages and tests. See https://docs.travis-ci.com/user/customizing-the-build#build-timeouts . Please manually re-run this job by using the travis restart button. The next run should not time out because the build cache has been saved."
   - XAYA_VERSION=0.4.0.0
   - CCACHE_COMPRESS=1
   - CCACHE_SIZE=2500M
@@ -164,7 +177,7 @@ before_install:
 install:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install ninja ccache; export PATH="/usr/local/opt/ccache/libexec:$PATH"; brew uninstall --ignore-dependencies mercurial python; brew
   bundle; brew link --overwrite --force boost@1.57; fi
-#- if [ "$PYZMQ" = "true" ]; then pyenv install 3.6.5 ; fi
+- if [ "$PYZMQ" = "true" ]; then pyenv install 3.6.5 ; fi
 - if [ "$PYZMQ" = "true" ]; then pip install pyzmq --user ; fi
 before_script:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then unset CC CXX DISPLAY; fi
@@ -172,6 +185,13 @@ before_script:
   export CPPFLAGS=-I/usr/local/opt/openssl/include; fi 
 - GLOBAL_CONFIG="--enable-reduce-exports --prefix=$TRAVIS_BUILD_DIR/depends/$HOST"
 script:
+  - export CONTINUE=1
+#  - if [ $SECONDS -gt 1200 ]; then export CONTINUE=0; fi  # Likely the depends build took very long
+#  - if [ $TRAVIS_REPO_SLUG = "cryptocrowd-city/xcrc-core-wallet" ]; then export CONTINUE=1; fi  # Whitelisted repo (90 minutes build time)
+#  - if [ $CONTINUE = "1" ]; then set -o errexit; source ./ci/test/06_script_a.sh; else set +o errexit; echo "$CACHE_ERR_MSG"; false; fi
+#  - if [ $SECONDS -gt 2000 ]; then export CONTINUE=0; fi  # Likely the build took very long; The tests take about 1000s, so we should abort if we have less than 50*60-1000=2000s left
+#  - if [ $TRAVIS_REPO_SLUG = "cryptocrowd-city/xcrc-core-wallet" ]; then export CONTINUE=1; fi  # Whitelisted repo (90 minutes build time)
+#  - if [ $CONTINUE = "1" ]; then set -o errexit; source ./ci/test/06_script_b.sh; else set +o errexit; echo "$CACHE_ERR_MSG"; false; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make $MAKEJOBS -C depends HOST="$HOST";
   depends/$HOST/native/bin/ccache --max-size=$CCACHE_SIZE; sh ./autogen.sh; ./configure
   --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; make $MAKEJOBS; fi
