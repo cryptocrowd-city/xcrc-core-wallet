@@ -99,6 +99,7 @@ matrix:
         - libboost-test-dev
         - libboost-thread-dev
         - qttools5-dev-tools
+        - libevent-dev
         - libqrencode-dev
         - python3-zmq
         - qtdeclarative5-dev
