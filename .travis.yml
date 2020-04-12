@@ -46,7 +46,6 @@ addons:
     - cmake
     - curl
     - libboost-all-dev
-    - libdb4.8
     - libbz2-dev
     - libcap-devv
     - libevent-dev
@@ -112,8 +111,8 @@ matrix:
         - libboost-filesystem-dev
         - libboost-test-dev
         - libboost-thread-dev
-#        - libdb4.8-dev
-#        - libdb4.8++-dev
+        - libdb4.8-dev
+        - libdb4.8++-dev
         - qttools5-dev-tools
         - libevent-dev
         - libqrencode-dev
