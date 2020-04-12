@@ -58,7 +58,7 @@ addons:
     - python3-zmq
     - zip
     - zlib1g-dev
-env:
+env:     
   global:
   - XAYA_VERSION=0.4.0.0
   - CCACHE_COMPRESS=1
