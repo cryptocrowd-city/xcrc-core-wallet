@@ -131,7 +131,7 @@ matrix:
 #      apt:
 #        packages:
 #        - g++-mingw-w64-i686
-#        -bc
+#        - bc
 #        - libprotobuf-dev
 #        - libqrencode-dev
 #        - linux-libc-dev:i386
@@ -150,6 +150,14 @@ matrix:
         - bc
         - g++-mingw-w64-x86-64
         - libprotobuf-dev
+        - libboost-system-dev
+        - libboost-filesystem-dev
+        - libboost-test-dev
+        - libboost-thread-dev
+        - libdb4.8
+#        - libdb4.8++-dev
+        - qttools5-dev-tools
+        - libevent-dev
         - libqrencode-dev
         - linux-libc-dev:i386
         - nsis
