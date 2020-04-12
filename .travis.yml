@@ -94,6 +94,10 @@ matrix:
         packages:
         - bc
         - libprotobuf-dev
+        - libboost-system-dev
+        - libboost-filesystem-dev
+        - libboost-test-dev
+        - libboost-thread-dev
         - qttools5-dev-tools
         - libqrencode-dev
         - python3-zmq
