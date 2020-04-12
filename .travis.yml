@@ -156,7 +156,7 @@ before_install:
 install:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install ninja ccache; export PATH="/usr/local/opt/ccache/libexec:$PATH"; brew uninstall --ignore-dependencies mercurial python; brew
   bundle; brew link --overwrite --force boost@1.57; fi
-#- if [ "$PYZMQ" = "true" ]; then pip install pyzmq --user ; fi
+#- if [ "$PYZMQ" = "true" ]; then pyenv install 3.5.6; pip install pyzmq --user ; fi
 before_script:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then unset CC CXX DISPLAY; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export LDFLAGS=-L/usr/local/opt/openssl/lib;
