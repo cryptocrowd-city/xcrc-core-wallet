@@ -1,5 +1,8 @@
 language: cpp
 dist: bionic
+os: linux
+#language: minimal
+arch: amd64
 #sudo: true
 git:
   quiet: true
@@ -18,9 +21,15 @@ cache:
   - depends/built
   - depends/work/build
   - depends/sdk-sources
+  - $TRAVIS_BUILD_DIR/depends/built
+  - $TRAVIS_BUILD_DIR/depends/sdk-sources
+  - $TRAVIS_BUILD_DIR/ci/scratch/.ccache
+  - $TRAVIS_BUILD_DIR/releases/$HOST
 #  - depends/i686-w64-mingw32
   - "$HOME/.ccache"
 #  - usr/local/Homebrew
+#    - $HOME/Library/Caches/Homebrew
+#    - /usr/local/Homebrew
 addons:
   apt:
     sources:
@@ -31,13 +40,12 @@ addons:
     - binutils
     - bsdmainutils
     - build-essential
+    - software-properties-common
     - cmake
     - curl
     - libboost-all-dev
     - libbz2-dev
-    - libcap-dev
-    - libdb4.8-dev
-    - libdb4.8++-dev
+    - libcap-devv
     - libevent-dev
     - libssl-dev
     - libtool
@@ -98,6 +106,8 @@ matrix:
         - libboost-filesystem-dev
         - libboost-test-dev
         - libboost-thread-dev
+        - libdb4.8-dev
+        - libdb4.8++-de
         - qttools5-dev-tools
         - libevent-dev
         - libqrencode-dev
