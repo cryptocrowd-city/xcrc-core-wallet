@@ -23,8 +23,8 @@ cache:
   - depends/sdk-sources
 #  - $TRAVIS_BUILD_DIR/depends/built
 #  - $TRAVIS_BUILD_DIR/depends/sdk-sources
-  - $TRAVIS_BUILD_DIR/ci/scratch/.ccache
-  - $TRAVIS_BUILD_DIR/releases/$HOST
+  - ci/scratch/.ccache
+  - releases/$HOST
 #  - depends/i686-w64-mingw32
    - $HOME/.ccache
 #  - usr/local/Homebrew
