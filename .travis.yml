@@ -44,6 +44,8 @@ addons:
     - linux-libc-dev
     - miniupnpc
     - libminiupnpc-dev
+    - libdb4.8-dev 
+    - libdb4.8++-dev
     - pkg-config
     - python-dev
     - python-setuptools
