@@ -44,7 +44,6 @@ addons:
     - linux-libc-dev
     - miniupnpc
     - libminiupnpc-dev
-    - qttools5-dev-tools
     - pkg-config
     - python-dev
     - python-setuptools
@@ -97,6 +96,7 @@ matrix:
         - bc
         - libprotobuf-dev
         - libqrencode-dev
+        - qttools5-dev-tools
         - python3-zmq
         - qtdeclarative5-dev
     env:
@@ -116,6 +116,7 @@ matrix:
         - libprotobuf-dev
         - libqrencode-dev
         - linux-libc-dev:i386
+        - qttools5-dev-tools
         - nsis
         - python3
         - qtdeclarative5-dev
@@ -161,12 +162,14 @@ install:
 #- if [ "$PYZMQ" = "true" ]; then pyenv install 3.5.6; pip install pyzmq --user ; fi
 before_script:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then unset CC CXX DISPLAY; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CPPFLAGS="$CPPFLAGS -I/usr/local/BerkeleyDB.4.8/include/; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export LDFLAGS=-L/usr/local/opt/openssl/lib;
-  export CPPFLAGS=-I/usr/local/opt/openssl/include; fi
+  export CPPFLAGS=-I/usr/local/opt/openssl/include; fi 
 - GLOBAL_CONFIG="--enable-reduce-exports --prefix=$TRAVIS_BUILD_DIR/depends/$HOST"
 script:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make $MAKEJOBS -C depends HOST="$HOST";
-  depends/$HOST/native/bin/ccache --max-size=$CCACHE_SIZE; sh ./autogen.sh; ./configure --disable-wallet
+  depends/$HOST/native/bin/ccache --max-size=$CCACHE_SIZE; sh ./autogen.sh; ./configure
+#  --disable-wallet
   --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; make $MAKEJOBS; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sh ./autogen.sh; ./configure --enable-reduce-exports;
   make deploy; fi
