@@ -150,7 +150,7 @@ before_install:
 - ll -lh
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
 #- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo update-alternatives --install /usr/bin/ld ld /usr/bin/ld.gold 20; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then chmod -x /xcrc-core-wallet/contrib/install_db4.sh; ./xcrc-core-wallet/contrib/install_db4.sh `pwd`; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then chmod -x contrib/install_db4.sh; ./contrib/install_db4.sh `pwd`; fi
 install:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install ninja ccache; export PATH="/usr/local/opt/ccache/libexec:$PATH"; brew uninstall --ignore-dependencies mercurial python; brew
   bundle; brew link --overwrite --force boost@1.57; fi
