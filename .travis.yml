@@ -1,7 +1,7 @@
-language: cpp
+#language: cpp
 dist: bionic
 os: linux
-#language: minimal
+language: minimal
 arch: amd64
 #sudo: true
 git:
@@ -26,7 +26,7 @@ cache:
 #  - $TRAVIS_BUILD_DIR/ci/scratch/.ccache
 #  - $TRAVIS_BUILD_DIR/releases/$HOST
 #  - depends/i686-w64-mingw32
-  - "$HOME/.ccache"
+#   - $HOME/.ccache
 #  - usr/local/Homebrew
 #    - $HOME/Library/Caches/Homebrew
 #    - /usr/local/Homebrew
@@ -111,15 +111,15 @@ matrix:
         - libboost-filesystem-dev
         - libboost-test-dev
         - libboost-thread-dev
-        - libdb4.8-dev
-        - libdb4.8++-dev
+        - libdb4.8
+#        - libdb4.8++-dev
         - qttools5-dev-tools
         - libevent-dev
         - libqrencode-dev
         - python3-zmq
         - qtdeclarative5-dev
     env:
-    - XAYA_CONFIG="--with-gui=qt5 --enable-reduce-exports" #--disable-wallet 
+    - XAYA_CONFIG="--with-gui=qt5 --enable-reduce-exports" # --disable-wallet 
 #    --enable-zmq --enable-glibc-back-compat LDFLAGS=-static-libstdc++"
 #    - CPPFLAGS="-DDEBUG_LOCKORDER -DENABLE_DASH_DEBUG"
     - HOST=x86_64-pc-linux-gnu
@@ -177,15 +177,15 @@ before_install:
 install:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install ninja ccache; export PATH="/usr/local/opt/ccache/libexec:$PATH"; brew uninstall --ignore-dependencies mercurial python; brew
   bundle; brew link --overwrite --force boost@1.57; fi
-- if [ "$PYZMQ" = "true" ]; then pyenv install 3.6.5 ; fi
-- if [ "$PYZMQ" = "true" ]; then pip install pyzmq --user ; fi
+#- if [ "$PYZMQ" = "true" ]; then pyenv install 3.6.5 ; fi
+#- if [ "$PYZMQ" = "true" ]; then pip install pyzmq --user ; fi
 before_script:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then unset CC CXX DISPLAY; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export LDFLAGS=-L/usr/local/opt/openssl/lib;
   export CPPFLAGS=-I/usr/local/opt/openssl/include; fi 
 - GLOBAL_CONFIG="--enable-reduce-exports --prefix=$TRAVIS_BUILD_DIR/depends/$HOST"
 script:
-  - export CONTINUE=1
+#  - export CONTINUE=1
 #  - if [ $SECONDS -gt 1200 ]; then export CONTINUE=0; fi  # Likely the depends build took very long
 #  - if [ $TRAVIS_REPO_SLUG = "cryptocrowd-city/xcrc-core-wallet" ]; then export CONTINUE=1; fi  # Whitelisted repo (90 minutes build time)
 #  - if [ $CONTINUE = "1" ]; then set -o errexit; source ./ci/test/06_script_a.sh; else set +o errexit; echo "$CACHE_ERR_MSG"; false; fi
@@ -208,7 +208,7 @@ before_deploy:
   - if [[ "$LABEL" == "win32" ]]; then cp $TRAVIS_BUILD_DIR/src/xaya-cli.exe $TRAVIS_BUILD_DIR/src/xaya-tx.exe $TRAVIS_BUILD_DIR/src/xayad.exe $TRAVIS_BUILD_DIR/deploy; cp $TRAVIS_BUILD_DIR/src/qt/xaya-qt.exe $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cp $TRAVIS_BUILD_DIR/CRyptoCrowd-Qt.dmg $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; fi
   - cd $TRAVIS_BUILD_DIR/deploy
-  - ls -lh;
+#  - ls -lh;
 #  - if [[ "$LABEL" == "ARM" ]]; then tar -zvcf xaya-bin-${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-$LABEL.tar.gz *; fi
   - if [[ "$LABEL" == "ARM" ]]; then zip -P "$DEVPW" xaya-bin-${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-$LABEL.zip *; fi
 #  - if [[ "$LABEL" == "linux64" ]]; then tar -zvcf xaya-bin-${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-$LABEL.tar.gz *; fi
