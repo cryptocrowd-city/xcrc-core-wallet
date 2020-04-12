@@ -1,6 +1,6 @@
 language: cpp
 dist: trusty
-sudo: true
+#sudo: true
 git:
   quiet: true
   depth: 5
