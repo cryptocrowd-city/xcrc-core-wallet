@@ -36,8 +36,6 @@ addons:
     - libboost-all-dev
     - libbz2-dev
     - libcap-dev
-    - libdb4.8-dev
-    - libdb4.8++-dev
     - libevent-dev
     - libssl-dev
     - libtool
@@ -94,6 +92,8 @@ matrix:
       apt:
         packages:
         - bc
+        - libdb4.8-dev
+        - libdb4.8++-dev
         - libprotobuf-dev
         - libqrencode-dev
         - qttools5-dev-tools
@@ -112,7 +112,10 @@ matrix:
     addons:
       apt:
         packages:
-        - g++-mingw-w64-i686 bc
+        - g++-mingw-w64-i686 
+        - bc
+        - libdb4.8-dev
+        - libdb4.8++-dev
         - libprotobuf-dev
         - libqrencode-dev
         - linux-libc-dev:i386
@@ -168,7 +171,7 @@ before_script:
 - GLOBAL_CONFIG="--enable-reduce-exports --prefix=$TRAVIS_BUILD_DIR/depends/$HOST"
 script:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make $MAKEJOBS -C depends HOST="$HOST";
-  depends/$HOST/native/bin/ccache --max-size=$CCACHE_SIZE; sh ./autogen.sh; ./configure --disable-wallet
+  depends/$HOST/native/bin/ccache --max-size=$CCACHE_SIZE; sh ./autogen.sh; ./configure
   --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; make $MAKEJOBS; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sh ./autogen.sh; ./configure --enable-reduce-exports;
   make deploy; fi
