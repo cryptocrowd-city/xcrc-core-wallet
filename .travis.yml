@@ -98,12 +98,12 @@ matrix:
         - python3-zmq
         - qtdeclarative5-dev
     env:
-    - XAYA_CONFIG="--enable-zmq --enable-glibc-back-compat
-      --with-gui=qt5 LDFLAGS=-static-libstdc++"
+    - XAYA_CONFIG="--with-gui=qt5" 
+#    --enable-zmq --enable-glibc-back-compat LDFLAGS=-static-libstdc++"
     - CPPFLAGS="-DDEBUG_LOCKORDER -DENABLE_DASH_DEBUG"
     - HOST=x86_64-pc-linux-gnu
     - LABEL=linux64
-    - PYZMQ=true
+#    - PYZMQ=true
     os: linux
   - name: Windows i686 32 Bit
     addons:
