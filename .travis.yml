@@ -43,6 +43,7 @@ addons:
     - libtool
     - linux-libc-dev
     - miniupnpc
+    - libminiupnpc-dev
     - pkg-config
     - python-dev
     - python-setuptools
@@ -94,6 +95,7 @@ matrix:
         packages:
         - bc
         - libprotobuf-dev
+        - qttools5-dev-tools
         - libqrencode-dev
         - python3-zmq
         - qtdeclarative5-dev
