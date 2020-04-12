@@ -94,39 +94,24 @@ matrix:
         packages:
         - bc
         - libprotobuf-dev
+        - qttools5-dev-tools
         - libqrencode-dev
         - python3-zmq
         - qtdeclarative5-dev
     env:
     - XAYA_CONFIG="--with-gui=qt5" 
 #    --enable-zmq --enable-glibc-back-compat LDFLAGS=-static-libstdc++"
-    - CPPFLAGS="-DDEBUG_LOCKORDER -DENABLE_DASH_DEBUG"
+#    - CPPFLAGS="-DDEBUG_LOCKORDER -DENABLE_DASH_DEBUG"
     - HOST=x86_64-pc-linux-gnu
     - LABEL=linux64
 #    - PYZMQ=true
     os: linux
-  - name: Windows i686 32 Bit
-    addons:
-      apt:
-        packages:
-        - g++-mingw-w64-i686 bc
-        - libprotobuf-dev
-        - libqrencode-dev
-        - linux-libc-dev:i386
-        - nsis
-        - python3
-        - qtdeclarative5-dev
-    env:
-    - XAYA_CONFIG="--with-gui=qt5"
-    - HOST=i686-w64-mingw32
-    - LABEL=win32
-    os: linux
-#  - name: Windows x86 64 Bit
+#  - name: Windows i686 32 Bit
 #    addons:
 #      apt:
 #        packages:
-#        - bc
-#        - g++-mingw-w64-x86-64
+#        - g++-mingw-w64-i686
+#        -bc
 #        - libprotobuf-dev
 #        - libqrencode-dev
 #        - linux-libc-dev:i386
@@ -134,10 +119,27 @@ matrix:
 #        - python3
 #        - qtdeclarative5-dev
 #    env:
-#    - XAYA_CONFIG="--with-gui=qt5 LDFLAGS=-Wa,-mbig-obj"
-#    - HOST=x86_64-w64-mingw32
-#    - LABEL=win64
+#    - XAYA_CONFIG="--with-gui=qt5"
+#    - HOST=i686-w64-mingw32
+#    - LABEL=win32
 #    os: linux
+  - name: Windows x86 64 Bit
+    addons:
+      apt:
+        packages:
+        - bc
+        - g++-mingw-w64-x86-64
+        - libprotobuf-dev
+        - libqrencode-dev
+        - linux-libc-dev:i386
+        - nsis
+        - python3
+        - qtdeclarative5-dev
+    env:
+    - XAYA_CONFIG="--with-gui=qt5 LDFLAGS=-Wa,-mbig-obj"
+    - HOST=x86_64-w64-mingw32
+    - LABEL=win64
+    os: linux
 #  - name: macOS x86 64 Bit
 #    cache:
 #      directories:
