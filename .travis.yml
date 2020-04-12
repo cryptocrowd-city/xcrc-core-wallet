@@ -104,7 +104,7 @@ matrix:
         - python3-zmq
         - qtdeclarative5-dev
     env:
-    - XAYA_CONFIG="--disable-wallet --enable-reduce-exports" #--with-gui=qt5 
+    - XAYA_CONFIG="--with-gui=qt5 --enable-reduce-exports" #--disable-wallet 
 #    --enable-zmq --enable-glibc-back-compat LDFLAGS=-static-libstdc++"
 #    - CPPFLAGS="-DDEBUG_LOCKORDER -DENABLE_DASH_DEBUG"
     - HOST=x86_64-pc-linux-gnu
