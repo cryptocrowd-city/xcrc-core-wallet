@@ -46,15 +46,13 @@ addons:
     - cmake
     - curl
     - libboost-all-dev
+    - libdb4.8
     - libbz2-dev
     - libcap-devv
     - libevent-dev
     - libssl-dev
     - libtool
-    - linux-libc-dev
-    - libdb4.8
-#    - libdb4.8-dev
-#    - libdb4.8++-dev
+    - linux-libc-dev 
     - miniupnpc
     - pkg-config
     - python-dev
@@ -114,6 +112,8 @@ matrix:
         - libboost-filesystem-dev
         - libboost-test-dev
         - libboost-thread-dev
+#        - libdb4.8-dev
+#        - libdb4.8++-dev
         - qttools5-dev-tools
         - libevent-dev
         - libqrencode-dev
