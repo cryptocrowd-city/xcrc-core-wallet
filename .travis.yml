@@ -48,7 +48,7 @@ addons:
     - qttools5-dev
     - qttools5-dev-tools
     - libqrencode-dev
-#    - libunivalue-dev
+    - libunivalue-dev
 env:
   global:
   - XAYA_VERSION=0.1.0.0
@@ -93,7 +93,7 @@ matrix:
       apt:
         packages:
 #        - libdb4.8
-        - univalue          
+#        - univalue          
     env:
     - XAYA_CONFIG="--enable-zmq --with-gui=qt5"
 #    - CPPFLAGS="-DDEBUG_LOCKORDER -DENABLE_DASH_DEBUG"
