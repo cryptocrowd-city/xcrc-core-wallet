@@ -24,9 +24,9 @@ cache:
 #  - $TRAVIS_BUILD_DIR/depends/built
 #  - $TRAVIS_BUILD_DIR/depends/sdk-sources
 #  - $TRAVIS_BUILD_DIR/ci/scratch/.ccache
-#  - $TRAVIS_BUILD_DIR/releases/$HOST
+  - $TRAVIS_BUILD_DIR/releases/$HOST
 #  - depends/i686-w64-mingw32
-#   - $HOME/.ccache
+   - $HOME/.ccache
 #  - usr/local/Homebrew
 #    - $HOME/Library/Caches/Homebrew
 #    - /usr/local/Homebrew
@@ -150,6 +150,14 @@ matrix:
         - bc
         - g++-mingw-w64-x86-64
         - libprotobuf-dev
+        - libboost-system-dev
+        - libboost-filesystem-dev
+        - libboost-test-dev
+        - libboost-thread-dev
+        - libdb4.8
+#        - libdb4.8++-dev
+        - qttools5-dev-tools
+        - libevent-dev
         - libqrencode-dev
         - linux-libc-dev:i386
         - nsis
