@@ -23,6 +23,8 @@ cache:
 #  - depends/sdk-sources
   - $TRAVIS_BUILD_DIR/depends/built
   - $TRAVIS_BUILD_DIR/depends/work/build
+  - $TRAVIS_BUILD_DIR/depends/$HOST
+#  - depends/$HOST/native/bin/ccache
   - $TRAVIS_BUILD_DIR/depends/sdk-sources
   - $TRAVIS_BUILD_DIR/ci/scratch/.ccache
   - $TRAVIS_BUILD_DIR/releases/$HOST
