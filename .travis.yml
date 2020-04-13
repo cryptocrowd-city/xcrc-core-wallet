@@ -157,15 +157,15 @@ matrix:
         - libboost-filesystem-dev
         - libboost-test-dev
         - libboost-thread-dev
-        - libdb4.8
+#        - libdb4.8
 #        - libdb4.8++-dev
-#        - qttools5-dev-tools
+        - qttools5-dev-tools
         - libevent-dev
-#        - libqrencode-dev
+        - libqrencode-dev
         - linux-libc-dev:i386
         - nsis
         - python3
-#        - qtdeclarative5-dev
+        - qtdeclarative5-dev
     env:
 #    - XAYA_CONFIG="--with-gui=qt5 --enable-reduce-exports LDFLAGS=-Wa,-mbig-obj"
     - XAYA_CONFIG="--disable-wallet --enable-reduce-exports LDFLAGS=-Wa,-mbig-obj" # --with-gui=qt5
