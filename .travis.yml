@@ -23,13 +23,13 @@ cache:
 #  - depends/sdk-sources
   - $TRAVIS_BUILD_DIR/depends/built
   - $TRAVIS_BUILD_DIR/depends/work/build
-#  - $TRAVIS_BUILD_DIR/depends/$HOST
-  - $TRAVIS_BUILD_DIR/depends/$HOST/native/bin/ccache
+  - $TRAVIS_BUILD_DIR/depends/$HOST
+#  - $TRAVIS_BUILD_DIR/depends/$HOST/native/bin/ccache
   - $TRAVIS_BUILD_DIR/depends/sdk-sources
 #  - $TRAVIS_BUILD_DIR/ci/scratch/.ccache
   - $TRAVIS_BUILD_DIR/releases/$HOST
 #  - depends/i686-w64-mingw32
-#   - $TRAVIS_HOME/.ccache
+#   - $TRAVIS_HOME/.ccache # Brakes parsing
 #  - usr/local/Homebrew
 #    - $HOME/Library/Caches/Homebrew
 #    - /usr/local/Homebrew
@@ -205,7 +205,7 @@ script:
 #  - if [ $TRAVIS_REPO_SLUG = "cryptocrowd-city/xcrc-core-wallet" ]; then export CONTINUE=1; fi  # Whitelisted repo (90 minutes build time)
 #  - if [ $CONTINUE = "1" ]; then set -o errexit; source ./ci/test/06_script_b.sh; else set +o errexit; echo "$CACHE_ERR_MSG"; false; fi
   - if [ $CONTINUE = "0" ]; then set +o errexit; echo "$CACHE_ERR_MSG"; false; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make $MAKEJOBS -C depends HOST="$HOST"; depends/$HOST/native/bin/ccache --max-size=$CCACHE_SIZE; fi # sh ./autogen.sh; ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; make $MAKEJOBS; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make $MAKEJOBS -C depends HOST="$HOST"; fi # depends/$HOST/native/bin/ccache --max-size=$CCACHE_SIZE; sh ./autogen.sh; ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; make $MAKEJOBS; fi
   - if [ $CONTINUE = "0" ]; then set +o errexit; echo "$CACHE_ERR_MSG"; false; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh ./autogen.sh; ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; fi
   - if [ $CONTINUE = "0" ]; then set +o errexit; echo "$CACHE_ERR_MSG"; false; fi
