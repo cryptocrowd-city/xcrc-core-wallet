@@ -48,7 +48,7 @@ addons:
     - software-properties-common
     - cmake
     - curl
-#    - libboost-all-dev
+    - libboost-all-dev
     - libbz2-dev
     - libcap-dev
     - libevent-dev
@@ -110,11 +110,11 @@ matrix:
         packages:
         - bc
         - libprotobuf-dev
-#        - libboost-system-dev
-#        - libboost-filesystem-dev
-#        - libboost-test-dev
-#        - libboost-thread-dev
-#        - libdb4.8
+        - libboost-system-dev
+        - libboost-filesystem-dev
+        - libboost-test-dev
+        - libboost-thread-dev
+        - libdb4.8
 #        - libdb4.8++-dev
         - qttools5-dev-tools
         - libevent-dev
@@ -157,7 +157,7 @@ matrix:
         - libboost-filesystem-dev
         - libboost-test-dev
         - libboost-thread-dev
-#        - libdb4.8
+        - libdb4.8
 #        - libdb4.8++-dev
         - qttools5-dev-tools
         - libevent-dev
