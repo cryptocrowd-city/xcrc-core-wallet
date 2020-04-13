@@ -211,7 +211,7 @@ script:
 ##  - if [ $CONTINUE = "0" ]; then set +o errexit; echo "$CACHE_ERR_MSG"; false; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; fi
 ##  - if [ $CONTINUE = "0" ]; then set +o errexit; echo "$CACHE_ERR_MSG"; false; fi
-#  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make $MAKEJOBS; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make $MAKEJOBS; fi
 #  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sh ./autogen.sh; ./configure --enable-reduce-exports;
 #  make deploy; fi
 before_deploy:
