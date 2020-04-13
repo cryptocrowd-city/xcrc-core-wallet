@@ -48,7 +48,7 @@ addons:
     - software-properties-common
     - cmake
     - curl
-    - libboost-all-dev
+#    - libboost-all-dev
     - libbz2-dev
     - libcap-dev
     - libevent-dev
@@ -110,11 +110,11 @@ matrix:
         packages:
         - bc
         - libprotobuf-dev
-        - libboost-system-dev
-        - libboost-filesystem-dev
-        - libboost-test-dev
-        - libboost-thread-dev
-        - libdb4.8
+#        - libboost-system-dev
+#        - libboost-filesystem-dev
+#        - libboost-test-dev
+#        - libboost-thread-dev
+#        - libdb4.8
 #        - libdb4.8++-dev
         - qttools5-dev-tools
         - libevent-dev
@@ -122,7 +122,7 @@ matrix:
         - python3-zmq
         - qtdeclarative5-dev
     env:
-    - XAYA_CONFIG="--with-gui=qt5 --enable-reduce-exports" # --disable-wallet 
+    - XAYA_CONFIG="--with-gui=qt5" # --disable-wallet 
 #    --enable-zmq --enable-glibc-back-compat LDFLAGS=-static-libstdc++"
 #    - CPPFLAGS="-DDEBUG_LOCKORDER -DENABLE_DASH_DEBUG"
     - HOST=x86_64-pc-linux-gnu
@@ -168,7 +168,7 @@ matrix:
         - qtdeclarative5-dev
     env:
 #    - XAYA_CONFIG="--with-gui=qt5 --enable-reduce-exports LDFLAGS=-Wa,-mbig-obj"
-    - XAYA_CONFIG="--disable-wallet --enable-reduce-exports LDFLAGS=-Wa,-mbig-obj" # --with-gui=qt5
+    - XAYA_CONFIG="--disable-wallet LDFLAGS=-Wa,-mbig-obj" # --with-gui=qt5
     - HOST=x86_64-w64-mingw32
     - LABEL=win64
     os: linux
