@@ -29,7 +29,7 @@ cache:
 #  - $TRAVIS_BUILD_DIR/ci/scratch/.ccache
   - $TRAVIS_BUILD_DIR/releases/$HOST
 #  - depends/i686-w64-mingw32
-   - $TRAVIS_HOME/.ccache
+#   - $TRAVIS_HOME/.ccache
 #  - usr/local/Homebrew
 #    - $HOME/Library/Caches/Homebrew
 #    - /usr/local/Homebrew
