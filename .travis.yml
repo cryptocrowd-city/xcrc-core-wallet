@@ -207,7 +207,7 @@ script:
 ##  - if [ $CONTINUE = "0" ]; then set +o errexit; echo "$CACHE_ERR_MSG"; false; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make $MAKEJOBS -C depends HOST="$HOST"; fi # depends/$HOST/native/bin/ccache --max-size=$CCACHE_SIZE; sh ./autogen.sh; ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; make $MAKEJOBS; fi
 ##  - if [ $CONTINUE = "0" ]; then set +o errexit; echo "$CACHE_ERR_MSG"; false; fi
-#  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh ./autogen.sh; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh ./autogen.sh; fi
 ##  - if [ $CONTINUE = "0" ]; then set +o errexit; echo "$CACHE_ERR_MSG"; false; fi
 #  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; fi
 ##  - if [ $CONTINUE = "0" ]; then set +o errexit; echo "$CACHE_ERR_MSG"; false; fi
