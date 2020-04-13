@@ -165,7 +165,8 @@ matrix:
         - python3
         - qtdeclarative5-dev
     env:
-    - XAYA_CONFIG="--with-gui=qt5 LDFLAGS=-Wa,-mbig-obj"
+#    - XAYA_CONFIG="--with-gui=qt5 --enable-reduce-exports LDFLAGS=-Wa,-mbig-obj"
+    - XAYA_CONFIG="--disable-wallet --enable-reduce-exports LDFLAGS=-Wa,-mbig-obj" # --with-gui=qt5
     - HOST=x86_64-w64-mingw32
     - LABEL=win64
     os: linux
