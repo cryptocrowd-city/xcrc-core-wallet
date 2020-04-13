@@ -24,6 +24,7 @@ cache:
   - $TRAVIS_BUILD_DIR/depends/built
   - $TRAVIS_BUILD_DIR/depends/work/build
   - $TRAVIS_BUILD_DIR/depends/sdk-sources
+  - $TRAVIS_BUILD_DIR/depends/$HOST
   - $TRAVIS_BUILD_DIR/ci/scratch/.ccache
   - $TRAVIS_BUILD_DIR/releases/$HOST
 #  - depends/i686-w64-mingw32
@@ -63,7 +64,7 @@ addons:
     - zlib1g-dev
 env:     
   global:
-  - CI_RETRY_EXE="travis_retry"
+#  - CI_RETRY_EXE="travis_retry"
 #  - CI_WAIT="while sleep 500; do echo .; done"
 #  - CACHE_ERR_MSG="Error! Initial build successful, but not enough time remains to run later build stages and tests. See https://docs.travis-ci.com/user/customizing-the-build#build-timeouts . Please manually re-run this job by using the travis restart button. The next run should not time out because the build cache has been saved."
   - XAYA_VERSION=0.4.0.0
@@ -120,7 +121,7 @@ matrix:
         - python3-zmq
         - qtdeclarative5-dev
     env:
-    - XAYA_CONFIG="--with-gui=qt5 --enable-reduce-exports" # --disable-wallet 
+    - XAYA_CONFIG="--with-gui=qt5" # --disable-wallet 
 #    --enable-zmq --enable-glibc-back-compat LDFLAGS=-static-libstdc++"
 #    - CPPFLAGS="-DDEBUG_LOCKORDER -DENABLE_DASH_DEBUG"
     - HOST=x86_64-pc-linux-gnu
@@ -165,8 +166,8 @@ matrix:
         - python3
         - qtdeclarative5-dev
     env:
-#    - XAYA_CONFIG="--with-gui=qt5 --enable-reduce-exports LDFLAGS=-Wa,-mbig-obj"
-    - XAYA_CONFIG="--disable-wallet --enable-reduce-exports LDFLAGS=-Wa,-mbig-obj" # --with-gui=qt5
+#    - XAYA_CONFIG="--with-gui=qt5 LDFLAGS=-Wa,-mbig-obj"
+    - XAYA_CONFIG="--disable-wallet" # --with-gui=qt5 LDFLAGS=-Wa,-mbig-obj
     - HOST=x86_64-w64-mingw32
     - LABEL=win64
     os: linux
