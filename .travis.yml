@@ -101,8 +101,7 @@ martix:
         -libqrencode-dev 
         -libboost-program-options-dev
     env:
-    - XAYA_CONFIG="--with-gui=qt5
-    --enable-zmq --enable-glibc-back-compat LDFLAGS=-static-libstdc++"
+    - XAYA_CONFIG="--with-gui=qt5 --enable-zmq"
     - CPPFLAGS="-DDEBUG_LOCKORDER -DENABLE_DASH_DEBUG"
     - HOST=x86_64-pc-linux-gnu
     - LABEL=linux64
