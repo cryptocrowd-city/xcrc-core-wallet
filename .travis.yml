@@ -85,7 +85,6 @@ jobs:
     addons:
       apt:
         packages:
-        - git 
         - libdb4.8
 #        - libdb4.8-dev 
 #        - libdb4.8++-dev 
@@ -147,7 +146,7 @@ jobs:
 #        - qtdeclarative5-dev
 #    env:
 ##    - XAYA_CONFIG="--with-gui=qt5 LDFLAGS=-Wa,-mbig-obj"
-#    - XAYA_CONFIG="--with-gui=no --disable-wallet LDFLAGS=-Wa,-mbig-obj"
+#    - XAYA_CONFIG="--without-gui --disable-wallet"
 #    - HOST=x86_64-w64-mingw32
 #    - LABEL=win64
 #    os: linux
