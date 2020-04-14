@@ -49,6 +49,7 @@ addons:
     - cmake
     - curl
     - libboost-all-dev
+    - libdb4.8
     - libbz2-dev
     - libcap-dev
     - libevent-dev
@@ -114,7 +115,7 @@ matrix:
         - libboost-filesystem-dev
         - libboost-test-dev
         - libboost-thread-dev
-        - libdb4.8
+#        - libdb4.8
 #        - libdb4.8++-dev
         - qttools5-dev-tools
         - libevent-dev
@@ -157,7 +158,7 @@ matrix:
         - libboost-filesystem-dev
         - libboost-test-dev
         - libboost-thread-dev
-        - libdb4.8
+#        - libdb4.8
 #        - libdb4.8++-dev
         - qttools5-dev-tools
         - libevent-dev
@@ -205,13 +206,13 @@ script:
 #  - if [ $TRAVIS_REPO_SLUG = "cryptocrowd-city/xcrc-core-wallet" ]; then export CONTINUE=1; fi  # Whitelisted repo (90 minutes build time)
 #  - if [ $CONTINUE = "1" ]; then set -o errexit; source ./ci/test/06_script_b.sh; else set +o errexit; echo "$CACHE_ERR_MSG"; false; fi
 ##  - if [ $CONTINUE = "0" ]; then set +o errexit; echo "$CACHE_ERR_MSG"; false; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make $MAKEJOBS -C depends HOST="$HOST"; fi # depends/$HOST/native/bin/ccache --max-size=$CCACHE_SIZE; sh ./autogen.sh; ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; make $MAKEJOBS; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make --quiet $MAKEJOBS -C depends HOST="$HOST"; fi # depends/$HOST/native/bin/ccache --max-size=$CCACHE_SIZE; sh ./autogen.sh; ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; make $MAKEJOBS; fi
 ##  - if [ $CONTINUE = "0" ]; then set +o errexit; echo "$CACHE_ERR_MSG"; false; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh ./autogen.sh; fi
 ##  - if [ $CONTINUE = "0" ]; then set +o errexit; echo "$CACHE_ERR_MSG"; false; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; fi
 ##  - if [ $CONTINUE = "0" ]; then set +o errexit; echo "$CACHE_ERR_MSG"; false; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make $MAKEJOBS; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make --quiet $MAKEJOBS; fi
 #  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sh ./autogen.sh; ./configure --enable-reduce-exports;
 #  make deploy; fi
 before_deploy:
