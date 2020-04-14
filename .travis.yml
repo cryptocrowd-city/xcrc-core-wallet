@@ -1,6 +1,6 @@
 language: cpp
 dist: bionic
-os: linux
+os: linux  
 #language: minimal
 arch: amd64
 #sudo: true
