@@ -51,8 +51,8 @@ addons:
     - curl
     - libboost-all-dev
     - libdb4.8
-    - libdb4.8-dev
-    - libdb4.8++-dev
+#    - libdb4.8-dev
+#    - libdb4.8++-dev
     - libbz2-dev
     - libcap-dev
     - libevent-dev
@@ -119,9 +119,9 @@ matrix:
         - libboost-filesystem-dev
         - libboost-test-dev
         - libboost-thread-dev
-        - libdb4.8
-        - libdb4.8-dev
-        - libdb4.8++-dev
+#        - libdb4.8
+#        - libdb4.8-dev
+#        - libdb4.8++-dev
         - qttools5-dev-tools
         - libevent-dev
         - libqrencode-dev
