@@ -16,7 +16,7 @@ cache:
   timeout: 1000
   ccache: true
   directories:
-#  - $TRAVIS_BUILD_DIR/depends/built
+  - $TRAVIS_BUILD_DIR/depends/built
 #  - $TRAVIS_BUILD_DIR/depends/work/build
   - $TRAVIS_BUILD_DIR/depends/$HOST
   - $TRAVIS_BUILD_DIR/depends/sdk-sources
