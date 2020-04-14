@@ -1,4 +1,3 @@
-#language: minimal #Shell
 language: cpp
 dist: bionic
 os: linux  
@@ -25,27 +24,27 @@ cache:
 #  - usr/local/Homebrew
 #    - $HOME/Library/Caches/Homebrew
 #    - /usr/local/Homebrew
-before_cache:
+#before_cache:
 #  - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then brew cleanup; fi
 addons:
   apt:
     sources:
-      - ppa:bitcoin/bitcoin
+    - ppa:bitcoin/bitcoin
     packages:
-  -build-essential 
-  -libtool 
-  -autotools-dev 
-  -automake 
-  -pkg-config 
-  -libssl-dev 
-  -libevent-dev 
-  -bsdmainutils 
-  -python3 
-  -libboost-system-dev 
-  -libboost-filesystem-dev 
-  -libboost-chrono-dev 
-  -libboost-test-dev 
-  -libboost-thread-dev
+    -build-essential 
+    -libtool 
+    -autotools-dev 
+    -automake 
+    -pkg-config 
+    -libssl-dev 
+    -libevent-dev 
+    -bsdmainutils 
+    -python3 
+    -libboost-system-dev 
+    -libboost-filesystem-dev 
+    -libboost-chrono-dev 
+    -libboost-test-dev 
+    -libboost-thread-dev
 env:     
   global:
   - CCACHE_COMPRESS=1
@@ -53,7 +52,7 @@ env:
   - CCACHE_CPP2=1
   - CCACHE_TEMPDIR=/tmp/.ccache-temp
   - MAKEJOBS="-s -k -j3"
-jobs:
+martix:
   include:
 #  - name: Linux ARM 32 Bit
 #    addons:
@@ -102,7 +101,7 @@ jobs:
         -libqrencode-dev 
         -libboost-program-options-dev
     env:
-    - XAYA_CONFIG="--with-gui=qt5" # --disable-wallet 
+    - XAYA_CONFIG="--with-gui=qt5
     --enable-zmq --enable-glibc-back-compat LDFLAGS=-static-libstdc++"
     - CPPFLAGS="-DDEBUG_LOCKORDER -DENABLE_DASH_DEBUG"
     - HOST=x86_64-pc-linux-gnu
