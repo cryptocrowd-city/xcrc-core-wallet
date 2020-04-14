@@ -1,9 +1,8 @@
+#language: minimal #Shell
 language: cpp
 dist: bionic
 os: linux  
-#language: minimal
 arch: amd64
-#sudo: true
 git:
   quiet: true
   depth: 5
@@ -18,68 +17,43 @@ cache:
   timeout: 1000
   ccache: true
   directories:
-#  - depends/built
-#  - depends/work/build
-#  - depends/sdk-sources
-  - $TRAVIS_BUILD_DIR/depends/built
-  - $TRAVIS_BUILD_DIR/depends/work/build
+#  - $TRAVIS_BUILD_DIR/depends/built
+#  - $TRAVIS_BUILD_DIR/depends/work/build
   - $TRAVIS_BUILD_DIR/depends/$HOST
-#  - $TRAVIS_BUILD_DIR/depends/$HOST/native/bin/ccache
   - $TRAVIS_BUILD_DIR/depends/sdk-sources
-#  - $TRAVIS_BUILD_DIR/ci/scratch/.ccache
-  - $TRAVIS_BUILD_DIR/releases/$HOST
-#  - depends/i686-w64-mingw32
-#   - $TRAVIS_HOME/.ccache # Brakes parsing
+#  - $TRAVIS_BUILD_DIR/releases/$HOST
 #  - usr/local/Homebrew
 #    - $HOME/Library/Caches/Homebrew
 #    - /usr/local/Homebrew
 before_cache:
-#- travis logs --delete --force;
-  - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then brew cleanup; fi
+#  - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then brew cleanup; fi
 addons:
   apt:
     sources:
-    - ppa:bitcoin/bitcoin
+      - ppa:bitcoin/bitcoin
     packages:
-    - autoconf
-    - autotools-dev
-    - binutils
-    - bsdmainutils
-    - build-essential
-    - software-properties-common
-    - cmake
-    - curl
-    - libboost-all-dev
-    - libdb4.8
-#    - libdb4.8-dev
-#    - libdb4.8++-dev
-    - libbz2-dev
-    - libcap-dev
-    - libevent-dev
-    - libssl-dev
-    - libtool
-    - linux-libc-dev 
-    - miniupnpc
-    - pkg-config
-    - python-dev
-    - python-setuptools
-    - python3
-    - python3-zmq
-    - zip
-    - zlib1g-dev
-    - travis
+  -build-essential 
+  -libtool 
+  -autotools-dev 
+  -automake 
+  -pkg-config 
+  -libssl-dev 
+  -libevent-dev 
+  -bsdmainutils 
+  -python3 
+  -libboost-system-dev 
+  -libboost-filesystem-dev 
+  -libboost-chrono-dev 
+  -libboost-test-dev 
+  -libboost-thread-dev
 env:     
   global:
-#  - CI_RETRY_EXE="travis_retry"
-#  - CI_WAIT="while sleep 500; do echo .; done"
-#  - CACHE_ERR_MSG="Error! Initial build successful, but not enough time remains to run later build stages and tests. See https://docs.travis-ci.com/user/customizing-the-build#build-timeouts . Please manually re-run this job by using the travis restart button. The next run should not time out because the build cache has been saved."
-  - XAYA_VERSION=0.4.0.0
   - CCACHE_COMPRESS=1
   - CCACHE_SIZE=2500M
   - CCACHE_CPP2=1
   - CCACHE_TEMPDIR=/tmp/.ccache-temp
   - MAKEJOBS="-s -k -j3"
-matrix:
+jobs:
   include:
 #  - name: Linux ARM 32 Bit
 #    addons:
@@ -113,27 +87,27 @@ matrix:
     addons:
       apt:
         packages:
-        - bc
-        - libprotobuf-dev
-        - libboost-system-dev
-        - libboost-filesystem-dev
-        - libboost-test-dev
-        - libboost-thread-dev
-#        - libdb4.8
-#        - libdb4.8-dev
-#        - libdb4.8++-dev
-        - qttools5-dev-tools
-        - libevent-dev
-        - libqrencode-dev
-        - python3-zmq
-        - qtdeclarative5-dev
+        -git 
+        -libdb4.8-dev 
+        -libdb4.8++-dev 
+        -libminiupnpc-dev 
+        -libzmq3-dev 
+        -libqt5gui5 
+        -libqt5core5a 
+        -libqt5dbus5 
+        -qttools5-dev 
+        -qttools5-dev-tools 
+        -libprotobuf-dev 
+        -protobuf-compiler 
+        -libqrencode-dev 
+        -libboost-program-options-dev
     env:
     - XAYA_CONFIG="--with-gui=qt5" # --disable-wallet 
-#    --enable-zmq --enable-glibc-back-compat LDFLAGS=-static-libstdc++"
-#    - CPPFLAGS="-DDEBUG_LOCKORDER -DENABLE_DASH_DEBUG"
+    --enable-zmq --enable-glibc-back-compat LDFLAGS=-static-libstdc++"
+    - CPPFLAGS="-DDEBUG_LOCKORDER -DENABLE_DASH_DEBUG"
     - HOST=x86_64-pc-linux-gnu
     - LABEL=linux64
-#    - PYZMQ=true
+    - PYZMQ=true
     os: linux
 #  - name: Windows i686 32 Bit
 #    addons:
@@ -152,33 +126,33 @@ matrix:
 #    - HOST=i686-w64-mingw32
 #    - LABEL=win32
 #    os: linux
-  - name: Windows x86 64 Bit
-    addons:
-      apt:
-        packages:
-        - bc
-        - g++-mingw-w64-x86-64
-        - libprotobuf-dev
-        - libboost-system-dev
-        - libboost-filesystem-dev
-        - libboost-test-dev
-        - libboost-thread-dev
-        - libdb4.8
+#  - name: Windows x86 64 Bit
+#    addons:
+#      apt:
+#        packages:
+#        - bc
+#        - g++-mingw-w64-x86-64
+#        - libprotobuf-dev
+#        - libboost-system-dev
+#        - libboost-filesystem-dev
+#        - libboost-test-dev
+#        - libboost-thread-dev
+#        - libdb4.8
 #        - libdb4.8-dev
 #        - libdb4.8++-dev
-        - qttools5-dev-tools
-        - libevent-dev
-        - libqrencode-dev
-        - linux-libc-dev:i386
-        - nsis
-        - python3
-        - qtdeclarative5-dev
-    env:
+#        - qttools5-dev-tools
+#        - libevent-dev
+#        - libqrencode-dev
+#        - linux-libc-dev:i386
+#        - nsis
+#        - python3
+#        - qtdeclarative5-dev
+#    env:
 #    - XAYA_CONFIG="--with-gui=qt5 LDFLAGS=-Wa,-mbig-obj"
-    - XAYA_CONFIG="--disable-wallet LDFLAGS=-Wa,-mbig-obj"
-    - HOST=x86_64-w64-mingw32
-    - LABEL=win64
-    os: linux
+#    - XAYA_CONFIG="--disable-wallet LDFLAGS=-Wa,-mbig-obj"
+#    - HOST=x86_64-w64-mingw32
+#    - LABEL=win64
+#    os: linux
 #  - name: macOS x86 64 Bit
 #    cache:
 #      directories:
@@ -191,42 +165,25 @@ matrix:
 #    os: osx
 #    osx_image: xcode9.2
 before_install:
-#- travis logs --delete --force;
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
+#- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo update-alternatives --install /usr/bin/ld ld /usr/bin/ld.gold 20; fi
 install:
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install ninja ccache; export PATH="/usr/local/opt/ccache/libexec:$PATH"; brew uninstall --ignore-dependencies mercurial python; brew
-  bundle; brew link --overwrite --force boost@1.57; fi
-#- if [ "$PYZMQ" = "true" ]; then pyenv install 3.6.5 ; fi
-#- if [ "$PYZMQ" = "true" ]; then pip install pyzmq --user ; fi
+#- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install ninja ccache; export PATH="/usr/local/opt/ccache/libexec:$PATH"; brew uninstall --ignore-dependencies mercurial python; brew
+#  bundle; brew link --overwrite --force boost@1.57; fi
+- if [ "$PYZMQ" = "true" ]; then pip install pyzmq --user ; fi
 before_script:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then unset CC CXX DISPLAY; fi
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export LDFLAGS=-L/usr/local/opt/openssl/lib;
+#- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export LDFLAGS=-L/usr/local/opt/openssl/lib;
   export CPPFLAGS=-I/usr/local/opt/openssl/include; fi 
 - GLOBAL_CONFIG="--enable-reduce-exports --prefix=$TRAVIS_BUILD_DIR/depends/$HOST"
 script:
-##  - export CONTINUE=1
-#  - if [ $SECONDS -gt 1200 ]; then export CONTINUE=0; fi  # Likely the depends build took very long
-##  - if [ $TRAVIS_REPO_SLUG = "cryptocrowd-city/xcrc-core-wallet" ]; then export CONTINUE=1; fi  # Whitelisted repo (90 minutes build time)
-#  - if [ $CONTINUE = "1" ]; then set -o errexit; source ./ci/test/06_script_a.sh; else set +o errexit; echo "$CACHE_ERR_MSG"; false; fi
-##  - if [ $SECONDS -gt 1800 ]; then export CONTINUE=0; fi  # Likely the build took very long; The tests take about 1000s, so we should abort if we have less than 50*60-1000=2000s left
-#  - if [ $TRAVIS_REPO_SLUG = "cryptocrowd-city/xcrc-core-wallet" ]; then export CONTINUE=1; fi  # Whitelisted repo (90 minutes build time)
-#  - if [ $CONTINUE = "1" ]; then set -o errexit; source ./ci/test/06_script_b.sh; else set +o errexit; echo "$CACHE_ERR_MSG"; false; fi
-##  - if [ $CONTINUE = "0" ]; then set +o errexit; echo "$CACHE_ERR_MSG"; false; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make --quiet --debug=n $MAKEJOBS -C depends HOST="$HOST"; fi # depends/$HOST/native/bin/ccache --max-size=$CCACHE_SIZE; sh ./autogen.sh; ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; make $MAKEJOBS; fi
-##  - if [ $CONTINUE = "0" ]; then set +o errexit; echo "$CACHE_ERR_MSG"; false; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh ./autogen.sh; fi
-##  - if [ $CONTINUE = "0" ]; then set +o errexit; echo "$CACHE_ERR_MSG"; false; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; fi
-##  - if [ $CONTINUE = "0" ]; then set +o errexit; echo "$CACHE_ERR_MSG"; false; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make --quiet --debug=n $MAKEJOBS; fi
 #  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sh ./autogen.sh; ./configure --enable-reduce-exports;
 #  make deploy; fi
 before_deploy:
-#- true
-#- export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
-#- export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M')}
-#- git tag $TRAVIS_TAG
   - mkdir $TRAVIS_BUILD_DIR/deploy
   - if [[ "$LABEL" == "ARM" ]]; then cp $TRAVIS_BUILD_DIR/src/xaya-cli $TRAVIS_BUILD_DIR/src/xaya-tx $TRAVIS_BUILD_DIR/src/xayad $TRAVIS_BUILD_DIR/deploy; fi
   - if [[ "$LABEL" == "linux64" ]]; then cp $TRAVIS_BUILD_DIR/src/xaya-cli $TRAVIS_BUILD_DIR/src/xaya-tx $TRAVIS_BUILD_DIR/src/xayad $TRAVIS_BUILD_DIR/deploy; cp $TRAVIS_BUILD_DIR/src/qt/xaya-qt $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; fi
