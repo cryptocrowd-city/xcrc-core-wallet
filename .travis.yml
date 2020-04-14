@@ -163,7 +163,7 @@ before_install:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt update; sudo update-alternatives --install /usr/bin/ld ld /usr/bin/ld.gold 20; fi
 install:
 #- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install ninja ccache; export PATH="/usr/local/opt/ccache/libexec:$PATH"; brew uninstall --ignore-dependencies mercurial python; brew bundle; brew link --overwrite --force boost@1.57; fi
-- if [ "$PYZMQ" = "true" ]; then pip install pyzmq --user ; - pip install travis-wait-improved ; fi
+- if [ "$PYZMQ" = "true" ]; then pip install pyzmq --user ; pip install travis-wait-improved ; fi
 before_script:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then unset CC CXX DISPLAY; fi
 #- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export LDFLAGS=-L/usr/local/opt/openssl/lib; export CPPFLAGS=-I/usr/local/opt/openssl/include; fi 
