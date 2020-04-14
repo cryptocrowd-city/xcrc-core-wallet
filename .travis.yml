@@ -38,7 +38,8 @@ addons:
     - libssl-dev 
     - libevent-dev 
     - bsdmainutils 
-    - python3 
+    - python3
+    - libboost-all-dev  
     - libboost-system-dev 
     - libboost-filesystem-dev 
     - libboost-chrono-dev 
