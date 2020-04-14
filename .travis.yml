@@ -141,10 +141,11 @@ jobs:
         - libboost-program-options-dev
         - nsis
     env:
-##    - XAYA_CONFIG="--with-gui=qt5 LDFLAGS=-Wa,-mbig-obj"
+##    - XAYA_CONFIG="--with-gui=qt5 --enable-zmq LDFLAGS=-Wa,-mbig-obj"
     - XAYA_CONFIG="--without-gui --disable-wallet"
     - HOST=x86_64-w64-mingw32
     - LABEL=win64
+#    - PYZMQ=true
     os: linux
 #  - name: macOS x86 64 Bit
 #    cache:
@@ -171,7 +172,7 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make --quiet --debug=n $MAKEJOBS -C depends HOST="$HOST"; fi # depends/$HOST/native/bin/ccache --max-size=$CCACHE_SIZE; sh ./autogen.sh; ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; make $MAKEJOBS; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh ./autogen.sh; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make --quiet --debug=n $MAKEJOBS; fi
+#  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make --quiet --debug=n $MAKEJOBS; fi
 #  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sh ./autogen.sh; ./configure --enable-reduce-exports; make deploy; fi
 before_deploy:
   - mkdir $TRAVIS_BUILD_DIR/deploy
