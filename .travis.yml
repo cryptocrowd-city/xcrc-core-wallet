@@ -87,8 +87,9 @@ martix:
       apt:
         packages:
         - git 
-        - libdb4.8-dev 
-        - libdb4.8++-dev 
+        - libdb4.8
+#        - libdb4.8-dev 
+#        - libdb4.8++-dev 
         - libminiupnpc-dev 
         - libzmq3-dev 
         - libqt5gui5 
