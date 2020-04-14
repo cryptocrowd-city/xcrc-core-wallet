@@ -173,7 +173,7 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make --quiet --debug=n $MAKEJOBS -C depends HOST="$HOST"; fi # depends/$HOST/native/bin/ccache --max-size=$CCACHE_SIZE; sh ./autogen.sh; ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; make $MAKEJOBS; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh ./autogen.sh; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then travis-wait-improved --timeout 30m ls -lh; make --quiet --debug=n $MAKEJOBS > /dev/null 2>&1; fi # >> compile.log 2>&1; fi #  1>/dev/null; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then travis-wait-improved --timeout 30m make --quiet --debug=n --log-level=ERROR $MAKEJOBS; fi # 1>/dev/null; fi #> /dev/null 2>&1; fi # >> compile.log 2>&1; fi #
 #  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sh ./autogen.sh; ./configure --enable-reduce-exports; make deploy; fi
 before_deploy:
   - mkdir $TRAVIS_BUILD_DIR/deploy
