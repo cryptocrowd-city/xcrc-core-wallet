@@ -86,8 +86,6 @@ jobs:
       apt:
         packages:
         - libdb4.8
-#        - libdb4.8-dev 
-#        - libdb4.8++-dev 
         - libminiupnpc-dev 
         - libzmq3-dev 
         - libqt5gui5 
@@ -129,8 +127,6 @@ jobs:
         packages:
         - g++-mingw-w64-x86-64
         - libdb4.8
-#        - libdb4.8-dev 
-#        - libdb4.8++-dev 
         - libminiupnpc-dev 
         - libzmq3-dev 
         - libqt5gui5 
