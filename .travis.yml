@@ -147,7 +147,7 @@ jobs:
         - nsis
     env:
 ##    - XAYA_CONFIG="--with-gui=qt5 LDFLAGS=-Wa,-mbig-obj"
-    - XAYA_CONFIG="--without-gui --disable-wallet --without-zmq"
+    - XAYA_CONFIG="--without-gui --disable-wallet --without-zmq --disable-zmq"
     - HOST=x86_64-w64-mingw32
     - LABEL=win64
 #    - PYZMQ=true
