@@ -111,6 +111,8 @@ jobs:
         packages:
         - g++-mingw-w64-i686
         - linux-libc-dev:i386
+        - gcc-multilib
+        - g++-multilib
         - libdb4.8
         - libminiupnpc-dev 
         - libzmq3-dev 
