@@ -33,7 +33,12 @@ addons:
     - autotools-dev 
     - automake 
     - pkg-config 
-    - bsdmainutils 
+    - bsdmainutils
+    - libboost-system-dev 
+    - libboost-filesystem-dev 
+    - libboost-chrono-dev 
+    - libboost-test-dev 
+    - libboost-thread-dev 
 env:     
   global:
   - CCACHE_COMPRESS=1
@@ -80,7 +85,7 @@ jobs:
         packages:
         - libssl-dev 
         - libevent-dev 
-        - libboost-all-dev  
+#        - libboost-all-dev  
         - libboost-system-dev 
         - libboost-filesystem-dev 
         - libboost-chrono-dev 
