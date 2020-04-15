@@ -171,9 +171,9 @@ before_script:
 - GLOBAL_CONFIG="--enable-reduce-exports --prefix=$TRAVIS_BUILD_DIR/depends/$HOST"
 script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make --quiet --debug=n $MAKEJOBS -C depends HOST="$HOST"; fi # depends/$HOST/native/bin/ccache --max-size=$CCACHE_SIZE; sh ./autogen.sh; ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; make $MAKEJOBS; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then  travis-wait-improved --timeout 30m sh ./autogen.sh; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then  travis-wait-improved --timeout 30m ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then travis-wait-improved --timeout 30m make --quiet --debug=n $MAKEJOBS > /dev/null; fi # >> compile.log 2>&1; fi # 
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then  travis-wait-improved --timeout 30m sh ./autogen.sh 1>/dev/null; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then  travis-wait-improved --timeout 30m ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG 1>/dev/null; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then travis-wait-improved --timeout 30m make --quiet --debug=n $MAKEJOBS 1>/dev/null; fi # >> compile.log 2>&1; fi # 
 #  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sh ./autogen.sh; ./configure --enable-reduce-exports; make deploy; fi
 before_deploy:
   - mkdir $TRAVIS_BUILD_DIR/deploy
