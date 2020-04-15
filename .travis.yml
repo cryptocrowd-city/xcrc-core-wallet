@@ -34,11 +34,23 @@ addons:
     - automake 
     - pkg-config 
     - bsdmainutils
+# Win64
+    - python3 
+    - libssl-dev
+    - libevent-dev
+    - protobuf-compiler
+    - libprotobuf-dev
     - libboost-system-dev 
     - libboost-filesystem-dev 
     - libboost-chrono-dev 
     - libboost-test-dev 
-    - libboost-thread-dev 
+    - libboost-thread-dev
+    - libboost-program-options-dev
+    - libqrencode-dev
+    - libminiupnpc-dev
+    - libzmq3-dev
+    - libpng-dev 
+    - librsvg2-dev # for MacOS  
 env:     
   global:
   - CCACHE_COMPRESS=1
@@ -83,8 +95,6 @@ jobs:
         sources:
         - ppa:bitcoin/bitcoin
         packages:
-        - libssl-dev 
-        - libevent-dev 
 #        - libboost-all-dev  
         - libboost-system-dev 
         - libboost-filesystem-dev 
@@ -109,7 +119,7 @@ jobs:
     - CPPFLAGS="-DDEBUG_LOCKORDER"
     - HOST=x86_64-unknown-linux-gnu
     - LABEL=linux64
-    - PYZMQ=true
+#    - PYZMQ=true
     os: linux
 #  - name: Windows i686 32 Bit
 #    addons:
@@ -159,12 +169,12 @@ before_install:
 install:
 #- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install ninja ccache; export PATH="/usr/local/opt/ccache/libexec:$PATH"; brew uninstall --ignore-dependencies mercurial python; brew bundle; brew link --overwrite --force boost@1.57; fi
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then pip install travis-wait-improved ; fi
-- if [ "$PYZMQ" = "true" ]; then pip install pyzmq --user ; fi
+#- if [ "$PYZMQ" = "true" ]; then pip install pyzmq --user ; fi
 before_script:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then unset CC CXX DISPLAY; fi
 #- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export LDFLAGS=-L/usr/local/opt/openssl/lib; export CPPFLAGS=-I/usr/local/opt/openssl/include; fi 
 script:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then travis-wait-improved --timeout 30m make $MAKE -C depends HOST="$HOST" 2>/dev/null; fi # depends/$HOST/native/bin/ccache --max-size=$CCACHE_SIZE; sh ./autogen.sh; ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; make $MAKE; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make $MAKE -C depends HOST="$HOST" 2>/dev/null; fi # travis-wait-improved --timeout 30m # depends/$HOST/native/bin/ccache --max-size=$CCACHE_SIZE; sh ./autogen.sh; ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; make $MAKE; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then travis-wait-improved --timeout 30m sh ./autogen.sh 2>/dev/null; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then travis-wait-improved --timeout 30m ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG 2>/dev/null; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then travis-wait-improved --timeout 30m make $MAKE 2>/dev/null; fi # >> compile.log 2>&1; fi # 
