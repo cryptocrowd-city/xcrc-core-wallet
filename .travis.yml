@@ -27,42 +27,34 @@ cache:
 #  - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then brew cleanup; fi
 addons:
   apt:
+    sources:
+    - ppa:bitcoin/bitcoin
     packages:
     - build-essential 
     - libtool 
     - autotools-dev 
     - automake 
     - pkg-config 
-    - bsdmainutils
-# Win64
+    - libssl-dev 
+    - libevent-dev 
+    - bsdmainutils 
     - python3
-    - python3-zmq 
-    - libssl-dev
-    - libevent-dev
-    - protobuf-compiler
-    - libprotobuf-dev
+    - libboost-all-dev  
     - libboost-system-dev 
     - libboost-filesystem-dev 
     - libboost-chrono-dev 
     - libboost-test-dev 
     - libboost-thread-dev
-    - libboost-program-options-dev
-    - libqrencode-dev
-    - libminiupnpc-dev
-    - libzmq3-dev
-    - libpng-dev 
-    - librsvg2-dev # for MacOS  
 env:     
   global:
   - CCACHE_COMPRESS=1
   - CCACHE_SIZE=2500M
   - CCACHE_CPP2=1
   - CCACHE_TEMPDIR=/tmp/.ccache-temp
-  - GLOBAL_CONFIG="--enable-reduce-exports --prefix=$TRAVIS_BUILD_DIR/depends/$HOST"
-  - MAKE="-s -k -j3 --debug=n"
+  - MAKEJOBS="-s -k -j3"
 jobs:
   include:
-##  - name: Linux ARM 32 Bit
+#  - name: Linux ARM 32 Bit
 #    addons:
 #      apt:
 #        packages:
@@ -73,7 +65,7 @@ jobs:
 #    - HOST=arm-linux-gnueabihf
 #    - LABEL=ARM
 #    os: linux
-##  - name: Linux i686 32 Bit
+#  - name: Linux i686 32 Bit
 #    addons:
 #      apt:
 #        packages:
@@ -93,17 +85,8 @@ jobs:
   - name: Linux x86 64 Bit
     addons:
       apt:
-        sources:
-        - ppa:bitcoin/bitcoin
         packages:
-#        - libboost-all-dev  
-        - libboost-system-dev 
-        - libboost-filesystem-dev 
-        - libboost-chrono-dev 
-        - libboost-test-dev 
-        - libboost-thread-dev
-        - libdb4.8-dev
-        - libdb4.8++-dev
+        - libdb4.8
         - libminiupnpc-dev 
         - libzmq3-dev 
         - libqt5gui5 
@@ -120,9 +103,9 @@ jobs:
     - CPPFLAGS="-DDEBUG_LOCKORDER"
     - HOST=x86_64-unknown-linux-gnu
     - LABEL=linux64
-#    - PYZMQ=true
+    - PYZMQ=true
     os: linux
-##  - name: Windows i686 32 Bit
+#  - name: Windows i686 32 Bit
 #    addons:
 #      apt:
 #        packages:
@@ -144,15 +127,27 @@ jobs:
       apt:
         packages:
         - g++-mingw-w64-x86-64
+        - libdb4.8
+        - libminiupnpc-dev 
+        - libzmq3-dev 
+        - libqt5gui5 
+        - libqt5core5a 
+        - libqt5dbus5 
+        - qttools5-dev 
+        - qttools5-dev-tools 
+        - libprotobuf-dev 
+        - protobuf-compiler 
+        - libqrencode-dev 
+        - libboost-program-options-dev
         - nsis
     env:
-##    - XAYA_CONFIG="--with-gui=qt5 LDFLAGS=-Wa,-mbig-obj"
-    - XAYA_CONFIG="--without-gui --disable-wallet --without-zmq --disable-zmq"
+##    - XAYA_CONFIG="--with-gui=qt5 --enable-zmq LDFLAGS=-Wa,-mbig-obj"
+    - XAYA_CONFIG="--without-gui --disable-wallet"
     - HOST=x86_64-w64-mingw32
     - LABEL=win64
-    - PYZMQ=true
+#    - PYZMQ=true
     os: linux
-##  - name: macOS x86 64 Bit
+#  - name: macOS x86 64 Bit
 #    cache:
 #      directories:
 #      - /usr/local/Homebrew
@@ -164,21 +159,20 @@ jobs:
 #    os: osx
 #    osx_image: xcode9.2
 before_install:
-#- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install zeromq; brew update; fi
-#- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo add-apt-repository ppa:bitcoin/bitcoin -y; sudo apt-get install libdb4.8-dev libdb4.8++-dev libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-test-dev libboost-thread-dev -y; sudo apt update; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo update-alternatives --install /usr/bin/ld ld /usr/bin/ld.gold 20; fi
+#- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt update; sudo update-alternatives --install /usr/bin/ld ld /usr/bin/ld.gold 20; fi
 install:
 #- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install ninja ccache; export PATH="/usr/local/opt/ccache/libexec:$PATH"; brew uninstall --ignore-dependencies mercurial python; brew bundle; brew link --overwrite --force boost@1.57; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then pip install travis-wait-improved ; fi
-- if [ "$PYZMQ" = "true" ]; then pip install pyzmq --user ; fi
+- if [ "$PYZMQ" = "true" ]; then pip install pyzmq --user ; pip install travis-wait-improved ; fi
 before_script:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then unset CC CXX DISPLAY; fi
 #- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export LDFLAGS=-L/usr/local/opt/openssl/lib; export CPPFLAGS=-I/usr/local/opt/openssl/include; fi 
+- GLOBAL_CONFIG="--enable-reduce-exports --prefix=$TRAVIS_BUILD_DIR/depends/$HOST"
 script:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make $MAKE -C depends HOST="$HOST" 2>/dev/null; fi # travis-wait-improved --timeout 30m # depends/$HOST/native/bin/ccache --max-size=$CCACHE_SIZE; sh ./autogen.sh; ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; make $MAKE; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then travis-wait-improved --timeout 30m sh ./autogen.sh 2>/dev/null; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then travis-wait-improved --timeout 30m ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG 2>/dev/null; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then travis-wait-improved --timeout 30m make $MAKE 2>/dev/null; fi # >> compile.log 2>&1; fi # 
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make --quiet --debug=n $MAKEJOBS -C depends HOST="$HOST"; fi # depends/$HOST/native/bin/ccache --max-size=$CCACHE_SIZE; sh ./autogen.sh; ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; make $MAKEJOBS; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh ./autogen.sh; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then travis-wait-improved --timeout 30m make --quiet --debug=n $MAKEJOBS; fi
 #  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sh ./autogen.sh; ./configure --enable-reduce-exports; make deploy; fi
 before_deploy:
   - mkdir $TRAVIS_BUILD_DIR/deploy
