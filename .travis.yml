@@ -105,28 +105,12 @@ jobs:
     - LABEL=linux64
     - PYZMQ=true
     os: linux
-#  - name: Windows i686 32 Bit
-#    addons:
-#      apt:
-#        packages:
-#        - g++-mingw-w64-i686
-#        - bc
-#        - libprotobuf-dev
-#        - libqrencode-dev
-#        - linux-libc-dev:i386
-#        - nsis
-#        - python3
-#        - qtdeclarative5-dev
-#    env:
-#    - XAYA_CONFIG="--with-gui=qt5"
-#    - HOST=i686-w64-mingw32
-#    - LABEL=win32
-#    os: linux
-  - name: Windows x86 64 Bit
+  - name: Windows i686 32 Bit
     addons:
       apt:
         packages:
-        - g++-mingw-w64-x86-64
+        - g++-mingw-w64-i686
+        - linux-libc-dev:i386
         - libdb4.8
         - libminiupnpc-dev 
         - libzmq3-dev 
@@ -141,12 +125,35 @@ jobs:
         - libboost-program-options-dev
         - nsis
     env:
-##    - XAYA_CONFIG="--with-gui=qt5 --enable-zmq LDFLAGS=-Wa,-mbig-obj"
-    - XAYA_CONFIG="--without-gui --disable-wallet"
-    - HOST=x86_64-w64-mingw32
-    - LABEL=win64
-#    - PYZMQ=true
+    - XAYA_CONFIG="--with-gui=qt5"
+    - HOST=i686-w64-mingw32
+    - LABEL=win32
     os: linux
+#  - name: Windows x86 64 Bit
+#    addons:
+#      apt:
+#        packages:
+#        - g++-mingw-w64-x86-64
+#        - libdb4.8
+#        - libminiupnpc-dev 
+#        - libzmq3-dev 
+#        - libqt5gui5 
+#        - libqt5core5a 
+#        - libqt5dbus5 
+#        - qttools5-dev 
+#        - qttools5-dev-tools 
+#        - libprotobuf-dev 
+#        - protobuf-compiler 
+#        - libqrencode-dev 
+#        - libboost-program-options-dev
+#        - nsis
+#    env:
+##    - XAYA_CONFIG="--with-gui=qt5 --enable-zmq LDFLAGS=-Wa,-mbig-obj"
+#    - XAYA_CONFIG="--without-gui --disable-wallet"
+#    - HOST=x86_64-w64-mingw32
+#    - LABEL=win64
+#    - PYZMQ=true
+#    os: linux
 #  - name: macOS x86 64 Bit
 #    cache:
 #      directories:
