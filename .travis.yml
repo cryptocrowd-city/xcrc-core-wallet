@@ -27,24 +27,13 @@ cache:
 #  - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then brew cleanup; fi
 addons:
   apt:
-    sources:
-    - ppa:bitcoin/bitcoin
     packages:
     - build-essential 
     - libtool 
     - autotools-dev 
     - automake 
     - pkg-config 
-    - libssl-dev 
-    - libevent-dev 
     - bsdmainutils 
-    - python3
-#    - libboost-all-dev  
-#    - libboost-system-dev 
-#    - libboost-filesystem-dev 
-#    - libboost-chrono-dev 
-#    - libboost-test-dev 
-#    - libboost-thread-dev
 env:     
   global:
   - CCACHE_COMPRESS=1
@@ -86,8 +75,19 @@ jobs:
   - name: Linux x86 64 Bit
     addons:
       apt:
+        sources:
+        - ppa:bitcoin/bitcoin
         packages:
-#        - libdb4.8
+        - libssl-dev 
+        - libevent-dev 
+        - libboost-all-dev  
+        - libboost-system-dev 
+        - libboost-filesystem-dev 
+        - libboost-chrono-dev 
+        - libboost-test-dev 
+        - libboost-thread-dev
+        - libdb4.8-dev
+        - libdb4.8++-dev
         - libminiupnpc-dev 
         - libzmq3-dev 
         - libqt5gui5 
@@ -128,18 +128,6 @@ jobs:
       apt:
         packages:
         - g++-mingw-w64-x86-64
-#        - libdb4.8
-        - libminiupnpc-dev 
-        - libzmq3-dev 
-        - libqt5gui5 
-        - libqt5core5a 
-        - libqt5dbus5 
-        - qttools5-dev 
-        - qttools5-dev-tools 
-        - libprotobuf-dev 
-        - protobuf-compiler 
-        - libqrencode-dev 
-        - libboost-program-options-dev
         - nsis
     env:
 ##    - XAYA_CONFIG="--with-gui=qt5 LDFLAGS=-Wa,-mbig-obj"
