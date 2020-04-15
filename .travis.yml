@@ -150,7 +150,7 @@ jobs:
     - XAYA_CONFIG="--without-gui --disable-wallet --without-zmq --disable-zmq"
     - HOST=x86_64-w64-mingw32
     - LABEL=win64
-#    - PYZMQ=true
+    - PYZMQ=true
     os: linux
 ##  - name: macOS x86 64 Bit
 #    cache:
@@ -170,7 +170,7 @@ before_install:
 install:
 #- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install ninja ccache; export PATH="/usr/local/opt/ccache/libexec:$PATH"; brew uninstall --ignore-dependencies mercurial python; brew bundle; brew link --overwrite --force boost@1.57; fi
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then pip install travis-wait-improved ; fi
-#- if [ "$PYZMQ" = "true" ]; then pip install pyzmq --user ; fi
+- if [ "$PYZMQ" = "true" ]; then pip install pyzmq --user ; fi
 before_script:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then unset CC CXX DISPLAY; fi
 #- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export LDFLAGS=-L/usr/local/opt/openssl/lib; export CPPFLAGS=-I/usr/local/opt/openssl/include; fi 
