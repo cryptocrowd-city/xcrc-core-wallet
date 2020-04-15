@@ -195,6 +195,7 @@ before_script:
   export CPPFLAGS=-I/usr/local/opt/openssl/include; fi 
 - GLOBAL_CONFIG="--enable-reduce-exports --prefix=$TRAVIS_BUILD_DIR/depends/$HOST"
 script:
+<<<<<<< Updated upstream
 #  - export CONTINUE=1
 #  - if [ $SECONDS -gt 1200 ]; then export CONTINUE=0; fi  # Likely the depends build took very long
 #  - if [ $TRAVIS_REPO_SLUG = "cryptocrowd-city/xcrc-core-wallet" ]; then export CONTINUE=1; fi  # Whitelisted repo (90 minutes build time)
@@ -205,6 +206,13 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make $MAKEJOBS -C depends HOST="$HOST"; depends/$HOST/native/bin/ccache --max-size=$CCACHE_SIZE; sh ./autogen.sh; ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; make $MAKEJOBS; fi
 #  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sh ./autogen.sh; ./configure --enable-reduce-exports;
 #  make deploy; fi
+=======
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make --quiet --debug=n $MAKEJOBS -C depends HOST="$HOST"; fi # depends/$HOST/native/bin/ccache --max-size=$CCACHE_SIZE; sh ./autogen.sh; ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; make $MAKEJOBS; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh ./autogen.sh; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make --quiet --debug=n $MAKEJOBS; fi  #  travis-wait-improved --timeout 10m # 2>/dev/null
+#  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sh ./autogen.sh; ./configure --enable-reduce-exports; make deploy; fi
+>>>>>>> Stashed changes
 before_deploy:
 #- true
 #- export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
