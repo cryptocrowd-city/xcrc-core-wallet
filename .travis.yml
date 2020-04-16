@@ -194,8 +194,8 @@ before_script:
 - GLOBAL_CONFIG="--enable-reduce-exports --prefix=$TRAVIS_BUILD_DIR/depends/$HOST"
 script:
 #  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make --quiet --debug=n $MAKEJOBS -C depends HOST="$HOST"; fi # depends/$HOST/native/bin/ccache --max-size=$CCACHE_SIZE; sh ./autogen.sh; ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; make $MAKEJOBS; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then travis-wait-improved --timeout 45m make --quiet --debug=n $MAKEJOBS -C depends HOST="$HOST" 2>/dev/null; sh ./autogen.sh 2>/dev/null; CONFIG_SITE=$PWD/depends/$HOST/share/config.site ./configure --prefix=/ 2>/dev/null; make --quiet --debug=n $MAKEJOBS 2>/dev/null; fi # 2>/dev/null
-#  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then travis-wait-improved --timeout 45m make --quiet --debug=n $MAKEJOBS -C depends HOST="$HOST" 2>/dev/null; sh ./autogen.sh 2>/dev/null; ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; make --quiet --debug=n $MAKEJOBS 2>/dev/null; fi # 2>/dev/null
+#  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then travis-wait-improved --timeout 45m make --quiet --debug=n $MAKEJOBS -C depends HOST="$HOST" 2>/dev/null; sh ./autogen.sh 2>/dev/null; CONFIG_SITE=$PWD/depends/$HOST/share/config.site ./configure --prefix=/ 2>/dev/null; make --quiet --debug=n $MAKEJOBS 2>/dev/null; fi # 2>/dev/null
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then travis-wait-improved --timeout 45m make --quiet --debug=n $MAKEJOBS -C depends HOST="$HOST" 2>/dev/null; sh ./autogen.sh 2>/dev/null; ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; make --quiet --debug=n $MAKEJOBS 2>/dev/null; fi # 2>/dev/null
 #  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh ./autogen.sh; fi
 #  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; fi
 #  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then CONFIG_SITE=$PWD/depends/$HOST/share/config.site ./configure --prefix=/; fi
