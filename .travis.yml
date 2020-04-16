@@ -39,7 +39,6 @@ addons:
     - libevent-dev 
     - bsdmainutils 
     - python3
-    - python
     - libboost-all-dev  
     - libboost-system-dev 
     - libboost-filesystem-dev 
