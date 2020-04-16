@@ -86,26 +86,27 @@ jobs:
   - name: Linux x86 64 Bit
     addons:
       apt:
-          sources:
-    - deadsnakes
-    - ppa:bitcoin/bitcoin
+        sources:
+        - deadsnakes
+        - ppa:bitcoin/bitcoin
         packages:
-            - build-essential 
-    - libtool 
-    - autotools-dev 
-    - automake 
-    - pkg-config 
-    - libssl-dev 
-    - libevent-dev 
-    - bsdmainutils 
-    - python3.5
-    - libboost-all-dev  
-    - libboost-system-dev 
-    - libboost-filesystem-dev 
-    - libboost-chrono-dev 
-    - libboost-test-dev 
-    - libboost-thread-dev
-        - libdb4.8
+        - build-essential 
+        - libtool 
+        - autotools-dev 
+        - automake 
+        - pkg-config 
+        - libssl-dev 
+        - libevent-dev 
+        - bsdmainutils 
+        - python3.5
+        - libboost-all-dev  
+        - libboost-system-dev 
+        - libboost-filesystem-dev 
+        - libboost-chrono-dev 
+        - libboost-test-dev 
+        - libboost-thread-dev
+        - libdb4.8-dev
+        - libdb4.8++-dev
         - libminiupnpc-dev 
         - libzmq3-dev 
         - libqt5gui5 
