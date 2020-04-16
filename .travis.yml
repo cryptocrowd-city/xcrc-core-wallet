@@ -198,8 +198,10 @@ script:
 #  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh ./autogen.sh; fi
 #  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; fi
 #  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then CONFIG_SITE=$PWD/depends/$HOST/share/config.site ./configure --prefix=/; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make --quiet --debug=n $MAKEJOBS; fi  #  travis-wait-improved --timeout 10m # 2>/dev/null
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make --quiet --debug=n $MAKEJOBS; fi  #  travis-wait-improved --timeout 10m # 2>/dev/null 
 #  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sh ./autogen.sh; ./configure --enable-reduce-exports; make deploy; fi
+   - cd src; - ls -lh;
+   - cd ..; - cd doc/man; - ls -lh;
 before_deploy:
   - mkdir $TRAVIS_BUILD_DIR/deploy
   - if [[ "$LABEL" == "ARM" ]]; then cp $TRAVIS_BUILD_DIR/src/xaya-cli $TRAVIS_BUILD_DIR/src/xaya-tx $TRAVIS_BUILD_DIR/src/xayad $TRAVIS_BUILD_DIR/deploy; fi
