@@ -1,5 +1,5 @@
 language: cpp
-dist: xenial # bionic
+dist: trusty
 os: linux  
 arch: amd64
 git:
@@ -86,7 +86,6 @@ jobs:
     addons:
       apt:
         packages:
-        - python3
         - libdb4.8
         - libminiupnpc-dev 
         - libzmq3-dev 
@@ -135,7 +134,6 @@ jobs:
       apt:
         packages:
         - g++-mingw-w64-x86-64
-        - python3
         - libdb4.8
         - libminiupnpc-dev 
         - libzmq3-dev 
