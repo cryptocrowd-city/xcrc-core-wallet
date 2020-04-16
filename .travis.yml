@@ -48,10 +48,6 @@ addons:
     - linux-libc-dev
     - miniupnpc
     - pkg-config
-    - python-dev
-    - python-setuptools
-    - python3
-    - python3-zmq
     - zip
     - zlib1g-dev
 env:
@@ -83,7 +79,10 @@ matrix:
 #        - g++-multilib
 #        - libprotobuf-dev
 #        - libqrencode-dev
-#        - python3-zmq
+    - python-dev
+    - python-setuptools
+    - python3
+    - python3-zmq
 #        - qtdeclarative5-dev
 #   env:
 #    - CRYPTOCROWD_CONFIG="--enable-zmq --enable-glibc-back-compat
@@ -113,7 +112,8 @@ matrix:
     addons:
       apt:
         packages:
-        - g++-mingw-w64-i686 bc
+        - g++-mingw-w64-i686 
+        - bc
         - libprotobuf-dev
         - libqrencode-dev
         - linux-libc-dev:i386
