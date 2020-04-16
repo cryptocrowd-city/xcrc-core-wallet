@@ -1,5 +1,5 @@
 language: cpp
-dist: xenial
+dist: bionic
 os: linux  
 arch: amd64
 git:
@@ -25,27 +25,6 @@ cache:
 #    - /usr/local/Homebrew
 #before_cache:
 #  - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then brew cleanup; fi
-addons:
-  apt:
-    sources:
-    - deadsnakes
-    - ppa:bitcoin/bitcoin
-    packages:
-    - build-essential 
-    - libtool 
-    - autotools-dev 
-    - automake 
-    - pkg-config 
-    - libssl-dev 
-    - libevent-dev 
-    - bsdmainutils 
-    - python3.5
-    - libboost-all-dev  
-    - libboost-system-dev 
-    - libboost-filesystem-dev 
-    - libboost-chrono-dev 
-    - libboost-test-dev 
-    - libboost-thread-dev
 env:     
   global:
   - CCACHE_COMPRESS=1
