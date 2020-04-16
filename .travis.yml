@@ -99,7 +99,6 @@ jobs:
         - libevent-dev 
         - bsdmainutils 
         - python3
-        - libboost-all-dev  
         - libboost-system-dev 
         - libboost-filesystem-dev 
         - libboost-chrono-dev 
@@ -152,9 +151,27 @@ jobs:
   - name: Windows x86 64 Bit
     addons:
       apt:
+        sources:
+        - deadsnakes
+        - sourceline: 'ppa:bitcoin/bitcoin'
         packages:
         - g++-mingw-w64-x86-64
-        - libdb4.8
+        - build-essential 
+        - libtool 
+        - autotools-dev 
+        - automake 
+        - pkg-config 
+        - libssl-dev 
+        - libevent-dev 
+        - bsdmainutils 
+        - python3
+        - libboost-system-dev 
+        - libboost-filesystem-dev 
+        - libboost-chrono-dev 
+        - libboost-test-dev 
+        - libboost-thread-dev
+        - libdb4.8-dev
+        - libdb4.8++-dev
         - libminiupnpc-dev 
         - libzmq3-dev 
         - libqt5gui5 
