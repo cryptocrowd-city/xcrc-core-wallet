@@ -204,8 +204,8 @@ before_deploy:
    - cd src; 
    - ls -lh;
    - cd ..; 
-   - cd doc/man; 
-   - ls -lh; 
+#   - cd doc/man; 
+#   - ls -lh; 
   - mkdir $TRAVIS_BUILD_DIR/deploy
   - if [[ "$LABEL" == "ARM" ]]; then cp $TRAVIS_BUILD_DIR/src/xaya-cli $TRAVIS_BUILD_DIR/src/xaya-tx $TRAVIS_BUILD_DIR/src/xayad $TRAVIS_BUILD_DIR/deploy; fi
   - if [[ "$LABEL" == "linux64" ]]; then cp $TRAVIS_BUILD_DIR/src/xaya-cli $TRAVIS_BUILD_DIR/src/xaya-tx $TRAVIS_BUILD_DIR/src/xayad $TRAVIS_BUILD_DIR/deploy; cp $TRAVIS_BUILD_DIR/src/qt/xaya-qt $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; fi
