@@ -164,7 +164,7 @@ jobs:
         - libboost-program-options-dev
         - nsis
     env:
-    - XAYA_CONFIG="--with-gui=qt5 LDFLAGS=-Wa,-mbig-obj"
+    - XAYA_CONFIG="--with-gui=qt5 LDFLAGS=-Wa,-mbig-obj" #
 #    - XAYA_CONFIG="--without-gui --disable-wallet"
 #    - XAYA_CONFIG=""
     - HOST=x86_64-w64-mingw32
