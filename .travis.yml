@@ -170,7 +170,7 @@ jobs:
     - HOST=x86_64-w64-mingw32
     - LABEL=win64
     os: linux
-#  - name: macOS x86 64 Bit
+#  - name: macOS x86 64 Bit    
 #    cache:
 #      directories:
 #      - /usr/local/Homebrew
