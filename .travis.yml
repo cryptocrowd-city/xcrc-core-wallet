@@ -85,12 +85,12 @@ jobs:
 #    os: linux
   - name: Linux x86 64 Bit
     addons:
-  apt:
-    sources:
+      apt:
+          sources:
     - deadsnakes
     - ppa:bitcoin/bitcoin
-    packages:
-    - build-essential 
+        packages:
+            - build-essential 
     - libtool 
     - autotools-dev 
     - automake 
