@@ -183,7 +183,7 @@ jobs:
 #    osx_image: xcode9.2
 before_install:
 #- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt update; sudo update-alternatives --install /usr/bin/ld ld /usr/bin/ld.gold 20; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt update; sudo update-alternatives --config x86_64-w64-mingw32-g++; sudo update-alternatives --install /usr/bin/ld ld /usr/bin/ld.gold 20; fi
 install:
 #- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install ninja ccache; export PATH="/usr/local/opt/ccache/libexec:$PATH"; brew uninstall --ignore-dependencies mercurial python; brew bundle; brew link --overwrite --force boost@1.57; fi
 - if [ "$PYZMQ" = "true" ]; then pip install pyzmq --user ; fi
@@ -194,7 +194,7 @@ before_script:
 - GLOBAL_CONFIG="--enable-reduce-exports --prefix=$TRAVIS_BUILD_DIR/depends/$HOST"
 script:
 #  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make --quiet --debug=n $MAKEJOBS -C depends HOST="$HOST"; fi # depends/$HOST/native/bin/ccache --max-size=$CCACHE_SIZE; sh ./autogen.sh; ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; make $MAKEJOBS; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then  travis-wait-improved --timeout 45m make --quiet --debug=n $MAKEJOBS -C depends HOST="$HOST" 2>/dev/null; sh ./autogen.sh 2>/dev/null; CONFIG_SITE=$PWD/depends/$HOST/share/config.site ./configure --prefix=/ 2>/dev/null; make --quiet --debug=n $MAKEJOBS 2>/dev/null; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then travis-wait-improved --timeout 45m make --quiet --debug=n $MAKEJOBS -C depends HOST="$HOST" 2>/dev/null; sh ./autogen.sh 2>/dev/null; CONFIG_SITE=$PWD/depends/$HOST/share/config.site ./configure --prefix=/ 2>/dev/null; make --quiet --debug=n $MAKEJOBS 2>/dev/null; fi
 #  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh ./autogen.sh; fi
 #  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./configure --cache-file=config.cache $GLOBAL_CONFIG $XAYA_CONFIG; fi
 #  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then CONFIG_SITE=$PWD/depends/$HOST/share/config.site ./configure --prefix=/; fi
