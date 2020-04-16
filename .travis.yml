@@ -208,6 +208,10 @@ before_deploy:
   - if [[ "$LABEL" == "win64" ]]; then cp $TRAVIS_BUILD_DIR/src/xaya*.exe $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; fi
   - if [[ "$LABEL" == "win64" ]]; then cp $TRAVIS_BUILD_DIR/doc/man/xaya*.exe $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; fi
 #  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cp $TRAVIS_BUILD_DIR/CRyptoCrowd-Qt.dmg $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; fi
+  - cd $TRAVIS_BUILD_DIR/src
+  - ls -lh;
+  - cd $TRAVIS_BUILD_DIR/doc/man
+  - ls -lh;
   - cd $TRAVIS_BUILD_DIR/deploy
   - ls -lh;
 #  - if [[ "$LABEL" == "ARM" ]]; then tar -zvcf xaya-bin-${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-$LABEL.tar.gz *; fi
