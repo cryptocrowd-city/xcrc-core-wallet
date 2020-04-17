@@ -107,8 +107,8 @@ jobs:
     addons:
       apt:
         packages:
-        - g++-mingw-w64-i686
-        - linux-libc-dev:i386
+         - g++-mingw-w64-i686
+         - linux-libc-dev:i386
          - bc
          - autoconf
          - autotools-dev
