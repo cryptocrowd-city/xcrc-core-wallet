@@ -103,12 +103,12 @@ jobs:
     - LABEL=linux64
     - PYZMQ=true
     os: linux
-#  - name: Windows i686 32 Bit
-#    addons:
-#      apt:
-#        packages:
-#        - g++-mingw-w64-i686
-#        - linux-libc-dev:i386
+  - name: Windows i686 32 Bit
+    addons:
+      apt:
+        packages:
+        - g++-mingw-w64-i686
+        - linux-libc-dev:i386
          - bc
          - autoconf
          - autotools-dev
@@ -119,7 +119,12 @@ jobs:
          - curl
          - libprotobuf-dev
          - libqrencode-dev
-         - libboost-all-dev
+#         - libboost-all-dev
+         - libboost-system-dev 
+         - libboost-filesystem-dev 
+         - libboost-chrono-dev 
+         - libboost-test-dev 
+         - libboost-thread-dev
          - libbz2-dev
          - libcap-dev
          - libdb4.8-dev
