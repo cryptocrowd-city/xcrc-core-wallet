@@ -22,35 +22,6 @@ cache:
 #  - depends/i686-w64-mingw32
   - "$HOME/.ccache"
 #  - usr/local/Homebrew
-addons:
-  apt:
-    sources:
-    - ppa:bitcoin/bitcoin
-    packages:
-    - autoconf
-    - autotools-dev
-    - binutils
-    - bsdmainutils
-    - build-essential
-    - cmake
-    - curl
-    - libboost-all-dev
-    - libbz2-dev
-    - libcap-dev
-    - libdb4.8-dev
-    - libdb4.8++-dev
-    - libevent-dev
-    - libssl-dev
-    - libtool
-    - linux-libc-dev
-    - miniupnpc
-    - pkg-config
-    - python-dev
-    - python-setuptools
-    - python3
-    - python3-zmq
-    - zip
-    - zlib1g-dev
 env:
   global:
   - xaya_VERSION=0.4.0.0
@@ -92,7 +63,34 @@ matrix:
   - name: Linux x86 64 Bit
     addons:
       apt:
+        sources:
+        - deadsnakes
+        - sourceline: 'ppa:bitcoin/bitcoin'
         packages:
+        - autoconf
+        - autotools-dev
+        - binutils
+        - bsdmainutils
+        - build-essential
+        - cmake
+        - curl
+        - libboost-all-dev
+        - libbz2-dev
+        - libcap-dev
+        - libdb4.8-dev
+        - libdb4.8++-dev
+        - libevent-dev
+        - libssl-dev
+        - libtool
+        - linux-libc-dev
+        - miniupnpc
+        - pkg-config
+        - python-dev
+        - python-setuptools
+        - python3
+        - python3-zmq
+        - zip
+        - zlib1g-dev
         - bc
         - libprotobuf-dev
         - libqrencode-dev
@@ -110,8 +108,35 @@ matrix:
   - name: Windows i686 32 Bit
     addons:
       apt:
+        sources:
+        - deadsnakes
+        - sourceline: 'ppa:bitcoin/bitcoin'
         packages:
-        - g++-mingw-w64-i686 
+        - g++-mingw-w64-i686
+        - autoconf
+        - autotools-dev
+        - binutils
+        - bsdmainutils
+        - build-essential
+        - cmake
+        - curl
+        - libboost-all-dev
+        - libbz2-dev
+        - libcap-dev
+        - libdb4.8-dev
+        - libdb4.8++-dev
+        - libevent-dev
+        - libssl-dev
+        - libtool
+        - linux-libc-dev
+        - miniupnpc
+        - pkg-config
+        - python-dev
+        - python-setuptools
+        - python3
+        - python3-zmq
+        - zip
+        - zlib1g-dev 
         - bc
         - libprotobuf-dev
         - libqrencode-dev
