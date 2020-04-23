@@ -98,6 +98,7 @@ matrix:
         - libqrencode-dev
         - python3-zmq
         - qtdeclarative5-dev
+        - qttools5-dev-tools
     env:
     - xaya_CONFIG="--enable-zmq --enable-glibc-back-compat
       --with-gui=qt5 LDFLAGS=-static-libstdc++"
@@ -110,13 +111,15 @@ matrix:
     addons:
       apt:
         packages:
-        - g++-mingw-w64-i686 bc
+        - g++-mingw-w64-i686 
+        - bc
         - libprotobuf-dev
         - libqrencode-dev
         - linux-libc-dev:i386
         - nsis
         - python3
         - qtdeclarative5-dev
+        - qttools5-dev-tools
     env:
     - xaya_CONFIG="--with-gui=qt5"
     - HOST=i686-w64-mingw32
