@@ -8,6 +8,7 @@ branches:
   only:
   - master
   - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
+  - /^travis.*$/
 #  - /^deploy-.*$/
   except:
   - /^v\d+\.\d+\.\d+(\.\d+)?(-\S*)?$/
