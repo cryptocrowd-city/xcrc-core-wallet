@@ -65,7 +65,7 @@ jobs:
         - deadsnakes
         - sourceline: 'ppa:bitcoin/bitcoin'
         - sourceline: 'ppa:cybermax-dexter/sdl2-backport'
-        - sourceline: 'deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main'
+        - sourceline: 'deb https://dl.winehq.org/wine-builds/ubuntu/bionic main'
         - sourceline: 'https://dl.winehq.org/wine-builds/winehq.key'        
         packages:
         - build-essential 
