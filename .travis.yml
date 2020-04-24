@@ -29,7 +29,7 @@ env:
   - CCACHE_SIZE=2500M
   - CCACHE_CPP2=1
   - CCACHE_TEMPDIR=/tmp/.ccache-temp
-  - MAKEJOBS="-s -k -j 4"
+  - MAKEJOBS="-s -j 4"
 matrix:
   include:
 #  - name: Linux ARM 32 Bit
