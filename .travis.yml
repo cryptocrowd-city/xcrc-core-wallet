@@ -95,8 +95,8 @@ jobs:
         - libboost-program-options-dev
         - g++-mingw-w64-x86-64
         - mingw-w64-x86-64-dev
-        - wine32
-        - wine64
+        - wine32-dev
+        - wine64-dev
     env:
     - LABEL=win64
     - HOST=x86_64-w64-mingw32
