@@ -64,6 +64,9 @@ jobs:
         sources:
         - deadsnakes
         - sourceline: 'ppa:bitcoin/bitcoin'
+        - sourceline: 'ppa:cybermax-dexter/sdl2-backport'
+        - sourceline: 'deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main'
+        - sourceline: 'https://dl.winehq.org/wine-builds/winehq.key'        
         packages:
         - build-essential 
         - libtool 
@@ -95,7 +98,7 @@ jobs:
         - libboost-program-options-dev
         - g++-mingw-w64-x86-64
         - mingw-w64-x86-64-dev
-        - monodevelop
+        - winehq-devel
     env:
     - LABEL=win64
     - HOST=x86_64-w64-mingw32
