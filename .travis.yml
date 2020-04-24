@@ -14,6 +14,7 @@ cache:
   - depends/built
   - depends/work/build
   - depends/sdk-sources
+#  - $TRAVIS_BUILD_DIR/depends/$HOST
 env:
   global:
   - MAKEJOBS="-j3"
@@ -94,6 +95,7 @@ jobs:
         - libboost-program-options-dev
         - g++-mingw-w64-x86-64
         - mingw-w64-x86-64-dev
+        - wine64
     env:
     - LABEL=win64
     - HOST=x86_64-w64-mingw32
