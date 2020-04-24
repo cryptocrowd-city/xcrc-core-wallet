@@ -93,12 +93,13 @@ jobs:
         - libqrencode-dev 
         - libboost-program-options-dev
         - g++-mingw-w64-x86-64
+        - mingw-w64-x86-64-dev
     env:
     - LABEL=win64
     - HOST=x86_64-w64-mingw32
     os: linux
 before_install:
-- if [[ "$LABEL" == "win64" ]]; then echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-g++; fi
+- if [[ "$LABEL" == "win64" ]]; then echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-g++; echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-gcc; fi
 install:
 #
 before_script:
