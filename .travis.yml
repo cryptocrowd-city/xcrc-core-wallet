@@ -1,5 +1,5 @@
 language: cpp
-dist: bionic
+dist: trusty
 git:
   quiet: true
   depth: 50
