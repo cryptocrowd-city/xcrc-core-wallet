@@ -27,7 +27,7 @@ jobs:
     name: Warming the cache for Win32 on Trusty
     dist: trusty
     before_install:
-    - sudo apt-get upgrade; 
+    - sudo apt-get update; 
     install:
     #
     before_script:
@@ -39,7 +39,7 @@ jobs:
     name: Warming the cache for Win32 on Xenial
     dist: xenial
     before_install:
-    - sudo apt-get upgrade; 
+    - sudo apt-get update; 
     install:
     #
     before_script:
@@ -51,7 +51,7 @@ jobs:
     name: Warming the cache for Win32 on Bionic
     dist: bionic
     before_install:
-    - sudo apt-get upgrade; 
+    - sudo apt-get update; 
     install:
     #
     before_script:
@@ -63,7 +63,7 @@ jobs:
     name: Warming the cache for Win64 on Trusty
     dist: trusty
     before_install:
-    - sudo apt-get upgrade; 
+    - sudo apt-get update; 
     install:
     #
     before_script:
@@ -75,7 +75,7 @@ jobs:
     name: Warming the cache for Win64 on Xenial
     dist: xenial
     before_install:
-    - sudo apt-get upgrade; 
+    - sudo apt-get update; 
     install:
     #
     before_script:
@@ -87,7 +87,7 @@ jobs:
     name: Warming the cache for Win64 on Bionic
     dist: bionic
     before_install:
-    - sudo apt-get upgrade; 
+    - sudo apt-get update; 
     install:
     #
     before_script:
