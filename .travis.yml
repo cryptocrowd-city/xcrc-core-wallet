@@ -525,8 +525,8 @@ jobs:
 before_install:
 #- sudo apt-get upgrade -y --allow-unauthenticated; 
 - if [[ "$LABEL" == "win32" ]]; then  sudo dpkg --add-architecture i386; fi
-- if [ "$OSLABEL" == "bionic" ] && [ "$HOST" == "i686-w64-mingw32" ]; then echo 1 | sudo update-alternatives --config i686-w64-mingw32-g++; echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-gcc; fi
-- if [ "$OSLABEL" == "bionic" ] && [ "$HOST" == "x86_64-w64-mingw32" ]; then echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-g++; fi # echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-gcc; fi
+- if [[ "$OSLABEL" == "bionic" ]] && [[ "$HOST" == "i686-w64-mingw32" ]]; then echo 1 | sudo update-alternatives --config i686-w64-mingw32-g++; echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-gcc; fi
+- if [[ "$OSLABEL" == "bionic" ]] && [[ "$HOST" == "x86_64-w64-mingw32" ]]; then echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-g++; fi # echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-gcc; fi
 install:
 - if [ "$PYZMQ" = "true" ]; then pip install pyzmq --user ; fi
 before_script:
