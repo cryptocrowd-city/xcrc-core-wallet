@@ -222,6 +222,7 @@ jobs:
     env:
     - BUILD_CONFIG="--enable-zmq --with-gui=qt5 CPPFLAGS=-DDEBUG_LOCKORDER"
     - LABEL=linux64
+    - OSLABEL=bionic
     - PYZMQ=true
     os: linux
     before_deploy:
@@ -296,8 +297,8 @@ jobs:
     - HOST=i686-w64-mingw32
     os: linux
   - stage: build
-    name: Win i686 32 Bit on Bionic
-    dist: bionic
+    name: Win i686 32 Bit on Xenial
+    dist: xenial
     addons:
       apt:
         sources:
@@ -341,8 +342,8 @@ jobs:
     - HOST=i686-w64-mingw32
     os: linux
   - stage: build
-    name: Win i686 32 Bit on Xenial
-    dist: xenial
+    name: Win i686 32 Bit on Bionic
+    dist: bionic
     addons:
       apt:
         sources:
@@ -383,6 +384,7 @@ jobs:
     env:
     - BUILD_CONFIG="--enable-zmq --with-gui=qt5 "
     - LABEL=win32
+    - OSLABEL=bionic
     - HOST=i686-w64-mingw32
     os: linux
   - stage: build
@@ -517,13 +519,14 @@ jobs:
     env:
     - BUILD_CONFIG="--enable-zmq --with-gui=qt5 LDFLAGS=-Wa,-mbig-obj"
     - LABEL=win64
+    - OSLABEL=bionic
     - HOST=x86_64-w64-mingw32
     os: linux
 before_install:
 #- sudo apt-get upgrade -y --allow-unauthenticated; 
 - if [[ "$LABEL" == "win32" ]]; then  sudo dpkg --add-architecture i386; fi
-- if [[ "$TRAVIS_DIST_NAME" == "bionic" ]]; then echo 1 | sudo update-alternatives --config i686-w64-mingw32-g++; echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-gcc; fi
-- if [[ "$TRAVIS_DIST_NAME" == "bionic" ]]; then echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-g++; fi # echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-gcc; fi
+- if [[ "$OSLABEL" == "bionic" && "$HOST" == "i686-w64-mingw32"]]; then echo 1 | sudo update-alternatives --config i686-w64-mingw32-g++; echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-gcc; fi
+- if [[ "$OSLABEL" == "bionic" && "$HOST" == "x86_64-w64-mingw32" ]]; then echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-g++; fi # echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-gcc; fi
 install:
 - if [ "$PYZMQ" = "true" ]; then pip install pyzmq --user ; fi
 before_script:
