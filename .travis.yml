@@ -21,6 +21,46 @@ env:
 stages:
   - cache
   - build
+before_install:
+- sudo apt-get upgrade; 
+- if [[ "$LABEL" == "win32" ]]; then  sudo dpkg -y --add-architecture i386; fi
+- if [[ "$HOST" == "i686-w64-mingw32" ]]; then echo 1 | sudo update-alternatives --config i686-w64-mingw32-g++; echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-gcc; fi
+- if [[ "$LABEL" == "win64" ]]; then echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-g++; fi # echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-gcc; fi
+install:
+#
+before_script:
+- if [[ "$LABEL" == "win32" ]]; then PATH=$(echo "$PATH" | sed -e 's/:\/mnt.*//g'); fi
+- if [[ "$LABEL" == "win64" ]]; then PATH=$(echo "$PATH" | sed -e 's/:\/mnt.*//g'); fi
+script:
+- if [[ "$LABEL" == "win32" ]]; then make $MAKEJOBS -C depends HOST="$HOST"; fi
+- if [[ "$LABEL" == "win64" ]]; then make $MAKEJOBS -C depends HOST="$HOST"; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./autogen.sh; fi
+- if [[ "$LABEL" == "linux64" ]]; then ./configure $GLOBAL_CONFIG $BUILD_CONFIG; fi
+- if [[ "$LABEL" == "win32" ]]; then CONFIG_SITE=$PWD/depends/i686-w64-mingw32/share/config.site ./configure --prefix=/; fi
+- if [[ "$LABEL" == "win64" ]]; then CONFIG_SITE=$PWD/depends/x86_64-w64-mingw32/share/config.site ./configure --prefix=/; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make $MAKEJOBS; fi
+before_deploy:
+  - mkdir $TRAVIS_BUILD_DIR/deploy
+  - if [[ "$LABEL" == "linux64" ]]; then cp $TRAVIS_BUILD_DIR/src/xaya-cli $TRAVIS_BUILD_DIR/src/xaya-tx $TRAVIS_BUILD_DIR/src/xayad $TRAVIS_BUILD_DIR/src/qt/xaya-qt $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; fi
+  - if [[ "$LABEL" == "win32" ]]; then cp $TRAVIS_BUILD_DIR/src/xaya-cli.exe $TRAVIS_BUILD_DIR/src/xaya-tx.exe $TRAVIS_BUILD_DIR/src/xayad.exe $TRAVIS_BUILD_DIR/src/qt/xaya-qt.exe $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; fi
+  - if [[ "$LABEL" == "win64" ]]; then cp $TRAVIS_BUILD_DIR/src/xaya-cli.exe $TRAVIS_BUILD_DIR/src/xaya-tx.exe $TRAVIS_BUILD_DIR/src/xayad.exe $TRAVIS_BUILD_DIR/src/qt/xaya-qt.exe $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; fi
+  - cd $TRAVIS_BUILD_DIR/deploy
+  - ls -lh;
+  - if [[ "$LABEL" == "win32" ]]; then zip -P "$DEVPW" xaya-bin-${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-$LABEL.zip *; fi
+  - if [[ "$LABEL" == "win64" ]]; then zip -P "$DEVPW" xaya-bin-${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-$LABEL.zip *; fi
+deploy:
+  provider: releases
+  token: $GH_TOKEN
+  file_glob: true
+  file: $TRAVIS_BUILD_DIR/deploy/xaya-bin*
+  overwrite: true
+  skip_cleanup: true
+  draft: true
+  name: ${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-${LABEL}
+  tag_name: ${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-${LABEL}
+  on:
+    repo: cryptocrowd-city/xcrc-core-wallet
+    all_branches: true
 jobs:
   include:
   - stage: cache
@@ -493,43 +533,3 @@ jobs:
     - LABEL=win64
     - HOST=x86_64-w64-mingw32
     os: linux
-before_install:
-- sudo apt-get upgrade; 
-- if [[ "$LABEL" == "win32" ]]; then  sudo dpkg -y --add-architecture i386; fi
-- if [[ "$HOST" == "i686-w64-mingw32" ]]; then echo 1 | sudo update-alternatives --config i686-w64-mingw32-g++; echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-gcc; fi
-- if [[ "$LABEL" == "win64" ]]; then echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-g++; fi # echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-gcc; fi
-install:
-#
-before_script:
-- if [[ "$LABEL" == "win32" ]]; then PATH=$(echo "$PATH" | sed -e 's/:\/mnt.*//g'); fi
-- if [[ "$LABEL" == "win64" ]]; then PATH=$(echo "$PATH" | sed -e 's/:\/mnt.*//g'); fi
-script:
-- if [[ "$LABEL" == "win32" ]]; then make $MAKEJOBS -C depends HOST="$HOST"; fi
-- if [[ "$LABEL" == "win64" ]]; then make $MAKEJOBS -C depends HOST="$HOST"; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./autogen.sh; fi
-- if [[ "$LABEL" == "linux64" ]]; then ./configure $GLOBAL_CONFIG $BUILD_CONFIG; fi
-- if [[ "$LABEL" == "win32" ]]; then CONFIG_SITE=$PWD/depends/i686-w64-mingw32/share/config.site ./configure --prefix=/; fi
-- if [[ "$LABEL" == "win64" ]]; then CONFIG_SITE=$PWD/depends/x86_64-w64-mingw32/share/config.site ./configure --prefix=/; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make $MAKEJOBS; fi
-before_deploy:
-  - mkdir $TRAVIS_BUILD_DIR/deploy
-  - if [[ "$LABEL" == "linux64" ]]; then cp $TRAVIS_BUILD_DIR/src/xaya-cli $TRAVIS_BUILD_DIR/src/xaya-tx $TRAVIS_BUILD_DIR/src/xayad $TRAVIS_BUILD_DIR/src/qt/xaya-qt $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; fi
-  - if [[ "$LABEL" == "win32" ]]; then cp $TRAVIS_BUILD_DIR/src/xaya-cli.exe $TRAVIS_BUILD_DIR/src/xaya-tx.exe $TRAVIS_BUILD_DIR/src/xayad.exe $TRAVIS_BUILD_DIR/src/qt/xaya-qt.exe $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; fi
-  - if [[ "$LABEL" == "win64" ]]; then cp $TRAVIS_BUILD_DIR/src/xaya-cli.exe $TRAVIS_BUILD_DIR/src/xaya-tx.exe $TRAVIS_BUILD_DIR/src/xayad.exe $TRAVIS_BUILD_DIR/src/qt/xaya-qt.exe $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; fi
-  - cd $TRAVIS_BUILD_DIR/deploy
-  - ls -lh;
-  - if [[ "$LABEL" == "win32" ]]; then zip -P "$DEVPW" xaya-bin-${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-$LABEL.zip *; fi
-  - if [[ "$LABEL" == "win64" ]]; then zip -P "$DEVPW" xaya-bin-${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-$LABEL.zip *; fi
-deploy:
-  provider: releases
-  token: $GH_TOKEN
-  file_glob: true
-  file: $TRAVIS_BUILD_DIR/deploy/xaya-bin*
-  overwrite: true
-  skip_cleanup: true
-  draft: true
-  name: ${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-${LABEL}
-  tag_name: ${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-${LABEL}
-  on:
-    repo: cryptocrowd-city/xcrc-core-wallet
-    all_branches: true
