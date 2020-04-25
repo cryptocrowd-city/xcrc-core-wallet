@@ -26,35 +26,38 @@ jobs:
   - stage: cache
     name: Warming the cache on Trusty
     dist: trusty
-    addons:
-      apt:
-        sources:
-        - deadsnakes
-        - sourceline: 'ppa:bitcoin/bitcoin'
-        packages:
-        - build-essential
+    before_install:
+#
+    install:
+    #
+    before_script:
+#
+    script:
+#
     os: linux
   - stage: cache
     name: Warming the cache on Xenial
     dist: xenial
-    addons:
-      apt:
-        sources:
-        - deadsnakes
-        - sourceline: 'ppa:bitcoin/bitcoin'
-        packages:
-        - build-essential
+    before_install:
+#
+    install:
+    #
+    before_script:
+#
+    script:
+#
     os: linux
   - stage: cache
     name: Warming the cache on Bionic
     dist: bionic
-    addons:
-      apt:
-        sources:
-        - deadsnakes
-        - sourceline: 'ppa:bitcoin/bitcoin'
-        packages:
-        - build-essential 
+    before_install:
+#
+    install:
+    #
+    before_script:
+#
+    script:
+#
     os: linux
   - stage: build
     name: Linux x86 64 Bit on Bionic
