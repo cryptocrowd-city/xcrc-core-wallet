@@ -17,7 +17,7 @@ cache:
 env:
   global:
   - MAKEJOBS="-j3"
-  - GLOBAL_CONFIG="--enable-reduce-exports --with-miniupnpc --enable-upnp-default"
+  - GLOBAL_CONFIG="--enable-reduce-exports"
 stages:
   - cache
   - build
@@ -178,7 +178,7 @@ jobs:
         - libqrencode-dev 
         - libboost-program-options-dev
     env:
-    - BUILD_CONFIG="--enable-zmq --with-gui=qt5 CPPFLAGS=-DDEBUG_LOCKORDER"
+    - BUILD_CONFIG="--enable-zmq --with-gui=qt5 --with-miniupnpc --enable-upnp-default CPPFLAGS=-DDEBUG_LOCKORDER"
     - LABEL=linux64
     - PYZMQ=true
     os: linux
@@ -220,7 +220,7 @@ jobs:
         - libqrencode-dev 
         - libboost-program-options-dev
     env:
-    - BUILD_CONFIG="--enable-zmq --with-gui=qt5 CPPFLAGS=-DDEBUG_LOCKORDER"
+    - BUILD_CONFIG="--enable-zmq --with-gui=qt5 --with-miniupnpc --enable-upnp-default CPPFLAGS=-DDEBUG_LOCKORDER"
     - LABEL=linux64
     - OSLABEL=bionic
     - PYZMQ=true
@@ -337,7 +337,7 @@ jobs:
         - g++-mingw-w64-i686
         - mingw-w64-i686-dev
     env:
-    - BUILD_CONFIG="--enable-zmq --with-gui=qt5 "
+    - BUILD_CONFIG="--enable-zmq --with-gui=qt5 --with-miniupnpc --enable-upnp-default"
     - LABEL=win32
     - HOST=i686-w64-mingw32
     os: linux
@@ -382,7 +382,7 @@ jobs:
         - g++-mingw-w64-i686
         - mingw-w64-i686-dev
     env:
-    - BUILD_CONFIG="--enable-zmq --with-gui=qt5 "
+    - BUILD_CONFIG="--enable-zmq --with-gui=qt5 --with-miniupnpc --enable-upnp-default"
     - LABEL=win32
     - OSLABEL=bionic
     - HOST=i686-w64-mingw32
@@ -473,7 +473,7 @@ jobs:
 # Win64
         - g++-mingw-w64-x86-64
     env:
-    - BUILD_CONFIG="--enable-zmq --with-gui=qt5 LDFLAGS=-Wa,-mbig-obj"
+    - BUILD_CONFIG="--enable-zmq --with-gui=qt5 --with-miniupnpc --enable-upnp-default LDFLAGS=-Wa,-mbig-obj"
     - LABEL=win64
     - HOST=x86_64-w64-mingw32
     os: linux
@@ -517,7 +517,7 @@ jobs:
 # Win64
         - g++-mingw-w64-x86-64
     env:
-    - BUILD_CONFIG="--enable-zmq --with-gui=qt5 LDFLAGS=-Wa,-mbig-obj"
+    - BUILD_CONFIG="--enable-zmq --with-gui=qt5 --with-miniupnpc --enable-upnp-default LDFLAGS=-Wa,-mbig-obj"
     - LABEL=win64
     - OSLABEL=bionic
     - HOST=x86_64-w64-mingw32
