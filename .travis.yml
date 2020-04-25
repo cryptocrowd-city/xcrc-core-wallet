@@ -20,7 +20,7 @@ env:
 jobs:
   include:
   - name: Linux x86 64 Bit
-  dist: bionic
+    dist: bionic
     addons:
       apt:
         sources:
@@ -61,7 +61,7 @@ jobs:
     - LABEL=linux64
     os: linux
   - name: Win x86 64 Bit
-  dist: trusty
+    dist: trusty
     addons:
       apt:
         sources:
