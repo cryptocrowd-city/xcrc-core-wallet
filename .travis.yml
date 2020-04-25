@@ -33,7 +33,7 @@ jobs:
     before_script:
 #
     script:
-#
+    - set -o errexit; ls -lh; 
     os: linux
   - stage: cache
     name: Warming the cache on Xenial
@@ -45,7 +45,7 @@ jobs:
     before_script:
 #
     script:
-#
+    - set -o errexit; ls -lh; 
     os: linux
   - stage: cache
     name: Warming the cache on Bionic
@@ -57,7 +57,7 @@ jobs:
     before_script:
 #
     script:
-#
+    - set -o errexit; ls -lh; 
     os: linux
   - stage: build
     name: Linux x86 64 Bit on Bionic
