@@ -527,11 +527,11 @@ before_script:
 - if [[ "$LABEL" == "win32" ]]; then PATH=$(echo "$PATH" | sed -e 's/:\/mnt.*//g'); fi
 - if [[ "$LABEL" == "win64" ]]; then PATH=$(echo "$PATH" | sed -e 's/:\/mnt.*//g'); fi
 script:
-- if [[ "$LABEL" == "win32" ]]; then make $MAKEJOBS -C depends HOST="$HOST"; fi
-- if [[ "$LABEL" == "win64" ]]; then make $MAKEJOBS -C depends HOST="$HOST"; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./autogen.sh; fi
-- if [[ "$LABEL" == "linux64" ]]; then ./configure $GLOBAL_CONFIG $BUILD_CONFIG; fi
-- if [[ "$LABEL" == "win32" ]]; then CONFIG_SITE=$PWD/depends/i686-w64-mingw32/share/config.site ./configure --prefix=/; fi
-- if [[ "$LABEL" == "win64" ]]; then CONFIG_SITE=$PWD/depends/x86_64-w64-mingw32/share/config.site ./configure --prefix=/; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make $MAKEJOBS; fi
+- set -o errexit; if [[ "$LABEL" == "win32" ]]; then make $MAKEJOBS -C depends HOST="$HOST"; fi
+- set -o errexit; if [[ "$LABEL" == "win64" ]]; then make $MAKEJOBS -C depends HOST="$HOST"; fi
+- set -o errexit; if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./autogen.sh; fi
+- set -o errexit; if [[ "$LABEL" == "linux64" ]]; then ./configure $GLOBAL_CONFIG $BUILD_CONFIG; fi
+- set -o errexit; if [[ "$LABEL" == "win32" ]]; then CONFIG_SITE=$PWD/depends/i686-w64-mingw32/share/config.site ./configure --prefix=/; fi
+- set -o errexit; if [[ "$LABEL" == "win64" ]]; then CONFIG_SITE=$PWD/depends/x86_64-w64-mingw32/share/config.site ./configure --prefix=/; fi
+- set -o errexit; if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make $MAKEJOBS; fi
 
