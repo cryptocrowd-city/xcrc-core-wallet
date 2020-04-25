@@ -60,6 +60,91 @@ jobs:
     - set -o errexit; ls -lh; 
     os: linux
   - stage: build
+    name: Linux x86 64 Bit on Trusty
+    dist: trusty
+    addons:
+      apt:
+        sources:
+        - deadsnakes
+        - sourceline: 'ppa:bitcoin/bitcoin'
+        packages:
+        - autoconf
+        - autotools-dev
+        - binutils
+        - bsdmainutils
+        - build-essential
+        - cmake
+        - curl
+        - libboost-all-dev
+        - libbz2-dev
+        - libcap-dev
+        - libdb4.8-dev
+        - libdb4.8++-dev
+        - libevent-dev
+        - libssl-dev
+        - libtool
+        - linux-libc-dev
+        - miniupnpc
+        - pkg-config
+        - python-dev
+        - python-setuptools
+        - python3
+        - python3-zmq
+        - zip
+        - zlib1g-dev
+        - bc
+        - libprotobuf-dev
+        - libqrencode-dev
+        - python3-zmq
+        - qtdeclarative5-dev
+        - qttools5-dev-tools
+        - linux-libc-dev:i386
+    env:
+    - BUILD_CONFIG="--enable-zmq --with-gui=qt5 CPPFLAGS=-DDEBUG_LOCKORDER"
+    - LABEL=linux64
+    os: linux
+  - stage: build
+    name: Linux x86 64 Bit on Xenial
+    dist: xenial
+    addons:
+      apt:
+        sources:
+        - deadsnakes
+        - sourceline: 'ppa:bitcoin/bitcoin'
+        packages:
+        - build-essential 
+        - libtool 
+        - autotools-dev 
+        - automake 
+        - pkg-config 
+        - libssl-dev 
+        - libevent-dev 
+        - bsdmainutils 
+        - python3 
+        - libboost-system-dev 
+        - libboost-filesystem-dev 
+        - libboost-chrono-dev 
+        - libboost-test-dev 
+        - libboost-thread-dev
+#
+        - libdb4.8-dev 
+        - libdb4.8++-dev 
+        - libminiupnpc-dev 
+        - libzmq3-dev 
+        - libqt5gui5 
+        - libqt5core5a 
+        - libqt5dbus5 
+        - qttools5-dev 
+        - qttools5-dev-tools 
+        - libprotobuf-dev 
+        - protobuf-compiler 
+        - libqrencode-dev 
+        - libboost-program-options-dev
+    env:
+    - BUILD_CONFIG="--enable-zmq --with-gui=qt5 CPPFLAGS=-DDEBUG_LOCKORDER"
+    - LABEL=linux64
+    os: linux
+  - stage: build
     name: Linux x86 64 Bit on Bionic
     dist: bionic
     addons:
@@ -139,8 +224,10 @@ jobs:
         - python3-zmq
         - qtdeclarative5-dev
         - qttools5-dev-tools
-        - g++-mingw-w64-i686
         - linux-libc-dev:i386
+# Win32
+        - g++-mingw-w64-i686
+        - mingw-w64-i686-dev
     env:
     - BUILD_CONFIG="--enable-zmq --with-gui=qt5"
     - LABEL=win32
