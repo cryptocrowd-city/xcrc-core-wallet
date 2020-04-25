@@ -19,7 +19,7 @@ env:
   - MAKEJOBS="-j3"
 jobs:
   include:
-  - name: Linux x86 64 Bit
+  - name: Linux x86 64 Bit on Bionic
     dist: bionic
     addons:
       apt:
@@ -58,7 +58,7 @@ jobs:
     env:
     - LABEL=linux64
     os: linux
-  - name: Win i686 32 Bit
+  - name: Win i686 32 Bit on Trusty
     dist: trusty
     addons:
       apt:
@@ -102,7 +102,7 @@ jobs:
     - LABEL=win32
     - HOST=i686-w64-mingw32
     os: linux
-  - name: Win x86 64 Bit
+  - name: Win i686 32 Bit on Bionic
     dist: bionic
     addons:
       apt:
@@ -124,7 +124,7 @@ jobs:
         - libboost-chrono-dev 
         - libboost-test-dev 
         - libboost-thread-dev
-#
+# Additional
         - libdb4.8-dev 
         - libdb4.8++-dev 
         - libminiupnpc-dev 
@@ -138,13 +138,57 @@ jobs:
         - protobuf-compiler 
         - libqrencode-dev 
         - libboost-program-options-dev
+# Win32
+        - g++-mingw-w64-i686
+        - mingw-w64-i686-dev
+    env:
+    - LABEL=win32
+    - HOST=i686-w64-mingw32
+    os: linux
+  - name: Win x86 64 Bit pn Bionic
+    dist: bionic
+    addons:
+      apt:
+        sources:
+        - deadsnakes
+        - sourceline: 'ppa:bitcoin/bitcoin'      
+        packages:
+        - build-essential 
+        - libtool 
+        - autotools-dev 
+        - automake 
+        - pkg-config 
+        - libssl-dev 
+        - libevent-dev 
+        - bsdmainutils 
+        - python3 
+        - libboost-system-dev 
+        - libboost-filesystem-dev 
+        - libboost-chrono-dev 
+        - libboost-test-dev 
+        - libboost-thread-dev
+# Additional
+        - libdb4.8-dev 
+        - libdb4.8++-dev 
+        - libminiupnpc-dev 
+        - libzmq3-dev 
+        - libqt5gui5 
+        - libqt5core5a 
+        - libqt5dbus5 
+        - qttools5-dev 
+        - qttools5-dev-tools 
+        - libprotobuf-dev 
+        - protobuf-compiler 
+        - libqrencode-dev 
+        - libboost-program-options-dev
+# Win64
         - g++-mingw-w64-x86-64
     env:
     - LABEL=win64
     - HOST=x86_64-w64-mingw32
     os: linux
 before_install:
-#- if [[ "$LABEL" == "win32" ]]; then echo 1 | sudo update-alternatives --config i686-w64-mingw32-g++; fi # echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-gcc; fi
+- if [[ "$LABEL" == "win32" ]]; then echo 1 | sudo update-alternatives --config i686-w64-mingw32-g++; fi # echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-gcc; fi
 - if [[ "$LABEL" == "win64" ]]; then echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-g++; fi # echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-gcc; fi
 install:
 #
