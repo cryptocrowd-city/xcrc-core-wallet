@@ -125,19 +125,19 @@ jobs:
         - python-dev
         - python-setuptools
         - python3
-        - python3-zmq
+        - python3-zmq 
         - zip
         - zlib1g-dev
         - bc
         - libprotobuf-dev
         - libqrencode-dev
-        - python3-zmq
         - qtdeclarative5-dev
         - qttools5-dev-tools
         - linux-libc-dev:i386
     env:
     - BUILD_CONFIG="--enable-zmq --with-gui=qt5 CPPFLAGS=-DDEBUG_LOCKORDER"
     - LABEL=linux64
+    - PYZMQ=true
     os: linux
   - stage: build
     name: Linux x86 64 Bit on Xenial
@@ -179,6 +179,7 @@ jobs:
     env:
     - BUILD_CONFIG="--enable-zmq --with-gui=qt5 CPPFLAGS=-DDEBUG_LOCKORDER"
     - LABEL=linux64
+    - PYZMQ=true
     os: linux
   - stage: build
     name: Linux x86 64 Bit on Bionic
@@ -220,6 +221,7 @@ jobs:
     env:
     - BUILD_CONFIG="--enable-zmq --with-gui=qt5 CPPFLAGS=-DDEBUG_LOCKORDER"
     - LABEL=linux64
+    - PYZMQ=true
     os: linux
     before_deploy:
     - mkdir $TRAVIS_BUILD_DIR/deploy
@@ -280,7 +282,6 @@ jobs:
         - bc
         - libprotobuf-dev
         - libqrencode-dev
-        - python3-zmq
         - qtdeclarative5-dev
         - qttools5-dev-tools
         - linux-libc-dev:i386
@@ -418,7 +419,6 @@ jobs:
         - bc
         - libprotobuf-dev
         - libqrencode-dev
-        - python3-zmq
         - qtdeclarative5-dev
         - qttools5-dev-tools
 # Win64
@@ -518,11 +518,11 @@ jobs:
     os: linux
 before_install:
 #- sudo apt-get upgrade -y --allow-unauthenticated; 
-- if [[ "$LABEL" == "win32" ]]; then  sudo dpkg -y --add-architecture i386; fi
+- if [[ "$LABEL" == "win32" ]]; then  sudo dpkg --add-architecture i386; fi
 - if [[ "$HOST" == "i686-w64-mingw32" ]]; then echo 1 | sudo update-alternatives --config i686-w64-mingw32-g++; echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-gcc; fi
 - if [[ "$LABEL" == "win64" ]]; then echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-g++; fi # echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-gcc; fi
 install:
-#
+- if [ "$PYZMQ" = "true" ]; then pip install pyzmq --user ; fi
 before_script:
 - if [[ "$LABEL" == "win32" ]]; then PATH=$(echo "$PATH" | sed -e 's/:\/mnt.*//g'); fi
 - if [[ "$LABEL" == "win64" ]]; then PATH=$(echo "$PATH" | sed -e 's/:\/mnt.*//g'); fi
