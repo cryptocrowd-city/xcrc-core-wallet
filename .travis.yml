@@ -58,7 +58,7 @@ jobs:
     env:
     - LABEL=linux64
     os: linux
-  - name: Win x86 64 Bit
+  - name: Win i686 32 Bit
     dist: trusty
     addons:
       apt:
@@ -96,30 +96,77 @@ jobs:
         - python3-zmq
         - qtdeclarative5-dev
         - qttools5-dev-tools
+        - g++-mingw-w64-i686
+        - linux-libc-dev:i386
+    env:
+    - LABEL=win32
+    - HOST=i686-w64-mingw32
+    os: linux
+  - name: Win x86 64 Bit
+    dist: bionic
+    addons:
+      apt:
+        sources:
+        - deadsnakes
+        - sourceline: 'ppa:bitcoin/bitcoin'      
+        packages:
+        - build-essential 
+        - libtool 
+        - autotools-dev 
+        - automake 
+        - pkg-config 
+        - libssl-dev 
+        - libevent-dev 
+        - bsdmainutils 
+        - python3 
+        - libboost-system-dev 
+        - libboost-filesystem-dev 
+        - libboost-chrono-dev 
+        - libboost-test-dev 
+        - libboost-thread-dev
+#
+        - libdb4.8-dev 
+        - libdb4.8++-dev 
+        - libminiupnpc-dev 
+        - libzmq3-dev 
+        - libqt5gui5 
+        - libqt5core5a 
+        - libqt5dbus5 
+        - qttools5-dev 
+        - qttools5-dev-tools 
+        - libprotobuf-dev 
+        - protobuf-compiler 
+        - libqrencode-dev 
+        - libboost-program-options-dev
         - g++-mingw-w64-x86-64
-        - mingw-w64-x86-64-dev
     env:
     - LABEL=win64
     - HOST=x86_64-w64-mingw32
     os: linux
 before_install:
-#- if [[ "$LABEL" == "win64" ]]; then echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-g++; echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-gcc; fi
+#- if [[ "$LABEL" == "win32" ]]; then echo 1 | sudo update-alternatives --config i686-w64-mingw32-g++; fi # echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-gcc; fi
+- if [[ "$LABEL" == "win64" ]]; then echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-g++; fi # echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-gcc; fi
 install:
 #
 before_script:
+- if [[ "$LABEL" == "win32" ]]; then PATH=$(echo "$PATH" | sed -e 's/:\/mnt.*//g'); fi
 - if [[ "$LABEL" == "win64" ]]; then PATH=$(echo "$PATH" | sed -e 's/:\/mnt.*//g'); fi
 script:
+- if [[ "$LABEL" == "win32" ]]; then make $MAKEJOBS -C depends HOST="$HOST"; fi
 - if [[ "$LABEL" == "win64" ]]; then make $MAKEJOBS -C depends HOST="$HOST"; fi
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./autogen.sh; fi
 - if [[ "$LABEL" == "linux64" ]]; then ./configure; fi
+- if [[ "$LABEL" == "win32" ]]; then CONFIG_SITE=$PWD/depends/i686-w64-mingw32/share/config.site ./configure --prefix=/; fi
 - if [[ "$LABEL" == "win64" ]]; then CONFIG_SITE=$PWD/depends/x86_64-w64-mingw32/share/config.site ./configure --prefix=/; fi
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make $MAKEJOBS; fi
 before_deploy:
   - mkdir $TRAVIS_BUILD_DIR/deploy
   - if [[ "$LABEL" == "linux64" ]]; then cp $TRAVIS_BUILD_DIR/src/xaya-cli $TRAVIS_BUILD_DIR/src/xaya-tx $TRAVIS_BUILD_DIR/src/xayad $TRAVIS_BUILD_DIR/src/qt/xaya-qt $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; fi
+  - if [[ "$LABEL" == "win32" ]]; then cp $TRAVIS_BUILD_DIR/src/xaya-cli.exe $TRAVIS_BUILD_DIR/src/xaya-tx.exe $TRAVIS_BUILD_DIR/src/xayad.exe $TRAVIS_BUILD_DIR/src/qt/xaya-qt.exe $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; fi
   - if [[ "$LABEL" == "win64" ]]; then cp $TRAVIS_BUILD_DIR/src/xaya-cli.exe $TRAVIS_BUILD_DIR/src/xaya-tx.exe $TRAVIS_BUILD_DIR/src/xayad.exe $TRAVIS_BUILD_DIR/src/qt/xaya-qt.exe $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; fi
   - cd $TRAVIS_BUILD_DIR/deploy
   - ls -lh;
+  - if [[ "$LABEL" == "win32" ]]; then zip -P "$DEVPW" xaya-bin-${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-$LABEL.zip *; fi
   - if [[ "$LABEL" == "win64" ]]; then zip -P "$DEVPW" xaya-bin-${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-$LABEL.zip *; fi
 deploy:
   provider: releases
