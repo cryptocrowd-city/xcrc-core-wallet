@@ -24,10 +24,10 @@ stages:
 jobs:
   include:
   - stage: cache
-    name: Warming the cache on Trusty
+    name: Warming the cache for Win32 on Trusty
     dist: trusty
     before_install:
-#
+    - sudo apt-get upgrade; 
     install:
     #
     before_script:
@@ -36,10 +36,10 @@ jobs:
     - set -o errexit; ls -lh; 
     os: linux
   - stage: cache
-    name: Warming the cache on Xenial
+    name: Warming the cache for Win32 on Xenial
     dist: xenial
     before_install:
-#
+    - sudo apt-get upgrade; 
     install:
     #
     before_script:
@@ -48,10 +48,46 @@ jobs:
     - set -o errexit; ls -lh; 
     os: linux
   - stage: cache
-    name: Warming the cache on Bionic
+    name: Warming the cache for Win32 on Bionic
     dist: bionic
     before_install:
+    - sudo apt-get upgrade; 
+    install:
+    #
+    before_script:
 #
+    script:
+    - set -o errexit; ls -lh; 
+    os: linux
+  - stage: cache
+    name: Warming the cache for Win64 on Trusty
+    dist: trusty
+    before_install:
+    - sudo apt-get upgrade; 
+    install:
+    #
+    before_script:
+#
+    script:
+    - set -o errexit; ls -lh; 
+    os: linux
+  - stage: cache
+    name: Warming the cache for Win64 on Xenial
+    dist: xenial
+    before_install:
+    - sudo apt-get upgrade; 
+    install:
+    #
+    before_script:
+#
+    script:
+    - set -o errexit; ls -lh; 
+    os: linux
+  - stage: cache
+    name: Warming the cache for Win64 on Bionic
+    dist: bionic
+    before_install:
+    - sudo apt-get upgrade; 
     install:
     #
     before_script:
@@ -457,7 +493,8 @@ jobs:
     - LABEL=win64
     - HOST=x86_64-w64-mingw32
     os: linux
-before_install: 
+before_install:
+- sudo apt-get upgrade; 
 - if [[ "$LABEL" == "win32" ]]; then  sudo dpkg -y --add-architecture i386; fi
 - if [[ "$HOST" == "i686-w64-mingw32" ]]; then echo 1 | sudo update-alternatives --config i686-w64-mingw32-g++; echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-gcc; fi
 - if [[ "$LABEL" == "win64" ]]; then echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-g++; fi # echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-gcc; fi
