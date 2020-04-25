@@ -17,9 +17,47 @@ cache:
 env:
   global:
   - MAKEJOBS="-j3"
+  - GLOBAL_CONFIG="--enable-reduce-exports --with-miniupnpc --enable-upnp-default"
+stages:
+  - cache
+  - build
 jobs:
   include:
-  - name: Linux x86 64 Bit on Bionic
+  - stage: cache
+    name: Warming the cache on Trusty
+    dist: trusty
+    addons:
+      apt:
+        sources:
+        - deadsnakes
+        - sourceline: 'ppa:bitcoin/bitcoin'
+        packages:
+        - build-essential
+    os: linux
+  - stage: cache
+    name: Warming the cache on Xenial
+    dist: xenial
+    addons:
+      apt:
+        sources:
+        - deadsnakes
+        - sourceline: 'ppa:bitcoin/bitcoin'
+        packages:
+        - build-essential
+    os: linux
+  - stage: cache
+    name: Warming the cache on Bionic
+    dist: bionic
+    addons:
+      apt:
+        sources:
+        - deadsnakes
+        - sourceline: 'ppa:bitcoin/bitcoin'
+        packages:
+        - build-essential 
+    os: linux
+  - stage: build
+    name: Linux x86 64 Bit on Bionic
     dist: bionic
     addons:
       apt:
@@ -56,9 +94,11 @@ jobs:
         - libqrencode-dev 
         - libboost-program-options-dev
     env:
+    - BUILD_CONFIG="--enable-zmq --with-gui=qt5 CPPFLAGS=-DDEBUG_LOCKORDER"
     - LABEL=linux64
     os: linux
-  - name: Win i686 32 Bit on Trusty
+  - stage: build
+    name: Win i686 32 Bit on Trusty
     dist: trusty
     addons:
       apt:
@@ -99,10 +139,12 @@ jobs:
         - g++-mingw-w64-i686
         - linux-libc-dev:i386
     env:
+    - BUILD_CONFIG="--enable-zmq --with-gui=qt5"
     - LABEL=win32
     - HOST=i686-w64-mingw32
     os: linux
-  - name: Win i686 32 Bit on Bionic
+  - stage: build
+    name: Win i686 32 Bit on Bionic
     dist: bionic
     addons:
       apt:
@@ -142,11 +184,57 @@ jobs:
         - g++-mingw-w64-i686
         - mingw-w64-i686-dev
     env:
+    - BUILD_CONFIG="--enable-zmq --with-gui=qt5 "
     - LABEL=win32
-    - HOST_OS=bionic32
     - HOST=i686-w64-mingw32
     os: linux
-  - name: Win x86 64 Bit pn Bionic
+  - stage: build
+    name: Win i686 32 Bit on Xenial
+    dist: xenial
+    addons:
+      apt:
+        sources:
+        - deadsnakes
+        - sourceline: 'ppa:bitcoin/bitcoin'      
+        packages:
+        - build-essential 
+        - libtool 
+        - autotools-dev 
+        - automake 
+        - pkg-config 
+        - libssl-dev 
+        - libevent-dev 
+        - bsdmainutils 
+        - python3 
+        - libboost-system-dev 
+        - libboost-filesystem-dev 
+        - libboost-chrono-dev 
+        - libboost-test-dev 
+        - libboost-thread-dev
+# Additional
+        - libdb4.8-dev 
+        - libdb4.8++-dev 
+        - libminiupnpc-dev 
+        - libzmq3-dev 
+        - libqt5gui5 
+        - libqt5core5a 
+        - libqt5dbus5 
+        - qttools5-dev 
+        - qttools5-dev-tools 
+        - libprotobuf-dev 
+        - protobuf-compiler 
+        - libqrencode-dev 
+        - libboost-program-options-dev
+# Win32
+        - g++-mingw-w64-i686
+        - mingw-w64-i686-dev
+    env:
+    - BUILD_CONFIG="--enable-zmq --with-gui=qt5 "
+    - LABEL=win32
+    - HOST=i686-w64-mingw32
+    os: linux
+  - stage: build
+    name: Win x86 64 Bit on Bionic
     dist: bionic
     addons:
       apt:
@@ -185,12 +273,13 @@ jobs:
 # Win64
         - g++-mingw-w64-x86-64
     env:
+    - BUILD_CONFIG="--enable-zmq --with-gui=qt5 LDFLAGS=-Wa,-mbig-obj"
     - LABEL=win64
     - HOST=x86_64-w64-mingw32
     os: linux
 before_install: 
 - if [[ "$LABEL" == "win32" ]]; then  sudo dpkg -y --add-architecture i386;
-- if [[ "$HOST_OS" == "bionic32" ]]; then echo 1 | sudo update-alternatives --config i686-w64-mingw32-g++; fi # echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-gcc; fi
+- if [[ "$HOST" == "i686-w64-mingw32" ]]; then echo 1 | sudo update-alternatives --config i686-w64-mingw32-g++; echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-gcc; fi
 - if [[ "$LABEL" == "win64" ]]; then echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-g++; fi # echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-gcc; fi
 install:
 #
@@ -201,7 +290,7 @@ script:
 - if [[ "$LABEL" == "win32" ]]; then make $MAKEJOBS -C depends HOST="$HOST"; fi
 - if [[ "$LABEL" == "win64" ]]; then make $MAKEJOBS -C depends HOST="$HOST"; fi
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./autogen.sh; fi
-- if [[ "$LABEL" == "linux64" ]]; then ./configure; fi
+- if [[ "$LABEL" == "linux64" ]]; then ./configure $GLOBAL_CONFIG $BUILD_CONFIG; fi
 - if [[ "$LABEL" == "win32" ]]; then CONFIG_SITE=$PWD/depends/i686-w64-mingw32/share/config.site ./configure --prefix=/; fi
 - if [[ "$LABEL" == "win64" ]]; then CONFIG_SITE=$PWD/depends/x86_64-w64-mingw32/share/config.site ./configure --prefix=/; fi
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make $MAKEJOBS; fi
