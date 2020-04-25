@@ -121,6 +121,7 @@ jobs:
         - libtool
         - linux-libc-dev
         - miniupnpc
+        - libminiupnpc-dev
         - pkg-config
         - python-dev
         - python-setuptools
@@ -272,6 +273,7 @@ jobs:
         - libtool
         - linux-libc-dev
         - miniupnpc
+        - libminiupnpc-dev
         - pkg-config
         - python-dev
         - python-setuptools
@@ -409,6 +411,7 @@ jobs:
         - libtool
         - linux-libc-dev
         - miniupnpc
+        - libminiupnpc-dev
         - pkg-config
         - python-dev
         - python-setuptools
@@ -520,7 +523,7 @@ before_install:
 #- sudo apt-get upgrade -y --allow-unauthenticated; 
 - if [[ "$LABEL" == "win32" ]]; then  sudo dpkg --add-architecture i386; fi
 - if [[ "$HOST" == "i686-w64-mingw32" ]]; then echo 1 | sudo update-alternatives --config i686-w64-mingw32-g++; echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-gcc; fi
-- if [[ "$LABEL" == "win64" ]]; then echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-g++; fi # echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-gcc; fi
+- if [[ "$HOST" == "x86_64-w64-mingw32" ]]; then echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-g++; fi # echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-gcc; fi
 install:
 - if [ "$PYZMQ" = "true" ]; then pip install pyzmq --user ; fi
 before_script:
