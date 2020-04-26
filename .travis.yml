@@ -68,11 +68,11 @@ jobs:
     - LABEL=win64
     - HOST=x86_64-w64-mingw32
     before_install:
-    - echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-g++; fi 
+    - echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-g++;  
     install:
     #
     before_script:
-    - PATH=$(echo "$PATH" | sed -e 's/:\/mnt.*//g'); fi
+    - PATH=$(echo "$PATH" | sed -e 's/:\/mnt.*//g'); 
     script:
     - set -o errexit; make $MAKEJOBS -C depends HOST="$HOST";
     os: linux
