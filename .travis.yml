@@ -1,145 +1,231 @@
-# The test build matrix (stage: test) is constructed to test a wide range of
-# configurations, rather than a single pass/fail. This helps to catch build
-# failures and logic errors that present on platforms other than the ones the
-# author has tested.
-#
-# Some builders use the dependency-generator in `./depends`, rather than using
-# apt-get to install build dependencies. This guarantees that the tester is
-# using the same versions as Gitian, so the build results are nearly identical
-# to what would be found in a final release.
-#
-# In order to avoid rebuilding all dependencies for each build, the binaries
-# are cached and re-used when possible. Changes in the dependency-generator
-# will trigger cache-invalidation and rebuilds as necessary.
-#
-# These caches can be manually removed if necessary. This is one of the very
-# few manual operations that is possible with Travis, and it can be done by a
-# Bitcoin Core GitHub member via the Travis web interface [0].
-#
-# Travis CI uploads the cache after the script phase of the build [1].
-# However, the build is terminated without saving the cache if it takes over
-# 50 minutes [2]. Thus, if we spent too much time in early build stages, fail
-# with an error and save the cache.
-#
-# [0] https://travis-ci.org/bitcoin/bitcoin/caches
-# [1] https://docs.travis-ci.com/user/caching/#build-phases
-# [2] https://docs.travis-ci.com/user/customizing-the-build#build-timeouts
-
-dist: xenial
-os: linux
-language: minimal
-notifications:
-  irc:
-    channels:
-#      - "chat.freenode.net#namecoin-dev"
-    on_success: never
+language: cpp
+branches:
+  only:
+  - master
+  - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
+  - /^travis.*$/
+  except:
+  - /^v\d+\.\d+\.\d+(\.\d+)?(-\S*)?$/
 cache:
+  timeout: 1000
   ccache: true
   directories:
-    - $TRAVIS_BUILD_DIR/depends/built
-    - $TRAVIS_BUILD_DIR/depends/sdk-sources
-    - $TRAVIS_BUILD_DIR/ci/scratch/.ccache
-stages:
-  - lint
-  - test
-  - extended-lint
+  - depends/built
+  - depends/work/build
+  - depends/sdk-sources
+#  - $TRAVIS_BUILD_DIR/depends/$HOST
 env:
   global:
-    - CI_RETRY_EXE="travis_retry"
-    - CACHE_ERR_MSG="Error! Initial build successful, but not enough time remains to run later build stages and tests. Please manually re-run this job by using the travis restart button or asking a bitcoin maintainer to restart. The next run should not time out because the build cache has been saved."
-before_install:
-  - set -o errexit; source ./ci/test/00_setup_env.sh
-  - set -o errexit; source ./ci/test/03_before_install.sh
-install:
-  - set -o errexit; source ./ci/test/04_install.sh
-before_script:
-  - set -o errexit; source ./ci/test/05_before_script.sh
-script:
-  - export CONTINUE=1
-  - if [ $SECONDS -gt 1200 ]; then export CONTINUE=0; fi  # Likely the depends build took very long
-  - if [ $TRAVIS_REPO_SLUG = "bitcoin/bitcoin" ]; then export CONTINUE=1; fi  # Whitelisted repo (90 minutes build time)
-  - if [ $CONTINUE = "1" ]; then set -o errexit; source ./ci/test/06_script_a.sh; else set +o errexit; echo "$CACHE_ERR_MSG"; false; fi
-  - if [ $SECONDS -gt 2000 ]; then export CONTINUE=0; fi  # Likely the build took very long; The tests take about 1000s, so we should abort if we have less than 50*60-1000=2000s left
-  - if [ $TRAVIS_REPO_SLUG = "bitcoin/bitcoin" ]; then export CONTINUE=1; fi  # Whitelisted repo (90 minutes build time)
-  - if [ $CONTINUE = "1" ]; then set -o errexit; source ./ci/test/06_script_b.sh; else set +o errexit; echo "$CACHE_ERR_MSG"; false; fi
-after_script:
-  - echo $TRAVIS_COMMIT_RANGE
+  - MAKEJOBS="-j3"
+  - GLOBAL_CONFIG="--enable-reduce-exports"
+stages:
+  - build
+  - compile
 jobs:
   include:
-
-    - stage: lint
-      name: 'lint'
-      env:
-      cache: false
-      language: python
-      python: '3.5' # Oldest supported version according to doc/dependencies.md
-      install:
-        - set -o errexit; source ./ci/lint/04_install.sh
-      before_script:
-        - set -o errexit; source ./ci/lint/05_before_script.sh
-      script:
-        - set -o errexit; source ./ci/lint/06_script.sh
-
-    - stage: extended-lint
-      name: 'extended lint [runtime >= 60 seconds]'
-      env:
-      cache: false
-      language: python
-      python: '3.5'
-      install:
-        - set -o errexit; source ./ci/extended_lint/04_install.sh
-      before_script:
-        - set -o errexit; source ./ci/lint/05_before_script.sh
-      script:
-        - set -o errexit; source ./ci/extended_lint/06_script.sh
-
-    - stage: test
-      name: 'ARM  [GOAL: install]  [no unit or functional tests]'
-      env: >-
-        FILE_ENV="./ci/test/00_setup_env_arm.sh"
-
-    - stage: test
-      name: 'Win64  [GOAL: deploy]  [no gui or functional tests]'
-      env: >-
-        FILE_ENV="./ci/test/00_setup_env_win64.sh"
-
-    - stage: test
-      name: '32-bit + dash  [GOAL: install]  [GUI: BIP70 enabled]'
-      env: >-
-        FILE_ENV="./ci/test/00_setup_env_i686.sh"
-
-    - stage: test
-      name: 'x86_64 Linux  [GOAL: install]  [bionic]  [uses qt5 dev package instead of depends Qt to speed up build and avoid timeout] [unsigned char]'
-      env: >-
-        FILE_ENV="./ci/test/00_setup_env_amd64_qt5.sh"
-
-    - stage: test
-      name: 'x86_64 Linux  [GOAL: install]  [trusty]  [no functional tests, no depends, only system libs]'
-      env: >-
-        FILE_ENV="./ci/test/00_setup_env_amd64_trusty.sh"
-
-    - stage: test
-      name: 'x86_64 Linux  [GOAL: install]  [xenial]  [no depends, only system libs, sanitizers: thread (TSan), no wallet]'
-      env: >-
-        FILE_ENV="./ci/test/00_setup_env_amd64_tsan.sh"
-        TEST_RUNNER_EXTRA="--exclude feature_block"  # Not enough memory on travis machines
-
-    - stage: test
-      name: 'x86_64 Linux  [GOAL: install]  [bionic]  [no depends, only system libs, sanitizers: address/leak (ASan + LSan) + undefined (UBSan) + integer]'
-      env: >-
-        FILE_ENV="./ci/test/00_setup_env_amd64_asan.sh"
-
-    - stage: test
-      name: 'x86_64 Linux  [GOAL: install]  [bionic]  [no depends, only system libs, sanitizers: fuzzer,address,undefined]'
-      env: >-
-        FILE_ENV="./ci/test/00_setup_env_amd64_fuzz.sh"
-
-    - stage: test
-      name: 'x86_64 Linux  [GOAL: install]  [bionic]  [no wallet]'
-      env: >-
-        FILE_ENV="./ci/test/00_setup_env_amd64_nowallet.sh"
-
-    - stage: test
-      name: 'macOS 10.10  [GOAL: deploy] [no functional tests]'
-      env: >-
-        FILE_ENV="./ci/test/00_setup_env_mac.sh"
+  - stage: build
+    name: Warming the cache for Win64 on Bionic
+    dist: bionic
+    addons:
+      apt:
+        sources:
+        - deadsnakes
+        - sourceline: 'ppa:bitcoin/bitcoin'      
+        packages:
+        - build-essential 
+        - libtool 
+        - autotools-dev 
+        - automake 
+        - pkg-config 
+        - libssl-dev 
+        - libevent-dev 
+        - bsdmainutils 
+        - python3 
+        - libboost-system-dev 
+        - libboost-filesystem-dev 
+        - libboost-chrono-dev 
+        - libboost-test-dev 
+        - libboost-thread-dev
+# Additional
+        - libdb4.8-dev 
+        - libdb4.8++-dev 
+        - libminiupnpc-dev 
+        - libzmq3-dev 
+        - libqt5gui5 
+        - libqt5core5a 
+        - libqt5dbus5 
+        - qttools5-dev 
+        - qttools5-dev-tools 
+        - libprotobuf-dev 
+        - protobuf-compiler 
+        - libqrencode-dev 
+        - libboost-program-options-dev
+# Win64
+        - g++-mingw-w64-x86-64
+    env:
+#    - BUILD_CONFIG="--enable-zmq --with-gui=qt5 --with-miniupnpc --enable-upnp-default LDFLAGS=-Wa,-mbig-obj"
+    - BUILD_CONFIG="--with-gui=qt5 LDFLAGS=-Wa,-mbig-obj"
+    - LABEL=win64
+    - HOST=x86_64-w64-mingw32
+    before_install:
+    - echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-g++;  
+    install:
+    #
+    before_script:
+    - PATH=$(echo "$PATH" | sed -e 's/:\/mnt.*//g'); 
+    script:
+    - set -o errexit; make $MAKEJOBS -C depends HOST="$HOST";
+    os: linux
+  - stage: compile
+    name: Linux x86 64 Bit on Bionic
+    dist: bionic
+    before_deploy:
+    - mkdir $TRAVIS_BUILD_DIR/deploy
+    - cp $TRAVIS_BUILD_DIR/src/xaya-cli $TRAVIS_BUILD_DIR/src/xaya-tx $TRAVIS_BUILD_DIR/src/xayad $TRAVIS_BUILD_DIR/src/qt/xaya-qt $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; 
+#    - if [[ "$LABEL" == "win32" ]]; then cp $TRAVIS_BUILD_DIR/src/xaya-cli.exe $TRAVIS_BUILD_DIR/src/xaya-tx.exe $TRAVIS_BUILD_DIR/src/xayad.exe $TRAVIS_BUILD_DIR/src/qt/xaya-qt.exe $TRAVIS_BUILD_DIR/src/qt/xaya-wallet.exe $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; fi
+#    - if [[ "$LABEL" == "win64" ]]; then cp $TRAVIS_BUILD_DIR/src/xaya-cli.exe $TRAVIS_BUILD_DIR/src/xaya-tx.exe $TRAVIS_BUILD_DIR/src/xayad.exe $TRAVIS_BUILD_DIR/src/qt/xaya-qt.exe $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; fi
+    - cd $TRAVIS_BUILD_DIR/deploy
+    - ls -lh;
+#    - if [[ "$LABEL" == "linux64" ]]; then tar -zvcf xaya-bin-${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-$LABEL.tar.gz *; fi
+    - zip -P "$DEVPW" xaya-bin-${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-$LABEL.zip *; 
+#    - if [[ "$LABEL" == "win64" ]]; then zip -P "$DEVPW" xaya-bin-${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-$LABEL.zip *; fi
+    deploy:
+      provider: releases
+      token: $GH_TOKEN
+      file_glob: true
+      file: $TRAVIS_BUILD_DIR/deploy/xaya-bin*
+      overwrite: true
+      skip_cleanup: true
+      draft: true
+      name: ${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-${LABEL}
+      tag_name: ${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-${LABEL}
+      on:
+        repo: cryptocrowd-city/xcrc-core-wallet
+        all_branches: true
+    addons:
+      apt:
+        sources:
+        - deadsnakes
+        - sourceline: 'ppa:bitcoin/bitcoin'
+        packages:
+        - build-essential 
+        - libtool 
+        - autotools-dev 
+        - automake 
+        - pkg-config 
+        - libssl-dev 
+        - libevent-dev 
+        - bsdmainutils 
+        - python3 
+        - libboost-system-dev 
+        - libboost-filesystem-dev 
+        - libboost-chrono-dev 
+        - libboost-test-dev 
+        - libboost-thread-dev
+#
+        - libdb4.8-dev 
+        - libdb4.8++-dev 
+        - libminiupnpc-dev 
+        - libzmq3-dev 
+        - libqt5gui5 
+        - libqt5core5a 
+        - libqt5dbus5 
+        - qttools5-dev 
+        - qttools5-dev-tools 
+        - libprotobuf-dev 
+        - protobuf-compiler 
+        - libqrencode-dev 
+        - libboost-program-options-dev
+    env:
+#    - BUILD_CONFIG="--enable-zmq --with-gui=qt5 --with-miniupnpc --enable-upnp-default CPPFLAGS=-DDEBUG_LOCKORDER"
+    - BUILD_CONFIG="--enable-zmq --enable-glibc-back-compat --with-gui=qt5 LDFLAGS=-static-libstdc++ CPPFLAGS=-DDEBUG_LOCKORDER"
+    - LABEL=linux64
+    - PYZMQ=true
+    os: linux
+  - stage: compile
+    name: Win x86 64 Bit on Bionic
+    dist: bionic
+    before_deploy:
+    - mkdir $TRAVIS_BUILD_DIR/deploy
+#    - if [[ "$LABEL" == "linux64" ]]; then cp $TRAVIS_BUILD_DIR/src/xaya-cli $TRAVIS_BUILD_DIR/src/xaya-tx $TRAVIS_BUILD_DIR/src/xayad $TRAVIS_BUILD_DIR/src/qt/xaya-qt $TRAVIS_BUILD_DIR/src/qt/xaya-wallet $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; fi
+#    - if [[ "$LABEL" == "win32" ]]; then cp $TRAVIS_BUILD_DIR/src/xaya-cli.exe $TRAVIS_BUILD_DIR/src/xaya-tx.exe $TRAVIS_BUILD_DIR/src/xayad.exe $TRAVIS_BUILD_DIR/src/qt/xaya-qt.exe $TRAVIS_BUILD_DIR/src/qt/xaya-wallet.exe $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; fi
+    - cp $TRAVIS_BUILD_DIR/src/xaya-cli.exe $TRAVIS_BUILD_DIR/src/xaya-tx.exe $TRAVIS_BUILD_DIR/src/xayad.exe $TRAVIS_BUILD_DIR/src/qt/xaya-qt.exe $TRAVIS_BUILD_DIR/src/qt/xaya-wallet.exe $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; 
+    - cd $TRAVIS_BUILD_DIR/deploy
+    - ls -lh;
+#    - if [[ "$LABEL" == "linux64" ]]; then tar -zvcf xaya-bin-${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-$LABEL.tar.gz *; fi
+#    - if [[ "$LABEL" == "win32" ]]; then zip -P "$DEVPW" xaya-bin-${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-$LABEL.zip *; fi
+    - zip -P "$DEVPW" xaya-bin-${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-$LABEL.zip *; 
+    deploy:
+      provider: releases
+      token: $GH_TOKEN
+      file_glob: true
+      file: $TRAVIS_BUILD_DIR/deploy/xaya-bin*
+      overwrite: true
+      skip_cleanup: true
+      draft: true
+      name: ${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-${LABEL}
+      tag_name: ${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-${LABEL}
+      on:
+        repo: cryptocrowd-city/xcrc-core-wallet
+        all_branches: true
+    addons:
+      apt:
+        sources:
+        - deadsnakes
+        - sourceline: 'ppa:bitcoin/bitcoin'      
+        packages:
+        - build-essential 
+        - libtool 
+        - autotools-dev 
+        - automake 
+        - pkg-config 
+        - libssl-dev 
+        - libevent-dev 
+        - bsdmainutils 
+        - python3 
+        - libboost-system-dev 
+        - libboost-filesystem-dev 
+        - libboost-chrono-dev 
+        - libboost-test-dev 
+        - libboost-thread-dev
+# Additional
+        - libdb4.8-dev 
+        - libdb4.8++-dev 
+        - libminiupnpc-dev 
+        - libzmq3-dev 
+        - libqt5gui5 
+        - libqt5core5a 
+        - libqt5dbus5 
+        - qttools5-dev 
+        - qttools5-dev-tools 
+        - libprotobuf-dev 
+        - protobuf-compiler 
+        - libqrencode-dev 
+        - libboost-program-options-dev
+# Win64
+        - g++-mingw-w64-x86-64
+    env:
+#    - BUILD_CONFIG="--enable-zmq --with-gui=qt5 --with-miniupnpc --enable-upnp-default LDFLAGS=-Wa,-mbig-obj"
+    - BUILD_CONFIG="--with-gui=qt5 LDFLAGS=-Wa,-mbig-obj"
+    - LABEL=win64
+    - HOST=x86_64-w64-mingw32
+    os: linux
+before_install:
+#- sudo apt-get upgrade -y --allow-unauthenticated; 
+- if [[ "$LABEL" == "win32" ]]; then  sudo dpkg --add-architecture i386; fi
+- if [[ "$TRAVIS_DIST" == "bionic" ]] && [[ "$HOST" == "i686-w64-mingw32" ]]; then echo 1 | sudo update-alternatives --config i686-w64-mingw32-g++; fi # echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-gcc; fi
+- if [[ "$TRAVIS_DIST" == "bionic" ]] && [[ "$HOST" == "x86_64-w64-mingw32" ]]; then echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-g++; fi # echo 1 | sudo update-alternatives --config x86_64-w64-mingw32-gcc; fi
+install:
+- if [ "$PYZMQ" = "true" ]; then pip install pyzmq --user ; fi
+before_script:
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then unset CC CXX DISPLAY; fi
+- if [[ "$LABEL" == "win32" ]]; then PATH=$(echo "$PATH" | sed -e 's/:\/mnt.*//g'); fi
+- if [[ "$LABEL" == "win64" ]]; then PATH=$(echo "$PATH" | sed -e 's/:\/mnt.*//g'); fi
+script:
+- set -o errexit; if [[ "$LABEL" == "win32" ]]; then make $MAKEJOBS -C depends HOST="$HOST"; fi
+- set -o errexit; if [[ "$LABEL" == "win64" ]]; then make $MAKEJOBS -C depends HOST="$HOST"; fi
+- set -o errexit; if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./autogen.sh; fi
+- set -o errexit; if [[ "$LABEL" == "linux64" ]]; then ./configure $GLOBAL_CONFIG $BUILD_CONFIG; fi
+- set -o errexit; if [[ "$LABEL" == "win32" ]]; then CONFIG_SITE=$PWD/depends/i686-w64-mingw32/share/config.site ./configure --prefix=/; fi
+- set -o errexit; if [[ "$LABEL" == "win64" ]]; then CONFIG_SITE=$PWD/depends/x86_64-w64-mingw32/share/config.site ./configure --prefix=/; fi
+- set -o errexit; if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make $MAKEJOBS; fi
