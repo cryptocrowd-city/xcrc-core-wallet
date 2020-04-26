@@ -4,6 +4,7 @@ branches:
   - master
   - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
   - /^travis.*$/
+  - /^pr.*$/
   except:
   - /^v\d+\.\d+\.\d+(\.\d+)?(-\S*)?$/
 cache:
