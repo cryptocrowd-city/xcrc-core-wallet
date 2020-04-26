@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2019 The Bitcoin Core developers
+// Copyright (c) 2018-2020 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -15,7 +15,6 @@
 #include <functional>
 #include <map>
 #include <memory>
-#include <psbt.h>
 #include <stdint.h>
 #include <string>
 #include <tuple>
@@ -26,12 +25,13 @@ class CCoinControl;
 class CFeeRate;
 class CKey;
 class CWallet;
-enum isminetype : unsigned int;
 enum class FeeReason;
-typedef uint8_t isminefilter;
-
 enum class OutputType;
+enum class TransactionError;
+enum isminetype : unsigned int;
 struct CRecipient;
+struct PartiallySignedTransaction;
+typedef uint8_t isminefilter;
 
 namespace interfaces {
 

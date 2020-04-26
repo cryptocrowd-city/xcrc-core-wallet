@@ -97,7 +97,7 @@ public:
             StopMapPort();
         }
     }
-    void setupServerArgs() override { return SetupServerArgs(); }
+    void setupServerArgs() override { return SetupServerArgs(m_context); }
     bool getProxy(Network net, proxyType& proxy_info) override { return GetProxy(net, proxy_info); }
     size_t getNodeCount(CConnman::NumConnections flags) override
     {
@@ -253,8 +253,9 @@ public:
     std::vector<std::unique_ptr<Wallet>> getWallets() override
     {
         std::vector<std::unique_ptr<Wallet>> wallets;
-        for (const std::shared_ptr<CWallet>& wallet : GetWallets()) {
-            wallets.emplace_back(MakeWallet(wallet));
+        for (auto& client : m_context.chain_clients) {
+            auto client_wallets = client->getWallets();
+            std::move(client_wallets.begin(), client_wallets.end(), std::back_inserter(wallets));
         }
         return wallets;
     }

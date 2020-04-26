@@ -336,7 +336,7 @@ void BitcoinApplication::initializeResult(bool success)
         window->setClientModel(clientModel);
 #ifdef ENABLE_WALLET
         if (WalletModel::isWalletEnabled()) {
-            m_wallet_controller = new WalletController(m_node, platformStyle, optionsModel, this);
+            m_wallet_controller = new WalletController(*clientModel, platformStyle, this);
             window->setWalletController(m_wallet_controller);
             if (paymentServer) {
                 paymentServer->setOptionsModel(optionsModel);
@@ -381,7 +381,7 @@ void BitcoinApplication::shutdownResult()
 
 void BitcoinApplication::handleRunawayException(const QString &message)
 {
-    QMessageBox::critical(nullptr, "Runaway exception", BitcoinGUI::tr("A fatal error occurred. Xaya can no longer continue safely and will quit.") + QString("\n\n") + message);
+    QMessageBox::critical(nullptr, "Runaway exception", BitcoinGUI::tr("A fatal error occurred. %1 can no longer continue safely and will quit.").arg(PACKAGE_NAME) + QString("\n\n") + message);
     ::exit(EXIT_FAILURE);
 }
 

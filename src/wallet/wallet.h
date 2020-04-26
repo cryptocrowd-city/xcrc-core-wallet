@@ -181,14 +181,23 @@ public:
 /** Address book data */
 class CAddressBookData
 {
+private:
+    bool m_change{true};
+    std::string m_label;
 public:
-    std::string name;
     std::string purpose;
 
     CAddressBookData() : purpose("unknown") {}
 
     typedef std::map<std::string, std::string> StringMap;
     StringMap destdata;
+
+    bool IsChange() const { return m_change; }
+    const std::string& GetLabel() const { return m_label; }
+    void SetLabel(const std::string& label) {
+        m_change = false;
+        m_label = label;
+    }
 };
 
 struct CRecipient
@@ -773,7 +782,8 @@ public:
     int64_t nOrderPosNext GUARDED_BY(cs_wallet) = 0;
     uint64_t nAccountingEntryNumber = 0;
 
-    std::map<CTxDestination, CAddressBookData> mapAddressBook GUARDED_BY(cs_wallet);
+    std::map<CTxDestination, CAddressBookData> m_address_book GUARDED_BY(cs_wallet);
+    const CAddressBookData* FindAddressBookEntry(const CTxDestination&, bool allow_change = false) const EXCLUSIVE_LOCKS_REQUIRED(cs_wallet);
 
     std::set<COutPoint> setLockedCoins GUARDED_BY(cs_wallet);
 
@@ -818,7 +828,7 @@ public:
     bool IsSpentKey(const uint256& hash, unsigned int n) const EXCLUSIVE_LOCKS_REQUIRED(cs_wallet);
     void SetSpentKeyState(WalletBatch& batch, const uint256& hash, unsigned int n, bool used, std::set<CTxDestination>& tx_destinations) EXCLUSIVE_LOCKS_REQUIRED(cs_wallet);
 
-    std::vector<OutputGroup> GroupOutputs(const std::vector<COutput>& outputs, bool single_coin) const;
+    std::vector<OutputGroup> GroupOutputs(const std::vector<COutput>& outputs, bool single_coin, const size_t max_ancestors) const;
 
     bool IsLockedCoin(uint256 hash, unsigned int n) const EXCLUSIVE_LOCKS_REQUIRED(cs_wallet);
     void LockCoin(const COutPoint& output) EXCLUSIVE_LOCKS_REQUIRED(cs_wallet);
@@ -840,7 +850,10 @@ public:
 
     bool LoadMinVersion(int nVersion) EXCLUSIVE_LOCKS_REQUIRED(cs_wallet) { AssertLockHeld(cs_wallet); nWalletVersion = nVersion; nWalletMaxVersion = std::max(nWalletMaxVersion, nVersion); return true; }
 
-    //! Adds a destination data tuple to the store, and saves it to disk
+    /**
+     * Adds a destination data tuple to the store, and saves it to disk
+     * When adding new fields, take care to consider how DelAddressBook should handle it!
+     */
     bool AddDestData(WalletBatch& batch, const CTxDestination& dest, const std::string& key, const std::string& value) EXCLUSIVE_LOCKS_REQUIRED(cs_wallet);
     //! Erases a destination data tuple in the store and on disk
     bool EraseDestData(WalletBatch& batch, const CTxDestination& dest, const std::string& key) EXCLUSIVE_LOCKS_REQUIRED(cs_wallet);
@@ -892,7 +905,7 @@ public:
         //! USER_ABORT.
         uint256 last_failed_block;
     };
-    ScanResult ScanForWalletTransactions(const uint256& first_block, const uint256& last_block, const WalletRescanReserver& reserver, bool fUpdate);
+    ScanResult ScanForWalletTransactions(const uint256& start_block, int start_height, Optional<int> max_height, const WalletRescanReserver& reserver, bool fUpdate);
     void transactionRemovedFromMempool(const CTransactionRef &ptx) override;
     void ReacceptWalletTransactions() EXCLUSIVE_LOCKS_REQUIRED(cs_wallet);
     void ResendWalletTransactions();
@@ -1170,6 +1183,9 @@ public:
         LogPrintf(("%s " + fmt).c_str(), GetDisplayName(), parameters...);
     };
 
+    /** Upgrade the wallet */
+    bool UpgradeWallet(int version, std::string& error, std::vector<std::string>& warnings);
+
     //! Returns all unique ScriptPubKeyMans in m_internal_spk_managers and m_external_spk_managers
     std::set<ScriptPubKeyMan*> GetActiveScriptPubKeyMans() const;
 
@@ -1208,6 +1224,12 @@ public:
         assert(m_last_block_processed_height >= 0);
         return m_last_block_processed_height;
     };
+    uint256 GetLastBlockHash() const EXCLUSIVE_LOCKS_REQUIRED(cs_wallet)
+    {
+        AssertLockHeld(cs_wallet);
+        assert(m_last_block_processed_height >= 0);
+        return m_last_block_processed;
+    }
     /** Set last block processed height, currently only use in unit test */
     void SetLastBlockProcessed(int block_height, uint256 block_hash) EXCLUSIVE_LOCKS_REQUIRED(cs_wallet)
     {
@@ -1230,35 +1252,35 @@ void MaybeResendWalletTxs();
 class WalletRescanReserver
 {
 private:
-    CWallet* m_wallet;
+    CWallet& m_wallet;
     bool m_could_reserve;
 public:
-    explicit WalletRescanReserver(CWallet* w) : m_wallet(w), m_could_reserve(false) {}
+    explicit WalletRescanReserver(CWallet& w) : m_wallet(w), m_could_reserve(false) {}
 
     bool reserve()
     {
         assert(!m_could_reserve);
-        std::lock_guard<std::mutex> lock(m_wallet->mutexScanning);
-        if (m_wallet->fScanningWallet) {
+        std::lock_guard<std::mutex> lock(m_wallet.mutexScanning);
+        if (m_wallet.fScanningWallet) {
             return false;
         }
-        m_wallet->m_scanning_start = GetTimeMillis();
-        m_wallet->m_scanning_progress = 0;
-        m_wallet->fScanningWallet = true;
+        m_wallet.m_scanning_start = GetTimeMillis();
+        m_wallet.m_scanning_progress = 0;
+        m_wallet.fScanningWallet = true;
         m_could_reserve = true;
         return true;
     }
 
     bool isReserved() const
     {
-        return (m_could_reserve && m_wallet->fScanningWallet);
+        return (m_could_reserve && m_wallet.fScanningWallet);
     }
 
     ~WalletRescanReserver()
     {
-        std::lock_guard<std::mutex> lock(m_wallet->mutexScanning);
+        std::lock_guard<std::mutex> lock(m_wallet.mutexScanning);
         if (m_could_reserve) {
-            m_wallet->fScanningWallet = false;
+            m_wallet.fScanningWallet = false;
         }
     }
 };

@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2019 The Bitcoin Core developers
+// Copyright (c) 2009-2020 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -20,10 +20,12 @@
 #include <util/system.h>
 #include <util/threadnames.h>
 #include <util/translation.h>
+#include <util/url.h>
 
 #include <functional>
 
 const std::function<std::string(const char*)> G_TRANSLATION_FUN = nullptr;
+UrlDecodeFn* const URL_DECODE = urlDecode;
 
 static void WaitForShutdown(NodeContext& node)
 {
@@ -51,7 +53,7 @@ static bool AppInit(int argc, char* argv[])
     // Parameters
     //
     // If Qt is used, parameters/bitcoin.conf are parsed in qt/bitcoin.cpp's main()
-    SetupServerArgs();
+    SetupServerArgs(node);
     std::string error;
     if (!gArgs.ParseParameters(argc, argv, error)) {
         return InitError(strprintf("Error parsing command line arguments: %s\n", error));

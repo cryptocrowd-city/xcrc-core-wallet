@@ -1,5 +1,5 @@
 // Copyright (c) 2010 Satoshi Nakamoto
-// Copyright (c) 2009-2019 The Bitcoin Core developers
+// Copyright (c) 2009-2020 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -33,6 +33,7 @@ static const CRPCConvertParam vRPCConvertParams[] =
     { "generatetoaddress", 2, "maxtries" },
     { "generatetodescriptor", 0, "num_blocks" },
     { "generatetodescriptor", 2, "maxtries" },
+    { "generateblock", 1, "transactions" },
     { "getnetworkhashps", 0, "nblocks" },
     { "getnetworkhashps", 1, "height" },
     { "sendtoaddress", 1, "amount" },
@@ -97,10 +98,8 @@ static const CRPCConvertParam vRPCConvertParams[] =
     { "signrawtransactionwithkey", 1, "privkeys" },
     { "signrawtransactionwithkey", 2, "prevtxs" },
     { "signrawtransactionwithwallet", 1, "prevtxs" },
-    { "sendrawtransaction", 1, "allowhighfees" },
     { "sendrawtransaction", 1, "maxfeerate" },
     { "testmempoolaccept", 0, "rawtxs" },
-    { "testmempoolaccept", 1, "allowhighfees" },
     { "testmempoolaccept", 1, "maxfeerate" },
     { "combinerawtransaction", 0, "txs" },
     { "fundrawtransaction", 1, "options" },
@@ -154,6 +153,8 @@ static const CRPCConvertParam vRPCConvertParams[] =
     { "logging", 0, "include" },
     { "logging", 1, "exclude" },
     { "disconnectnode", 1, "nodeid" },
+    { "upgradewallet", 0, "version" },
+
     { "name_show", 1, "options" },
     { "name_history", 1, "options" },
     { "name_scan", 1, "count" },
@@ -166,6 +167,7 @@ static const CRPCConvertParam vRPCConvertParams[] =
     { "namerawtransaction", 2, "nameop" },
     { "sendtoname", 1, "amount" },
     { "sendtoname", 4, "subtractfeefromamount" },
+
     // Echo with conversion (For testing only)
     { "echojson", 0, "arg0" },
     { "echojson", 1, "arg1" },

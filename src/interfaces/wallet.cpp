@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2019 The Bitcoin Core developers
+// Copyright (c) 2018-2020 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -14,6 +14,7 @@
 #include <sync.h>
 #include <ui_interface.h>
 #include <uint256.h>
+#include <util/check.h>
 #include <util/system.h>
 #include <wallet/feebumper.h>
 #include <wallet/fees.h>
@@ -62,7 +63,7 @@ WalletTx MakeWalletTx(CWallet& wallet, const CWalletTx& wtx)
 WalletTxStatus MakeWalletTxStatus(interfaces::Chain::Lock& locked_chain, const CWalletTx& wtx)
 {
     WalletTxStatus result;
-    result.block_height = locked_chain.getBlockHeight(wtx.m_confirm.hashBlock).get_value_or(std::numeric_limits<int>::max());
+    result.block_height = wtx.m_confirm.block_height > 0 ? wtx.m_confirm.block_height : std::numeric_limits<int>::max();
     result.blocks_to_maturity = wtx.GetBlocksToMaturity();
     result.depth_in_main_chain = wtx.GetDepthInMainChain();
     result.time_received = wtx.nTimeReceived;
@@ -151,12 +152,12 @@ public:
         std::string* purpose) override
     {
         LOCK(m_wallet->cs_wallet);
-        auto it = m_wallet->mapAddressBook.find(dest);
-        if (it == m_wallet->mapAddressBook.end()) {
+        auto it = m_wallet->m_address_book.find(dest);
+        if (it == m_wallet->m_address_book.end() || it->second.IsChange()) {
             return false;
         }
         if (name) {
-            *name = it->second.name;
+            *name = it->second.GetLabel();
         }
         if (is_mine) {
             *is_mine = m_wallet->IsMine(dest);
@@ -170,8 +171,9 @@ public:
     {
         LOCK(m_wallet->cs_wallet);
         std::vector<WalletAddress> result;
-        for (const auto& item : m_wallet->mapAddressBook) {
-            result.emplace_back(item.first, m_wallet->IsMine(item.first), item.second.name, item.second.purpose);
+        for (const auto& item : m_wallet->m_address_book) {
+            if (item.second.IsChange()) continue;
+            result.emplace_back(item.first, m_wallet->IsMine(item.first), item.second.GetLabel(), item.second.purpose);
         }
         return result;
     }
@@ -317,13 +319,9 @@ public:
         if (mi == m_wallet->mapWallet.end()) {
             return false;
         }
-        if (Optional<int> height = locked_chain->getHeight()) {
-            num_blocks = *height;
-            block_time = locked_chain->getBlockTime(*height);
-        } else {
-            num_blocks = -1;
-            block_time = -1;
-        }
+        num_blocks = m_wallet->GetLastBlockHeight();
+        block_time = -1;
+        CHECK_NONFATAL(m_wallet->chain().findBlock(m_wallet->GetLastBlockHash(), FoundBlock().time(block_time)));
         tx_status = MakeWalletTxStatus(*locked_chain, mi->second);
         return true;
     }
@@ -372,12 +370,12 @@ public:
     {
         auto locked_chain = m_wallet->chain().lock(true /* try_lock */);
         if (!locked_chain) return false;
-        num_blocks = locked_chain->getHeight().get_value_or(-1);
-        if (!force && num_blocks == cached_num_blocks) return false;
         TRY_LOCK(m_wallet->cs_wallet, locked_wallet);
         if (!locked_wallet) {
             return false;
         }
+        num_blocks = m_wallet->GetLastBlockHeight();
+        if (!force && num_blocks == cached_num_blocks) return false;
         balances = getBalances();
         return true;
     }
@@ -518,6 +516,15 @@ public:
     void start(CScheduler& scheduler) override { return StartWallets(scheduler); }
     void flush() override { return FlushWallets(); }
     void stop() override { return StopWallets(); }
+    void setMockTime(int64_t time) override { return SetMockTime(time); }
+    std::vector<std::unique_ptr<Wallet>> getWallets() override
+    {
+        std::vector<std::unique_ptr<Wallet>> wallets;
+        for (const auto& wallet : GetWallets()) {
+            wallets.emplace_back(MakeWallet(wallet));
+        }
+        return wallets;
+    }
     ~WalletClientImpl() override { UnloadWallets(); }
 
     Chain& m_chain;

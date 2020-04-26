@@ -398,7 +398,7 @@ name_show (const JSONRPCRequest& request)
   }
 
   MaybeWalletForRequest wallet(request);
-  LOCK (wallet.getLock ());
+  LOCK2 (cs_main, wallet.getLock ());
   return getNameInfo (options, name, data, wallet);
 }
 
@@ -466,7 +466,7 @@ name_history (const JSONRPCRequest& request)
   }
 
   MaybeWalletForRequest wallet(request);
-  LOCK (wallet.getLock ());
+  LOCK2 (cs_main, wallet.getLock ());
 
   UniValue res(UniValue::VARR);
   for (const auto& entry : history.getData ())
@@ -817,6 +817,8 @@ name_checkdb (const JSONRPCRequest& request)
 } // namespace
 /* ************************************************************************** */
 
+void RegisterNameRPCCommands(CRPCTable &t)
+{
 static const CRPCCommand commands[] =
 { //  category              name                      actor (function)         argNames
   //  --------------------- ------------------------  -----------------------  ----------
@@ -828,8 +830,6 @@ static const CRPCCommand commands[] =
     { "rawtransactions",    "namerawtransaction",     &namerawtransaction,     {"hexstring","vout","nameop"} },
 };
 
-void RegisterNameRPCCommands(CRPCTable &t)
-{
     for (unsigned int vcidx = 0; vcidx < ARRAYLEN(commands); vcidx++)
         t.appendCommand(commands[vcidx].name, &commands[vcidx]);
 }
