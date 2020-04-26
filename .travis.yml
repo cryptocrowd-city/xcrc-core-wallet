@@ -4,8 +4,8 @@ branches:
   - master
   - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
   - /^travis.*$/
-  except:
-  - /^v\d+\.\d+\.\d+(\.\d+)?(-\S*)?$/
+#  except:
+#  - /^v\d+\.\d+\.\d+(\.\d+)?(-\S*)?$/
 cache:
   timeout: 1000
   ccache: true
