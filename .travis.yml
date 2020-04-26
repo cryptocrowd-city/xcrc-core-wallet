@@ -81,13 +81,13 @@ jobs:
     dist: bionic
     before_deploy:
     - mkdir $TRAVIS_BUILD_DIR/deploy
-    - cp $TRAVIS_BUILD_DIR/src/xaya-cli $TRAVIS_BUILD_DIR/src/xaya-tx $TRAVIS_BUILD_DIR/src/xayad $TRAVIS_BUILD_DIR/src/qt/xaya-qt $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; fi
+    - cp $TRAVIS_BUILD_DIR/src/xaya-cli $TRAVIS_BUILD_DIR/src/xaya-tx $TRAVIS_BUILD_DIR/src/xayad $TRAVIS_BUILD_DIR/src/qt/xaya-qt $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; 
 #    - if [[ "$LABEL" == "win32" ]]; then cp $TRAVIS_BUILD_DIR/src/xaya-cli.exe $TRAVIS_BUILD_DIR/src/xaya-tx.exe $TRAVIS_BUILD_DIR/src/xayad.exe $TRAVIS_BUILD_DIR/src/qt/xaya-qt.exe $TRAVIS_BUILD_DIR/src/qt/xaya-wallet.exe $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; fi
 #    - if [[ "$LABEL" == "win64" ]]; then cp $TRAVIS_BUILD_DIR/src/xaya-cli.exe $TRAVIS_BUILD_DIR/src/xaya-tx.exe $TRAVIS_BUILD_DIR/src/xayad.exe $TRAVIS_BUILD_DIR/src/qt/xaya-qt.exe $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; fi
     - cd $TRAVIS_BUILD_DIR/deploy
     - ls -lh;
 #    - if [[ "$LABEL" == "linux64" ]]; then tar -zvcf xaya-bin-${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-$LABEL.tar.gz *; fi
-#    - zip -P "$DEVPW" xaya-bin-${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-$LABEL.zip *; fi
+    - zip -P "$DEVPW" xaya-bin-${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-$LABEL.zip *; 
 #    - if [[ "$LABEL" == "win64" ]]; then zip -P "$DEVPW" xaya-bin-${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-$LABEL.zip *; fi
     deploy:
       provider: releases
@@ -143,65 +143,18 @@ jobs:
     - PYZMQ=true
     os: linux
   - stage: compile
-    name: Win i686 32 Bit on Bionic
-    dist: bionic
-    addons:
-      apt:
-        sources:
-        - deadsnakes
-        - sourceline: 'ppa:bitcoin/bitcoin'      
-        packages:
-        - build-essential 
-        - libtool 
-        - autotools-dev 
-        - automake 
-        - pkg-config 
-        - libssl-dev 
-        - libevent-dev 
-        - bsdmainutils 
-        - python3 
-        - libboost-system-dev 
-        - libboost-filesystem-dev 
-        - libboost-chrono-dev 
-        - libboost-test-dev 
-        - libboost-thread-dev
-# Additional
-        - libdb4.8-dev 
-        - libdb4.8++-dev 
-        - libminiupnpc-dev 
-        - libzmq3-dev 
-        - libqt5gui5 
-        - libqt5core5a 
-        - libqt5dbus5 
-        - qttools5-dev 
-        - qttools5-dev-tools 
-        - libprotobuf-dev 
-        - protobuf-compiler 
-        - libqrencode-dev 
-        - libboost-program-options-dev
-# Win32
-        - g++-mingw-w64-i686
-        - mingw-w64-i686-dev
-        - wine32
-    env:
-#    - BUILD_CONFIG="--enable-zmq --with-gui=qt5 --with-miniupnpc --enable-upnp-default"
-    - BUILD_CONFIG="--with-gui=qt5"
-    - LABEL=win32
-    - HOST=i686-w64-mingw32
-    os: linux
-  - stage: compile
     name: Win x86 64 Bit on Bionic
     dist: bionic
     before_deploy:
     - mkdir $TRAVIS_BUILD_DIR/deploy
 #    - if [[ "$LABEL" == "linux64" ]]; then cp $TRAVIS_BUILD_DIR/src/xaya-cli $TRAVIS_BUILD_DIR/src/xaya-tx $TRAVIS_BUILD_DIR/src/xayad $TRAVIS_BUILD_DIR/src/qt/xaya-qt $TRAVIS_BUILD_DIR/src/qt/xaya-wallet $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; fi
 #    - if [[ "$LABEL" == "win32" ]]; then cp $TRAVIS_BUILD_DIR/src/xaya-cli.exe $TRAVIS_BUILD_DIR/src/xaya-tx.exe $TRAVIS_BUILD_DIR/src/xayad.exe $TRAVIS_BUILD_DIR/src/qt/xaya-qt.exe $TRAVIS_BUILD_DIR/src/qt/xaya-wallet.exe $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; fi
-    - cp $TRAVIS_BUILD_DIR/src/xaya-cli.exe $TRAVIS_BUILD_DIR/src/xaya-tx.exe $TRAVIS_BUILD_DIR/src/xayad.exe $TRAVIS_BUILD_DIR/src/qt/xaya-qt.exe $TRAVIS_BUILD_DIR/src/qt/xaya-wallet.exe $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; fi
+    - cp $TRAVIS_BUILD_DIR/src/xaya-cli.exe $TRAVIS_BUILD_DIR/src/xaya-tx.exe $TRAVIS_BUILD_DIR/src/xayad.exe $TRAVIS_BUILD_DIR/src/qt/xaya-qt.exe $TRAVIS_BUILD_DIR/src/qt/xaya-wallet.exe $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; 
     - cd $TRAVIS_BUILD_DIR/deploy
     - ls -lh;
 #    - if [[ "$LABEL" == "linux64" ]]; then tar -zvcf xaya-bin-${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-$LABEL.tar.gz *; fi
 #    - if [[ "$LABEL" == "win32" ]]; then zip -P "$DEVPW" xaya-bin-${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-$LABEL.zip *; fi
-    - zip -P "$DEVPW" xaya-bin-${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-$LABEL.zip *; fi
+    - zip -P "$DEVPW" xaya-bin-${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-$LABEL.zip *; 
     deploy:
       provider: releases
       token: $GH_TOKEN
