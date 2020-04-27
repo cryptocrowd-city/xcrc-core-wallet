@@ -30,7 +30,7 @@ enum class Fork
    * main (non-fakeheader) nonce must be zero in order to resolve
    * https://github.com/cryptocrowd/cryptocrowd/issues/50.
    *
-   * It also increases the block reward from 1 CHI to a value calculated to
+   * It also increases the block reward from 1 XCRC to a value calculated to
    * yield the correct total PoW supply.
    */
   POST_ICO,

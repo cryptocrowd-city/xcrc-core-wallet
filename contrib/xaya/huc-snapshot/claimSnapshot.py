@@ -3,8 +3,8 @@
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-# This Python script can be used to easily claim all CHI from the
-# Huntercoin snapshot, based on your Huntercoin wallet.  The CHI addresses
+# This Python script can be used to easily claim all XCRC from the
+# Huntercoin snapshot, based on your Huntercoin wallet.  The XCRC addresses
 # with coins from the snapshot will be imported into the wallet with label
 # 'huc-snapshot' (can be changed by editing the file below).  No rescan
 # is run, so make sure to manually rescan the CRyptoCrowd wallet to make all
@@ -30,7 +30,7 @@ import sys
 
 from bitcoin import b58check_to_hex, hex_to_b58check
 
-CHI_PRIVKEY_VERSION = 130
+XCRC_PRIVKEY_VERSION = 130
 PRECISION = Decimal ('1.00000000')
 INPUT_FILE = "processed-snapshot.json"
 LABEL = "huc-snapshot"
@@ -59,20 +59,20 @@ for rpc in [huc, cryptocrowd]:
 # Go through the snapshot data and look for addresses that are in the HUC
 # wallet we own.
 totalHuc = Decimal ('0.00000000')
-totalChi = Decimal ('0.00000000')
+totalXcrc = Decimal ('0.00000000')
 privkeys = []
 for entry in snapshot:
   info = huc.getaddressinfo (entry['address']['huc'])
   if info['ismine']:
     log.info ("Found address: %s" % entry['address']['huc'])
     totalHuc += Decimal (entry['amount']['huc']).quantize (PRECISION)
-    totalChi += Decimal (entry['amount']['chi']).quantize (PRECISION)
+    totalXcrc += Decimal (entry['amount']['xcrc']).quantize (PRECISION)
     pkHuc = huc.dumpprivkey (entry['address']['huc'])
     keyHex = b58check_to_hex (pkHuc)
-    pkChi = hex_to_b58check (keyHex, CHI_PRIVKEY_VERSION)
-    privkeys.append (pkChi)
+    pkXcrc = hex_to_b58check (keyHex, XCRC_PRIVKEY_VERSION)
+    privkeys.append (pkXcrc)
 log.info ("Total HUC amount eligible: %s" % totalHuc)
-log.info ("Total CHI amount claimed: %s" % totalChi)
+log.info ("Total XCRC amount claimed: %s" % totalXcrc)
 
 # Import the found addresses.
 for pk in privkeys:

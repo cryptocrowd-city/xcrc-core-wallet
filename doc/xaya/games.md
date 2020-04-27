@@ -192,28 +192,28 @@ For an admin command, the `cmd` field can also be duplicated:
 In this case, all associated values are considered valid admin commands
 for the game in question.
 
-## CHI Transactions in Games <a name="currency"></a>
+## XCRC Transactions in Games <a name="currency"></a>
 
-Games may also need to process CHI transactions, at least in a limited fashion.
+Games may also need to process XCRC transactions, at least in a limited fashion.
 For instance, it may be possible to buy in-game items from the game developer
-with CHI, or the game may implement a player-to-player market place where
-transactions are settled in CHI.
+with XCRC, or the game may implement a player-to-player market place where
+transactions are settled in XCRC.
 
 To facilitate this, game engines can process all **currency outputs**
 created by name transactions that reference their game ID.  In other words,
-a player can issue a move and *in the same CRyptoCrowd transaction* also send CHI to,
+a player can issue a move and *in the same CRyptoCrowd transaction* also send XCRC to,
 for instance, the CRyptoCrowd address of the game developer or a trading partner.
 The game engine will then (but only if done in the same transaction) know about
 this, and can implement rules that update the game state accordingly.
 For instance, a game rule could be like this:
 
 > If the move data contains `{"buy": "diamond sword"}` **and** at least
-  1,000 CHI are sent to the company address Cxyz, **then** the player gets
+  1,000 XCRC are sent to the company address Cxyz, **then** the player gets
   a diamond sword for her avatar in the game state.
 
 Note that there exists a second possibility for trading in games:
 [Atomic name updates](trading.md) can be used to couple game moves
-(e.g. an explicit command to transfer an item) with payments in CHI.
+(e.g. an explicit command to transfer an item) with payments in XCRC.
 This is particularly useful for market places between players themselves,
 rather than payments to a game developer.
 

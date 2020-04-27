@@ -45,12 +45,12 @@ class AtomicTradingTest (BitcoinTestFramework):
     not changing except through the test.
     """
 
-    addr = "chirt1qcmdxwpu35mqlzxz3alc9u9ztp22edsuc5s7zzk"
+    addr = "xcrcrt1qcmdxwpu35mqlzxz3alc9u9ztp22edsuc5s7zzk"
     self.nodes[ind].generatetoaddress (n, addr)
 
   def buildTxOut (self, addr, amount):
     """
-    Builds a CTxOut message that sends the given amount of CHI to the
+    Builds a CTxOut message that sends the given amount of XCRC to the
     given address.
     """
 
@@ -184,7 +184,7 @@ class AtomicTradingTest (BitcoinTestFramework):
     which inputs the buyer uses to pay.  This is solved by signing the
     name input with SINGLE|ANYONECANPAY and sending the ask price
     *into the name*.  (It can be recovered later, as the only requirement
-    for the locked amount is that it always stays >= 0.01 CHI.)
+    for the locked amount is that it always stays >= 0.01 XCRC.)
     The node is the seller, who owns the name.
 
     Note that this type of order is rather useless for most real-world

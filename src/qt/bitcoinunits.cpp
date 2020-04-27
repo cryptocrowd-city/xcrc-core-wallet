@@ -40,9 +40,9 @@ QString BitcoinUnits::longName(int unit)
 {
     switch(unit)
     {
-    case BTC: return QString("CHI");
-    case mBTC: return QString("mCHI");
-    case uBTC: return QString::fromUtf8("μCHI");
+    case BTC: return QString("XCRC");
+    case mBTC: return QString("mXCRC");
+    case uBTC: return QString::fromUtf8("μXCRC");
     case SAT: return QString("Satoshi (sat)");
     default: return QString("???");
     }
@@ -62,9 +62,9 @@ QString BitcoinUnits::description(int unit)
 {
     switch(unit)
     {
-    case BTC: return QString("CRyptoCrowd");
-    case mBTC: return QString("Milli-CHI (1 / 1" THIN_SP_UTF8 "000)");
-    case uBTC: return QString("Micro-CHI (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+    case BTC: return QString("XCRC");
+    case mBTC: return QString("Milli-XCRC (1 / 1" THIN_SP_UTF8 "000)");
+    case uBTC: return QString("Micro-XCRC (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
     case SAT: return QString("Satoshi (sat) (1 / 100" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
     default: return QString("???");
     }

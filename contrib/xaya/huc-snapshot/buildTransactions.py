@@ -52,7 +52,7 @@ info = cryptocrowd.getwalletinfo ()
 if 'unlocked_until' in info and info['unlocked_until'] < 1000000000:
   sys.exit ("The CRyptoCrowd Core wallet must be unlocked")
 
-# Query the original CHI output that will be spent.
+# Query the original XCRC output that will be spent.
 originalInput = cryptocrowd.gettxout (INPUT_TXID, INPUT_VOUT)
 inputValue = Decimal (originalInput['value']).quantize (PRECISION)
 
@@ -73,12 +73,12 @@ originalInput['vout'] = INPUT_VOUT
 originalInput['scriptPubKey'] = originalInput['scriptPubKey']['hex']
 
 # Quick check on the amount compared to what we need to give out.
-requiredChi = Decimal ('0.00000000')
+requiredXcrc = Decimal ('0.00000000')
 for entry in snapshot:
-  requiredChi += Decimal (entry['amount']['chi']).quantize (PRECISION)
-assert requiredChi < inputValue
-totalFee = inputValue - requiredChi
-log.info ("CHI sent out in snapshot: %s" % requiredChi)
+  requiredXcrc += Decimal (entry['amount']['xcrc']).quantize (PRECISION)
+assert requiredXcrc < inputValue
+totalFee = inputValue - requiredXcrc
+log.info ("XCRC sent out in snapshot: %s" % requiredXcrc)
 log.info ("Value of input: %s" % inputValue)
 log.info ("Available for fees: %s" % totalFee)
 
@@ -129,7 +129,7 @@ for entry in snapshot:
     tx, prevOut = buildTx (prevOut, dests)
     txs.append (tx)
     dests = {}
-  dests[entry['address']['chi']] = entry['amount']['chi']
+  dests[entry['address']['xcrc']] = entry['amount']['xcrc']
 tx, _ = buildTx (prevOut, dests)
 txs.append (tx)
 
@@ -138,9 +138,9 @@ txs.append (tx)
 # final sanity check that everything is fine.
 expectedPayments = {}
 for entry in snapshot:
-  addr = entry['address']['chi']
+  addr = entry['address']['xcrc']
   assert addr not in expectedPayments
-  expectedPayments[addr] = Decimal (entry['amount']['chi']).quantize (PRECISION)
+  expectedPayments[addr] = Decimal (entry['amount']['xcrc']).quantize (PRECISION)
 assert len (expectedPayments) == len (snapshot)
 
 actualPayments = {}

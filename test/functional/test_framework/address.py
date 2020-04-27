@@ -11,7 +11,7 @@ from .util import hex_str_to_bytes
 
 from . import segwit_addr
 
-ADDRESS_BCRT1_UNSPENDABLE = 'chirt1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq563mzw'
+ADDRESS_BCRT1_UNSPENDABLE = 'xcrcrt1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq563mzw'
 
 
 class AddressType(enum.Enum):
@@ -69,7 +69,7 @@ def program_to_witness(version, program, main = False):
     assert 0 <= version <= 16
     assert 2 <= len(program) <= 40
     assert version > 0 or len(program) in [20, 32]
-    return segwit_addr.encode("chi" if main else "chirt", version, program)
+    return segwit_addr.encode("xcrc" if main else "xcrcrt", version, program)
 
 def script_to_p2wsh(script, main = False):
     script = check_script(script)
