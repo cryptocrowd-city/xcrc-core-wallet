@@ -43,7 +43,7 @@ static const int TOOLTIP_WRAP_THRESHOLD = 80;
 #define SPINNER_FRAMES 36
 
 #define QAPP_ORG_NAME "CRyptoCrowd"
-#define QAPP_ORG_DOMAIN "cryptocrowd.io"
+#define QAPP_ORG_DOMAIN "coin.cryptocrpwd.city"
 #define QAPP_APP_NAME_DEFAULT "CRyptoCrowd-Qt"
 #define QAPP_APP_NAME_TESTNET "CRyptoCrowd-Qt-testnet"
 #define QAPP_APP_NAME_REGTEST "CRyptoCrowd-Qt-regtest"

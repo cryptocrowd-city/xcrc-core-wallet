@@ -579,8 +579,8 @@ void SetupServerArgs()
 
 std::string LicenseInfo()
 {
-    const std::string URL_SOURCE_CODE = "<https://github.com/cryptocrowd/cryptocrowd>";
-    const std::string URL_WEBSITE = "<https://cryptocrowd.io/>";
+    const std::string URL_SOURCE_CODE = "<https://github.com/cryptocrowd-city/xcrc-core-wallet>";
+    const std::string URL_WEBSITE = "<https://coin.cryptocrowd.city/>";
     // todo: remove urls from translations on next change
     return CopyrightHolders(strprintf(_("Copyright (C) %i-%i").translated, 2009, COPYRIGHT_YEAR) + " ") + "\n" +
            "\n" +

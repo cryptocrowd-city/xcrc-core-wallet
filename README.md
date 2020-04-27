@@ -1,13 +1,13 @@
 CRyptoCrowd Core
 =========
 
-https://cryptocrowd.io
-(Formerly Chimaera)
+https://coin.cryptocrowd.city
+(Formerly CRowdCLassic)
 
 What is CRyptoCrowd?
 -------------
 
-CRyptoCrowd Core is a decentralized open source information registration and transfer system based on the Namecoin cryptocurrency. It is primarily aimed at decentralised blockchain gaming.
+CRyptoCrowd Core is a decentralized open source information registration and transfer system based on the Namecoin cryptocurrency. It is primarily aimed at decentralised blockchain Project Acceleration through gamification for the masses.
 This is the first layer of the CRyptoCrowd Platform.
 
 What does it do?
@@ -37,13 +37,13 @@ More Information
 
 CRYPTOCROWD Core includes the base elements required for Experienced users, Miners and Exchanges. cryptocrowdd, cryptocrowd-qt, cryptocrowd-cli and the usual.
 
-You may check https://github.com/cryptocrowd/cryptocrowd/tree/master/doc/cryptocrowd for more CRYPTOCROWD specs and additional information.
+You may check https://github.com/cryptocrowd-city/xcrc-core-wallet/tree/master/doc/cryptocrowd for more CRYPTOCROWD specs and additional information.
 
 Several tutorials and more information are here:
-https://github.com/cryptocrowd/cryptocrowd_tutorials/wiki
+https://github.com/cryptocrowd-city/cryptocrowd_tutorials/wiki
 
 For compiling on Ubuntu you can use this guide:
-https://forum.cryptocrowd.io/topic/59-guide-building-cryptocrowd-on-ubuntu/
+https://github.com/cryptocrowd-city/cryptocrowd_tutorials/wiki
 
 
 you can also follow any Bitcoin guide, just replace the repo with CRYPTOCROWD's:
@@ -52,6 +52,6 @@ https://github.com/bitcoin/bitcoin/blob/master/doc/build-unix.md
 https://github.com/bitcoin/bitcoin/blob/master/doc/build-osx.md
 
 
-Standard users should use the CRYPTOCROWD Electron Wallet which is a front end to cryptocrowdd here https://github.com/cryptocrowd/cryptocrowd_electron
+Standard users should use the CRYPTOCROWD Electron Wallet which is a front end to cryptocrowdd here https://github.com/cryptocrowd-city/xcrc-electron-wallet
 
-for issues with CRYPTOCROWD Core you can create an issue in Github or ask on the forum https://forum.cryptocrowd.io
+for issues with CRYPTOCROWD Core you can create an issue in Github or ask on the forum https://github.com/cryptocrowd-city/xcrc-core-wallet/issues
