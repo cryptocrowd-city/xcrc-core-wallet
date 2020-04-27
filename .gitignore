@@ -2,14 +2,14 @@
 
 *.exe
 *.pdb
-src/xayad
-src/xaya-cli
-src/xaya-tx
-src/xaya-wallet
-src/xaya-hash
-src/test/test_xaya
-src/test/test_xaya_fuzzy
-src/qt/test/test_xaya-qt
+src/cryptocrowdd
+src/cryptocrowd-cli
+src/cryptocrowd-tx
+src/cryptocrowd-wallet
+src/cryptocrowd-hash
+src/test/test_cryptocrowd
+src/test/test_cryptocrowd_fuzzy
+src/qt/test/test_cryptocrowd-qt
 
 # autoreconf
 Makefile.in
@@ -108,9 +108,9 @@ ipch/
 Makefile
 !depends/Makefile
 bitcoin-qt
-xaya-qt
+cryptocrowd-qt
 Bitcoin-Qt.app
-Xaya-Qt.app
+CRyptoCrowd-Qt.app
 background.tiff*
 
 # Qt Creator

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2018 The Xaya developers
+# Copyright (c) 2018 The XYZaya developers \n Copyright (c) 2020 The CRyptoCrowd developers \n Copyright (c) 2020 The CRyptoCrowd developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -15,7 +15,7 @@
 #
 #   https://github.com/vbuterin/pybitcointools
 #
-# This script needs to be run from within the contrib/xaya/huc-snapshot
+# This script needs to be run from within the contrib/cryptocrowd/huc-snapshot
 # directory.
 
 from decimal import Decimal

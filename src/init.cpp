@@ -106,7 +106,7 @@ static const char* FEE_ESTIMATES_FILENAME="fee_estimates.dat";
 /**
  * The PID file facilities.
  */
-static const char* BITCOIN_PID_FILENAME = "xayad.pid";
+static const char* BITCOIN_PID_FILENAME = "cryptocrowdd.pid";
 
 static fs::path GetPidFile()
 {
@@ -478,7 +478,7 @@ void SetupServerArgs()
     gArgs.AddArg("-zmqpubrawtxhwm=<n>", strprintf("Set publish raw transaction outbound message high water mark (default: %d)", CZMQAbstractNotifier::DEFAULT_ZMQ_SNDHWM), ArgsManager::ALLOW_ANY, OptionsCategory::ZMQ);
     gArgs.AddArg("-zmqpubgameblocks=<address>", "Enable publication of game data for block attach/detach events in <address>", ArgsManager::ALLOW_ANY, OptionsCategory::ZMQ);
     gArgs.AddArg("-zmqpubgamepending=<address>", "Enable publication of pending game transactions in <address>", ArgsManager::ALLOW_ANY, OptionsCategory::ZMQ);
-    gArgs.AddArg("-trackgame=<game>", "Enable tracking of the listed game for the Xaya game interface", ArgsManager::ALLOW_ANY, OptionsCategory::ZMQ);
+    gArgs.AddArg("-trackgame=<game>", "Enable tracking of the listed game for the CRyptoCrowd game interface", ArgsManager::ALLOW_ANY, OptionsCategory::ZMQ);
 #else
     hidden_args.emplace_back("-zmqpubhashblock=<address>");
     hidden_args.emplace_back("-zmqpubhashtx=<address>");
@@ -579,8 +579,8 @@ void SetupServerArgs()
 
 std::string LicenseInfo()
 {
-    const std::string URL_SOURCE_CODE = "<https://github.com/xaya/xaya>";
-    const std::string URL_WEBSITE = "<https://xaya.io/>";
+    const std::string URL_SOURCE_CODE = "<https://github.com/cryptocrowd/cryptocrowd>";
+    const std::string URL_WEBSITE = "<https://cryptocrowd.io/>";
     // todo: remove urls from translations on next change
     return CopyrightHolders(strprintf(_("Copyright (C) %i-%i").translated, 2009, COPYRIGHT_YEAR) + " ") + "\n" +
            "\n" +

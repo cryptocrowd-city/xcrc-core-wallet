@@ -19,7 +19,7 @@ static const char *MSG_RAWBLOCK  = "rawblock";
 static const char *MSG_RAWTX     = "rawtx";
 
 /**
- * Lock protecting any ZMQ publications.  This is necessary in Xaya, since
+ * Lock protecting any ZMQ publications.  This is necessary in CRyptoCrowd, since
  * game_sendupdates may send notifications from additional threads.  Since
  * sockets can be reused (if on the same address), we have to lock all
  * sends (also for non-game-blocks) to be sure that the socket is not

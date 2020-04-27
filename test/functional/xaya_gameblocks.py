@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2018-2019 The Xaya developers
+# Copyright (c) 2018-2019 The XYZaya developers \n Copyright (c) 2020 The CRyptoCrowd developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -23,8 +23,8 @@ from test_framework.script import (
   CScript,
   OP_TRUE,
 )
-from test_framework.xaya_zmq import (
-  XayaZmqTest,
+from test_framework.cryptocrowd_zmq import (
+  CRyptoCrowdZmqTest,
   ZmqSubscriber,
 )
 
@@ -43,7 +43,7 @@ def assertMove (obj, txid, name, move):
   assert_equal (obj["move"], move)
 
 
-class GameBlocksTest (XayaZmqTest):
+class GameBlocksTest (CRyptoCrowdZmqTest):
 
   def set_test_params (self):
     self.num_nodes = 1

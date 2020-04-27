@@ -220,7 +220,7 @@ class TestNode():
         self.process = subprocess.Popen(self.args + extra_args, env=subp_env, stdout=stdout, stderr=stderr, cwd=cwd, **kwargs)
 
         self.running = True
-        self.log.debug("xayad started, waiting for RPC to come up")
+        self.log.debug("cryptocrowdd started, waiting for RPC to come up")
 
         if self.start_perf:
             self._start_perf()
@@ -232,7 +232,7 @@ class TestNode():
         for _ in range(poll_per_s * self.rpc_timeout):
             if self.process.poll() is not None:
                 raise FailedToStartError(self._node_msg(
-                    'xayad exited with status {} during initialization'.format(self.process.returncode)))
+                    'cryptocrowdd exited with status {} during initialization'.format(self.process.returncode)))
             try:
                 rpc = get_rpc_proxy(rpc_url(self.datadir, self.index, self.chain, self.rpchost), self.index, timeout=self.rpc_timeout, coveragedir=self.coverage_dir)
                 rpc.getblockcount()
@@ -256,7 +256,7 @@ class TestNode():
                 if "No RPC credentials" not in str(e):
                     raise
             time.sleep(1.0 / poll_per_s)
-        self._raise_assertion_error("Unable to connect to xayad")
+        self._raise_assertion_error("Unable to connect to cryptocrowdd")
 
     def generate(self, nblocks, maxtries=1000000):
         self.log.debug("TestNode.generate() dispatches `generate` call to `generatetoaddress`")
@@ -466,7 +466,7 @@ class TestNode():
                 self.stop_node()
                 self.wait_until_stopped()
             except FailedToStartError as e:
-                self.log.debug('xayad failed to start: %s', e)
+                self.log.debug('cryptocrowdd failed to start: %s', e)
                 self.running = False
                 self.process = None
                 # Check stderr for expected message
@@ -487,9 +487,9 @@ class TestNode():
                                 'Expected message "{}" does not fully match stderr:\n"{}"'.format(expected_msg, stderr))
             else:
                 if expected_msg is None:
-                    assert_msg = "xayad should have exited with an error"
+                    assert_msg = "cryptocrowdd should have exited with an error"
                 else:
-                    assert_msg = "xayad should have exited with expected error " + expected_msg
+                    assert_msg = "cryptocrowdd should have exited with expected error " + expected_msg
                 self._raise_assertion_error(assert_msg)
 
     def add_p2p_connection(self, p2p_conn, *, wait_for_verack=True, **kwargs):
@@ -551,7 +551,7 @@ class TestNodeCLI():
         self.binary = binary
         self.datadir = datadir
         self.input = None
-        self.log = logging.getLogger('TestFramework.xayacli')
+        self.log = logging.getLogger('TestFramework.cryptocrowdcli')
 
     def __call__(self, *options, input=None):
         # TestNodeCLI is callable with bitcoin-cli command-line options
@@ -576,14 +576,14 @@ class TestNodeCLI():
         """Run bitcoin-cli command. Deserializes returned string as python object."""
         pos_args = [arg_to_cli(arg) for arg in args]
         named_args = [str(key) + "=" + arg_to_cli(value) for (key, value) in kwargs.items()]
-        assert not (pos_args and named_args), "Cannot use positional arguments and named arguments in the same xaya-cli call"
+        assert not (pos_args and named_args), "Cannot use positional arguments and named arguments in the same cryptocrowd-cli call"
         p_args = [self.binary, "-datadir=" + self.datadir] + self.options
         if named_args:
             p_args += ["-named"]
         if command is not None:
             p_args += [command]
         p_args += pos_args + named_args
-        self.log.debug("Running xaya-cli command: %s" % command)
+        self.log.debug("Running cryptocrowd-cli command: %s" % command)
         process = subprocess.Popen(p_args, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
         cli_stdout, cli_stderr = process.communicate(input=self.input)
         returncode = process.poll()

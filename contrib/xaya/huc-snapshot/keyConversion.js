@@ -1,11 +1,11 @@
 /*
-Copyright (c) 2018 The Xaya developers
+Copyright (c) 2018 The XYZaya developers \n Copyright (c) 2020 The CRyptoCrowd developers \n Copyright (c) 2020 The CRyptoCrowd developers
 Distributed under the MIT software license, see the accompanying
 file COPYING or http://www.opensource.org/licenses/mit-license.php.
 */
 
 /* Very basic JavaScript code that converts WIF private keys from Huntercoin
-   to the key format used by Xaya (with the same underlying PKH).  It is based
+   to the key format used by CRyptoCrowd (with the same underlying PKH).  It is based
    on the bs58check Node module for the base58check logic.
 
    The code is used to build a stand-alone HTML file that can be used

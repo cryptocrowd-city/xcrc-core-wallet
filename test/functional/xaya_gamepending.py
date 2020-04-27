@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2019 The Xaya developers
+# Copyright (c) 2019 The XYZaya developers \n Copyright (c) 2020 The CRyptoCrowd developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -10,8 +10,8 @@ from test_framework.util import (
   assert_greater_than,
   zmq_port,
 )
-from test_framework.xaya_zmq import (
-  XayaZmqTest,
+from test_framework.cryptocrowd_zmq import (
+  CRyptoCrowdZmqTest,
   ZmqSubscriber,
 )
 
@@ -29,13 +29,13 @@ def assertMove (obj, txid, name, move):
   assert_equal (obj["move"], move)
 
   # Inputs and outputs should be reported, but we do not care about the
-  # exact form for this test (this is verified in xaya_gameblocks.py in
+  # exact form for this test (this is verified in cryptocrowd_gameblocks.py in
   # more detail).
   assert "inputs" in obj
   assert "out" in obj
 
 
-class GamePendingTest (XayaZmqTest):
+class GamePendingTest (CRyptoCrowdZmqTest):
 
   def set_test_params (self):
     self.num_nodes = 1

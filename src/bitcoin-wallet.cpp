@@ -42,12 +42,12 @@ static bool WalletAppInit(int argc, char* argv[])
         return false;
     }
     if (argc < 2 || HelpRequested(gArgs)) {
-        std::string usage = strprintf("%s xaya-wallet version", PACKAGE_NAME) + " " + FormatFullVersion() + "\n\n" +
-                                      "wallet-tool is an offline tool for creating and interacting with Xaya wallet files.\n" +
+        std::string usage = strprintf("%s cryptocrowd-wallet version", PACKAGE_NAME) + " " + FormatFullVersion() + "\n\n" +
+                                      "wallet-tool is an offline tool for creating and interacting with CRyptoCrowd wallet files.\n" +
                                       "By default wallet-tool will act on wallets in the default mainnet wallet directory in the datadir.\n" +
                                       "To change the target wallet, use the -datadir, -wallet and -testnet/-regtest arguments.\n\n" +
                                       "Usage:\n" +
-                                     "  xaya-wallet [options] <command>\n\n" +
+                                     "  cryptocrowd-wallet [options] <command>\n\n" +
                                      gArgs.GetHelpMessage();
 
         tfm::format(std::cout, "%s", usage.c_str());
@@ -97,7 +97,7 @@ int main(int argc, char* argv[])
     }
 
     if (method.empty()) {
-        tfm::format(std::cerr, "No method provided. Run `xaya-wallet -help` for valid methods.\n");
+        tfm::format(std::cerr, "No method provided. Run `cryptocrowd-wallet -help` for valid methods.\n");
         return EXIT_FAILURE;
     }
 

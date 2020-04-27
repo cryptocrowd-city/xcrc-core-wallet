@@ -42,17 +42,17 @@ from the root of the repository.
 
 **Note**: You only need Berkeley DB if the wallet is enabled (see [*Disable-wallet mode*](/doc/build-osx.md#disable-wallet-mode)).
 
-## Build Xaya
+## Build CRyptoCrowd
 
-1. Clone the Xaya source code:
+1. Clone the CRyptoCrowd source code:
     ```shell
-    git clone https://github.com/xaya/xaya.git
-    cd xaya
+    git clone https://github.com/cryptocrowd/cryptocrowd.git
+    cd cryptocrowd
     ```
 
-2.  Build xaya:
+2.  Build cryptocrowd:
 
-    Configure and build the headless xaya binaries as well as the GUI (if Qt is found).
+    Configure and build the headless cryptocrowd binaries as well as the GUI (if Qt is found).
 
     You can disable the GUI build by passing `--without-gui` to configure.
     ```shell
@@ -83,18 +83,18 @@ In this case there is no dependency on Berkeley DB 4.8.
 Mining is also possible in disable-wallet mode using the `getblocktemplate` RPC call.
 
 ## Running
-Xaya is now available at `./src/xayad`
+CRyptoCrowd is now available at `./src/cryptocrowdd`
 
 Before running, you may create an empty configuration file:
 ```shell
 mkdir -p "/Users/${USER}/Library/Application Support/Bitcoin"
 
-touch "/Users/${USER}/Library/Application Support/Xaya/xaya.conf"
+touch "/Users/${USER}/Library/Application Support/CRyptoCrowd/cryptocrowd.conf"
 
-chmod 600 "/Users/${USER}/Library/Application Support/Xaya/xaya.conf"
+chmod 600 "/Users/${USER}/Library/Application Support/CRyptoCrowd/cryptocrowd.conf"
 ```
 
-The first time you run xayad, it will start downloading the blockchain. This process could
+The first time you run cryptocrowdd, it will start downloading the blockchain. This process could
 take several hours.
 
 You can monitor the download process by looking at the debug.log file:
@@ -104,9 +104,9 @@ tail -f $HOME/Library/Application\ Support/Bitcoin/debug.log
 
 ## Other commands:
 ```shell
-./src/xayad -daemon      # Starts the Xaya daemon.
-./src/xaya-cli --help    # Outputs a list of command-line options.
-./src/xaya-cli help      # Outputs a list of RPC commands when the daemon is running.
+./src/cryptocrowdd -daemon      # Starts the CRyptoCrowd daemon.
+./src/cryptocrowd-cli --help    # Outputs a list of command-line options.
+./src/cryptocrowd-cli help      # Outputs a list of RPC commands when the daemon is running.
 ```
 
 ## Notes

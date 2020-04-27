@@ -144,7 +144,7 @@ void TestGUI()
         wallet->AddKeyPubKey(test.coinbaseKey, test.coinbaseKey.GetPubKey());
     }
 
-    /* In Xaya, the minimum / default wallet version already supports HD,
+    /* In CRyptoCrowd, the minimum / default wallet version already supports HD,
        unlike upstream Bitcoin/Namecoin.  Thus we have to set an HD seed
        as well, otherwise the wallet won't generate keys.  */
     wallet->SetHDSeed(wallet->GenerateNewSeed());
@@ -227,7 +227,7 @@ void TestGUI()
             QString paymentText = rlist->toPlainText();
             QStringList paymentTextList = paymentText.split('\n');
             QCOMPARE(paymentTextList.at(0), QString("Payment information"));
-            QVERIFY(paymentTextList.at(1).indexOf(QString("URI: xaya:")) != -1);
+            QVERIFY(paymentTextList.at(1).indexOf(QString("URI: cryptocrowd:")) != -1);
             QVERIFY(paymentTextList.at(2).indexOf(QString("Address:")) != -1);
             QCOMPARE(paymentTextList.at(3), QString("Amount: 0.00000001 ") + QString::fromStdString(CURRENCY_UNIT));
             QCOMPARE(paymentTextList.at(4), QString("Label: TEST_LABEL_1"));

@@ -584,7 +584,7 @@ sendtoname (const JSONRPCRequest& request)
 
   if (::ChainstateActive ().IsInitialBlockDownload ())
     throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD,
-                       "Xaya is downloading blocks...");
+                       "CRyptoCrowd is downloading blocks...");
 
   /* Make sure the results are valid at least up to the most recent block
      the user could have gotten from another RPC command prior to now.  */

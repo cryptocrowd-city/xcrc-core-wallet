@@ -29,16 +29,16 @@
   <string>????</string>
 
   <key>CFBundleExecutable</key>
-  <string>Xaya-Qt</string>
+  <string>CRyptoCrowd-Qt</string>
 
   <key>CFBundleName</key>
-  <string>Xaya-Qt</string>
+  <string>CRyptoCrowd-Qt</string>
 
   <key>LSHasLocalizedDisplayName</key>
   <true/>
 
   <key>CFBundleIdentifier</key>
-  <string>io.xaya.Xaya-Qt</string>
+  <string>io.cryptocrowd.CRyptoCrowd-Qt</string>
 
   <key>CFBundleURLTypes</key>
   <array>
@@ -46,10 +46,10 @@
       <key>CFBundleTypeRole</key>
       <string>Editor</string>
       <key>CFBundleURLName</key>
-      <string>io.xaya.XayaPayment</string>
+      <string>io.cryptocrowd.CRyptoCrowdPayment</string>
       <key>CFBundleURLSchemes</key>
       <array>
-        <string>xaya</string>
+        <string>cryptocrowd</string>
       </array>
     </dict>
   </array>
@@ -58,9 +58,9 @@
   <array>
     <dict>
       <key>UTTypeIdentifier</key>
-      <string>io.xaya.paymentrequest</string>
+      <string>io.cryptocrowd.paymentrequest</string>
       <key>UTTypeDescription</key>
-      <string>Xaya payment request</string>
+      <string>CRyptoCrowd payment request</string>
       <key>UTTypeConformsTo</key>
       <array>
         <string>public.data</string>
@@ -68,10 +68,10 @@
       <key>UTTypeTagSpecification</key>
       <dict>
         <key>public.mime-type</key>
-        <string>application/x-xaya-payment-request</string>
+        <string>application/x-cryptocrowd-payment-request</string>
         <key>public.filename-extension</key>
         <array>
-          <string>xayapaymentrequest</string>
+          <string>cryptocrowdpaymentrequest</string>
         </array>
       </dict>
     </dict>
@@ -84,7 +84,7 @@
       <string>Editor</string>
       <key>LSItemContentTypes</key>
       <array>
-        <string>io.xaya.paymentrequest</string>
+        <string>io.cryptocrowd.paymentrequest</string>
       </array>
       <key>LSHandlerRank</key>
       <string>Owner</string>

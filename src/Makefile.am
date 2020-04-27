@@ -77,23 +77,23 @@ EXTRA_LIBRARIES += \
 noinst_LTLIBRARIES = $(LIBBITCOINCONSENSUS)
 
 bin_PROGRAMS =
-noinst_PROGRAMS = xaya-hash
+noinst_PROGRAMS = cryptocrowd-hash
 TESTS =
 BENCHMARKS =
 
 if BUILD_BITCOIND
-  bin_PROGRAMS += xayad
+  bin_PROGRAMS += cryptocrowdd
 endif
 
 if BUILD_BITCOIN_CLI
-  bin_PROGRAMS += xaya-cli
+  bin_PROGRAMS += cryptocrowd-cli
 endif
 if BUILD_BITCOIN_TX
-  bin_PROGRAMS += xaya-tx
+  bin_PROGRAMS += cryptocrowd-tx
 endif
 if ENABLE_WALLET
 if BUILD_BITCOIN_WALLET
-  bin_PROGRAMS += xaya-wallet
+  bin_PROGRAMS += cryptocrowd-wallet
 endif
 endif
 
@@ -558,18 +558,18 @@ nodist_libbitcoin_util_a_SOURCES = $(srcdir)/obj/build.h
 #
 
 # bitcoind binary #
-xayad_SOURCES = bitcoind.cpp
-xayad_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-xayad_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-xayad_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+cryptocrowdd_SOURCES = bitcoind.cpp
+cryptocrowdd_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+cryptocrowdd_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+cryptocrowdd_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-xayad_SOURCES += bitcoind-res.rc
+cryptocrowdd_SOURCES += bitcoind-res.rc
 endif
 
 # Libraries below may be listed more than once to resolve circular dependencies (see
 # https://eli.thegreenplace.net/2013/07/09/library-order-in-static-linking#circular-dependency)
-xayad_LDADD = \
+cryptocrowdd_LDADD = \
   $(LIBBITCOIN_SERVER) \
   $(LIBBITCOIN_WALLET) \
   $(LIBBITCOIN_SERVER) \
@@ -584,38 +584,38 @@ xayad_LDADD = \
   $(LIBMEMENV) \
   $(LIBSECP256K1)
 
-xayad_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
+cryptocrowdd_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
 
 # bitcoin-cli binary #
-xaya_cli_SOURCES = bitcoin-cli.cpp
-xaya_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
-xaya_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-xaya_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+cryptocrowd_cli_SOURCES = bitcoin-cli.cpp
+cryptocrowd_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
+cryptocrowd_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+cryptocrowd_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-xaya_cli_SOURCES += bitcoin-cli-res.rc
+cryptocrowd_cli_SOURCES += bitcoin-cli-res.rc
 endif
 
-xaya_cli_LDADD = \
+cryptocrowd_cli_LDADD = \
   $(LIBBITCOIN_CLI) \
   $(LIBUNIVALUE) \
   $(LIBBITCOIN_UTIL) \
   $(LIBBITCOIN_CRYPTO)
 
-xaya_cli_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
+cryptocrowd_cli_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
 #
 
 # bitcoin-tx binary #
-xaya_tx_SOURCES = bitcoin-tx.cpp
-xaya_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-xaya_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-xaya_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+cryptocrowd_tx_SOURCES = bitcoin-tx.cpp
+cryptocrowd_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+cryptocrowd_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+cryptocrowd_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-xaya_tx_SOURCES += bitcoin-tx-res.rc
+cryptocrowd_tx_SOURCES += bitcoin-tx-res.rc
 endif
 
-xaya_tx_LDADD = \
+cryptocrowd_tx_LDADD = \
   $(LIBUNIVALUE) \
   $(LIBBITCOIN_COMMON) \
   $(LIBBITCOIN_UTIL) \
@@ -623,37 +623,37 @@ xaya_tx_LDADD = \
   $(LIBBITCOIN_CRYPTO) \
   $(LIBSECP256K1)
 
-xaya_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
+cryptocrowd_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
 #
 
-# xaya-hash binary #
-xaya_hash_SOURCES = xaya-hash.cpp
-xaya_hash_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-xaya_hash_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-xaya_hash_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# cryptocrowd-hash binary #
+cryptocrowd_hash_SOURCES = cryptocrowd-hash.cpp
+cryptocrowd_hash_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+cryptocrowd_hash_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+cryptocrowd_hash_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
-xaya_hash_LDADD = \
+cryptocrowd_hash_LDADD = \
   $(LIBBITCOIN_COMMON) \
   $(LIBBITCOIN_UTIL) \
   $(LIBBITCOIN_CONSENSUS) \
   $(LIBBITCOIN_CRYPTO) \
   $(LIBUNIVALUE) \
   $(LIBSECP256K1)
-xaya_hash_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
+cryptocrowd_hash_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
 #
 
 # bitcoin-wallet binary #
-xaya_wallet_SOURCES = bitcoin-wallet.cpp
-xaya_wallet_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-xaya_wallet_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-xaya_wallet_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+cryptocrowd_wallet_SOURCES = bitcoin-wallet.cpp
+cryptocrowd_wallet_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+cryptocrowd_wallet_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+cryptocrowd_wallet_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-xaya_wallet_SOURCES += bitcoin-wallet-res.rc
+cryptocrowd_wallet_SOURCES += bitcoin-wallet-res.rc
 endif
 
 # FIXME: Remove SERVER once we have cleaned up getauxblock!
-xaya_wallet_LDADD = \
+cryptocrowd_wallet_LDADD = \
   $(LIBBITCOIN_SERVER) \
   $(LIBBITCOIN_WALLET_TOOL) \
   $(LIBBITCOIN_WALLET) \
@@ -670,7 +670,7 @@ xaya_wallet_LDADD = \
   $(LIBSECP256K1) \
   $(LIBUNIVALUE)
 
-xaya_wallet_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(CRYPTO_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(MINIUPNPC_LIBS) $(ZMQ_LIBS)
+cryptocrowd_wallet_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(CRYPTO_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(MINIUPNPC_LIBS) $(ZMQ_LIBS)
 #
 
 # bitcoinconsensus library #

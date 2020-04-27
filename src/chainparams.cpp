@@ -59,7 +59,7 @@ constexpr const char hexPremineAddressRegtest[]
 
 /*
 The premine on testnet and mainnet is sent to a 2-of-4 multisig address.  The
-keys are held by the founding members of the Xaya team.
+keys are held by the founding members of the CRyptoCrowd team.
 
 The address is:
   DHy2615XKevE23LVRVZVxGeqxadRGyiFW4
@@ -165,7 +165,7 @@ public:
         /* The value of ~3.8 CHI is calculated to yield the desired total
            PoW coin supply.  For the calculation, see here:
 
-           https://github.com/xaya/xaya/issues/70#issuecomment-441292533
+           https://github.com/cryptocrowd/cryptocrowd/issues/70#issuecomment-441292533
         */
         consensus.initialSubsidy = 382934346;
         consensus.BIP16Height = 0;
@@ -184,7 +184,7 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
 
         // The best chain should have at least this much work.
-        // The value is the chain work of the Xaya mainnet chain at height
+        // The value is the chain work of the CRyptoCrowd mainnet chain at height
         // 1,234,000, with best block hash:
         // a853c0581c3637726a769b77cadf185e09666742757ef2df00058e876cf25897
         consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000005f3932875f0873b98a368a");
@@ -217,8 +217,8 @@ public:
         assert(consensus.hashGenesisBlock == uint256S("e5062d76e5f50c42f493826ac9920b63a8def2626fd70a5cec707ec47a4c4651"));
         assert(genesis.hashMerkleRoot == uint256S("0827901b75ab43978c3cf20a78baf040faeb0e2eeff3a2c58ab6521a6d46f8fd"));
 
-        vSeeds.emplace_back("seed.xaya.io");
-        vSeeds.emplace_back("seed.xaya.domob.eu");
+        vSeeds.emplace_back("seed.cryptocrowd.io");
+        vSeeds.emplace_back("seed.cryptocrowd.domob.eu");
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,28);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,30);
@@ -281,7 +281,7 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
 
-        // The value is the chain work of the Xaya testnet chain at height
+        // The value is the chain work of the CRyptoCrowd testnet chain at height
         // 70,000 with best block hash:
         // e2c154dc8e223cef271b54174c9d66eaf718378b30977c3df115ded629f3edb1
         consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000ad96bc2631b9");
@@ -311,8 +311,8 @@ public:
 
         vFixedSeeds.clear();
         vSeeds.clear();
-        vSeeds.emplace_back("seed.testnet.xaya.io");
-        vSeeds.emplace_back("seed.testnet.xaya.domob.eu");
+        vSeeds.emplace_back("seed.testnet.cryptocrowd.io");
+        vSeeds.emplace_back("seed.testnet.cryptocrowd.domob.eu");
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,88);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,90);

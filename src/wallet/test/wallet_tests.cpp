@@ -159,7 +159,7 @@ BOOST_FIXTURE_TEST_CASE(importmulti_rescan, TestChain100Setup)
                       "timestamp %d. There was an error reading a block from time %d, which is after or within %d "
                       "seconds of key creation, and could contain transactions pertaining to the key. As a result, "
                       "transactions and coins using this key may not appear in the wallet. This error could be caused "
-                      "by pruning or data corruption (see xayad log for details) and could be dealt with by "
+                      "by pruning or data corruption (see cryptocrowdd log for details) and could be dealt with by "
                       "downloading and rescanning the relevant blocks (see -reindex and -rescan "
                       "options).\"}},{\"success\":true}]",
                               0, oldTip->GetBlockTimeMax(), TIMESTAMP_WINDOW));
@@ -348,7 +348,7 @@ public:
         bool firstRun;
         wallet->LoadWallet(firstRun);
 
-        /* In Xaya, the minimum / default wallet version already supports HD,
+        /* In CRyptoCrowd, the minimum / default wallet version already supports HD,
            unlike upstream Bitcoin/Namecoin.  Thus we have to set an HD seed
            as well, otherwise the wallet won't generate keys.  */
         wallet->SetHDSeed(wallet->GenerateNewSeed());

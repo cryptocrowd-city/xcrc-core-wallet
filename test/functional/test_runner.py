@@ -241,14 +241,14 @@ BASE_SCRIPTS = [
     'name_utxo.py',
     'name_wallet.py',
 
-    # Xaya-specific tests
-    'xaya_dualalgo.py',
-    'xaya_gameblocks.py',
-    'xaya_gamepending.py',
-    'xaya_postico_fork.py',
-    'xaya_premine.py',
-    'xaya_trackedgames.py',
-    'xaya_trading.py',
+    # CRyptoCrowd-specific tests
+    'cryptocrowd_dualalgo.py',
+    'cryptocrowd_gameblocks.py',
+    'cryptocrowd_gamepending.py',
+    'cryptocrowd_postico_fork.py',
+    'cryptocrowd_premine.py',
+    'cryptocrowd_trackedgames.py',
+    'cryptocrowd_trading.py',
 ]
 
 # Tests that are currently being skipped (e. g., because of BIP9).
@@ -257,7 +257,7 @@ SKIPPED = [
     'p2p_dos_header_tree.py',
     # Disabled, as they take too long with neoscrypt (they mine a lot of
     # blocks).  They are also not relevant, since all BIP34-activated forks
-    # are active from the start in Xaya.
+    # are active from the start in CRyptoCrowd.
     'feature_dersig.py',
     'feature_cltv.py',
 ]
@@ -411,8 +411,8 @@ def run_tests(*, test_list, src_dir, build_dir, tmpdir, jobs=1, enable_coverage=
     # Warn if bitcoind is already running
     # pidof might fail or return an empty string if bitcoind is not running
     try:
-        if subprocess.check_output(["pidof", "xayad"]) not in [b'']:
-            print("%sWARNING!%s There is already a xayad process running on this system. Tests may fail unexpectedly due to resource contention!" % (BOLD[1], BOLD[0]))
+        if subprocess.check_output(["pidof", "cryptocrowdd"]) not in [b'']:
+            print("%sWARNING!%s There is already a cryptocrowdd process running on this system. Tests may fail unexpectedly due to resource contention!" % (BOLD[1], BOLD[0]))
     except (OSError, subprocess.SubprocessError):
         pass
 
@@ -650,7 +650,7 @@ class TestResult():
 def check_script_prefixes():
     """Check that test scripts start with one of the allowed name prefixes."""
 
-    good_prefixes_re = re.compile("(example|feature|interface|mempool|mining|p2p|rpc|wallet|tool|auxpow|name|xaya)_")
+    good_prefixes_re = re.compile("(example|feature|interface|mempool|mining|p2p|rpc|wallet|tool|auxpow|name|cryptocrowd)_")
     bad_script_names = [script for script in ALL_SCRIPTS if good_prefixes_re.match(script) is None]
 
     if bad_script_names:

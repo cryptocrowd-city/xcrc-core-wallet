@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-# Copyright (c) 2018-2019 The Xaya developers
+# Copyright (c) 2018-2019 The XYZaya developers \n Copyright (c) 2020 The CRyptoCrowd developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
-"""Tests the POST_ICO hard fork in Xaya."""
+"""Tests the POST_ICO hard fork in CRyptoCrowd."""
 
 from test_framework.test_framework import BitcoinTestFramework
 from test_framework.blocktools import (
@@ -42,7 +42,7 @@ class PostIcoForkTest (BitcoinTestFramework):
 
     # Test that we can restart the client just fine.  There was a bug
     # with non-zero nNonce values in the on-disk block index that caused
-    # a crash here:  https://github.com/xaya/xaya/issues/82
+    # a crash here:  https://github.com/cryptocrowd/cryptocrowd/issues/82
     self.node.generate (10)
     self.restart_node (0)
     assert_equal (blkHash, self.nodes[0].getblockhash (FORK_HEIGHT))

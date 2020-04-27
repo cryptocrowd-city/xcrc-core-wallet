@@ -8,18 +8,18 @@ define(_CLIENT_VERSION_RC, 0)
 define(_CLIENT_VERSION_IS_RELEASE, true)
 define(_COPYRIGHT_YEAR, 2019)
 define(_COPYRIGHT_HOLDERS,[The %s developers])
-define(_COPYRIGHT_HOLDERS_SUBSTITUTION,[[Bitcoin Core, Namecoin and Xaya]])
-AC_INIT([Xaya],m4_join([.], _CLIENT_VERSION_MAJOR, _CLIENT_VERSION_MINOR, _CLIENT_VERSION_REVISION, m4_if(_CLIENT_VERSION_BUILD, [0], [], _CLIENT_VERSION_BUILD))m4_if(_CLIENT_VERSION_RC, [0], [], [rc]_CLIENT_VERSION_RC),[https://github.com/xaya/xaya/issues],[xaya],[https://xaya.io/])
+define(_COPYRIGHT_HOLDERS_SUBSTITUTION,[[Bitcoin Core, Namecoin, Xaya and CRyptoCrowd]])
+AC_INIT([CRyptoCrowd],m4_join([.], _CLIENT_VERSION_MAJOR, _CLIENT_VERSION_MINOR, _CLIENT_VERSION_REVISION, m4_if(_CLIENT_VERSION_BUILD, [0], [], _CLIENT_VERSION_BUILD))m4_if(_CLIENT_VERSION_RC, [0], [], [rc]_CLIENT_VERSION_RC),[https://github.com/cryptocrowd/cryptocrowd/issues],[cryptocrowd],[https://cryptocrowd.io/])
 AC_CONFIG_SRCDIR([src/validation.cpp])
 AC_CONFIG_HEADERS([src/config/bitcoin-config.h])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([build-aux/m4])
 
-BITCOIN_DAEMON_NAME=xayad
-BITCOIN_GUI_NAME=xaya-qt
-BITCOIN_CLI_NAME=xaya-cli
-BITCOIN_TX_NAME=xaya-tx
-BITCOIN_WALLET_TOOL_NAME=xaya-wallet
+BITCOIN_DAEMON_NAME=cryptocrowdd
+BITCOIN_GUI_NAME=cryptocrowd-qt
+BITCOIN_CLI_NAME=cryptocrowd-cli
+BITCOIN_TX_NAME=cryptocrowd-tx
+BITCOIN_WALLET_TOOL_NAME=cryptocrowd-wallet
 
 dnl Unless the user specified ARFLAGS, force it to be cr
 AC_ARG_VAR(ARFLAGS, [Flags for the archiver, defaults to <cr> if not set])
@@ -436,7 +436,7 @@ CPPFLAGS="$CPPFLAGS -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS"
 
 AC_ARG_WITH([utils],
   [AS_HELP_STRING([--with-utils],
-  [build xaya-cli xaya-tx xaya-wallet (default=yes)])],
+  [build cryptocrowd-cli cryptocrowd-tx cryptocrowd-wallet (default=yes)])],
   [build_bitcoin_utils=$withval],
   [build_bitcoin_utils=yes])
 
@@ -466,7 +466,7 @@ AC_ARG_WITH([libs],
 
 AC_ARG_WITH([daemon],
   [AS_HELP_STRING([--with-daemon],
-  [build xaya daemon (default=yes)])],
+  [build cryptocrowd daemon (default=yes)])],
   [build_bitcoind=$withval],
   [build_bitcoind=yes])
 
@@ -1379,19 +1379,19 @@ if test x$have_protobuf != xno &&
   BITCOIN_QT_PATH_PROGS([PROTOC], [protoc],$protoc_bin_path)
 fi
 
-AC_MSG_CHECKING([whether to build xayad])
+AC_MSG_CHECKING([whether to build cryptocrowdd])
 AM_CONDITIONAL([BUILD_BITCOIND], [test x$build_bitcoind = xyes])
 AC_MSG_RESULT($build_bitcoind)
 
-AC_MSG_CHECKING([whether to build xaya-cli])
+AC_MSG_CHECKING([whether to build cryptocrowd-cli])
 AM_CONDITIONAL([BUILD_BITCOIN_CLI], [test x$build_bitcoin_cli = xyes])
 AC_MSG_RESULT($build_bitcoin_cli)
 
-AC_MSG_CHECKING([whether to build xaya-tx])
+AC_MSG_CHECKING([whether to build cryptocrowd-tx])
 AM_CONDITIONAL([BUILD_BITCOIN_TX], [test x$build_bitcoin_tx = xyes])
 AC_MSG_RESULT($build_bitcoin_tx)
 
-AC_MSG_CHECKING([whether to build xaya-wallet])
+AC_MSG_CHECKING([whether to build cryptocrowd-wallet])
 AM_CONDITIONAL([BUILD_BITCOIN_WALLET], [test x$build_bitcoin_wallet = xyes])
 AC_MSG_RESULT($build_bitcoin_wallet)
 

@@ -81,7 +81,7 @@ class NameRegistrationTest (NameTestFramework):
     self.generate (0, 1)
     self.checkName (1, "x/test-name", valueOfLength (2048))
 
-    # In Xaya, we also verify that the value must be valid JSON.
+    # In CRyptoCrowd, we also verify that the value must be valid JSON.
     # It is specifically allowed to have JSON objects with duplicated keys.
     # Verify this is true.
     duplicateKeys = '{"x": 1, "x": 2}'

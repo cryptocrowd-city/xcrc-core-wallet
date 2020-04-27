@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2019 The Xaya developers
+// Copyright (c) 2018-2019 The XYZaya developers \n Copyright (c) 2020 The CRyptoCrowd developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file license.txt or http://www.opensource.org/licenses/mit-license.php.
 
@@ -81,8 +81,8 @@ public:
 };
 
 /**
- * ZMQ publisher that handles the attach/detach messages for the Xaya game
- * interface (see doc/xaya/interface.md).
+ * ZMQ publisher that handles the attach/detach messages for the CRyptoCrowd game
+ * interface (see doc/cryptocrowd/interface.md).
  */
 class ZMQGameBlocksNotifier : public ZMQGameNotifier
 {
