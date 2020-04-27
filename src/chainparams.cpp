@@ -25,10 +25,10 @@
 namespace
 {
 
-constexpr const char pszTimestampTestnet[] = "Decentralised Autonomous Worlds";
+constexpr const char pszTimestampTestnet[] = "CRyptoCrowd Testnet";
 constexpr const char pszTimestampMainnet[]
-    = "HUC #2,351,800: "
-      "8730ea650d24cd01692a5adb943e7b8720b0ba8a4c64ffcdf5a95d9b3fb57b7f";
+    = "CRCL #500,800: "
+      "1dd0b5a9166779f0bf9ce65ab03806499abbe6f74c894cab8a312882500183d0";
 
 /* Premined amount is 222,222,222 XCRC.  This is the maximum possible number of
    coins needed in case everything is sold in the ICO.  If this is not the case
@@ -162,12 +162,12 @@ public:
     CMainParams() {
         strNetworkID = "main";
         consensus.nSubsidyHalvingInterval = 4200000;
-        /* The value of ~3.8 XCRC is calculated to yield the desired total
+        /* The value of ~38 XCRC is calculated to yield the desired total
            PoW coin supply.  For the calculation, see here:
 
            https://github.com/cryptocrowd/cryptocrowd/issues/70#issuecomment-441292533
         */
-        consensus.initialSubsidy = 382934346;
+        consensus.initialSubsidy = 3829343460;
         consensus.BIP16Height = 0;
         consensus.BIP34Height = 1;
         consensus.BIP65Height = 0;
@@ -187,7 +187,7 @@ public:
         // The value is the chain work of the CRyptoCrowd mainnet chain at height
         // 1,234,000, with best block hash:
         // a853c0581c3637726a769b77cadf185e09666742757ef2df00058e876cf25897
-        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000005f3932875f0873b98a368a");
+        consensus.nMinimumChainWork = uint256S("0000000000000000000000000000000000000000000000000000000100010001");
 
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0xa853c0581c3637726a769b77cadf185e09666742757ef2df00058e876cf25897"); // 1,234,000
@@ -201,11 +201,11 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 32-bit integer with any alignment.
          */
-        pchMessageStart[0] = 0xcc;
-        pchMessageStart[1] = 0xbe;
-        pchMessageStart[2] = 0xb4;
-        pchMessageStart[3] = 0xfe;
-        nDefaultPort = 8394;
+        pchMessageStart[0] = 0xea;
+        pchMessageStart[1] = 0xae;
+        pchMessageStart[2] = 0xfd;
+        pchMessageStart[3] = 0x83;
+        nDefaultPort = 11998;
         nPruneAfterHeight = 100000;
         m_assumed_blockchain_size = 2;
         m_assumed_chain_state_size = 1;
@@ -220,9 +220,9 @@ public:
         vSeeds.emplace_back("xcrc.seed.cryptocrowd.city");
         /* vSeeds.emplace_back("seed.cryptocrowd.domob.eu"); */
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,28);
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,30);
-        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,130);
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,75);
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,80);
+        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,140);
         /* FIXME: Update these below.  */
         base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x88, 0xB2, 0x1E};
         base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x88, 0xAD, 0xE4};
@@ -236,11 +236,11 @@ public:
         m_is_test_chain = false;
 
         checkpointData = {
-            {
+/*            {
                 {      0, uint256S("ce46f5f898b38e9c8c5e9ae4047ef5bccc42ec8eca0142202813a625e6dc2656")},
                 { 340000, uint256S("e685ccaa62025c5c5075cfee80e498589bd4788614dcbe397e12bf2b8e887e47")},
-                {1234000, uint256S("a853c0581c3637726a769b77cadf185e09666742757ef2df00058e876cf25897")},
-            }
+                {1234000, uint256S("a853c0581c3637726a769b77cadf185e09666742757ef2df00058e876cf25897")},  
+            }  */
         };
 
         chainTxData = ChainTxData{
@@ -311,17 +311,17 @@ public:
 
         vFixedSeeds.clear();
         vSeeds.clear();
-        vSeeds.emplace_back("seed.testnet.cryptocrowd.io");
-        vSeeds.emplace_back("seed.testnet.cryptocrowd.domob.eu");
+        vSeeds.emplace_back("testnet.xcrc.seed.cryptocrowd.city");
+        /* vSeeds.emplace_back("seed.testnet.cryptocrowd.domob.eu"); */
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,88);
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,90);
-        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,230);
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,137);
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,142);
+        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,240);
         /* FIXME: Update these below.  */
         base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x35, 0x87, 0xCF};
         base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x35, 0x83, 0x94};
 
-        bech32_hrp = "chitn";
+        bech32_hrp = "xcrctn";
 
         vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_test, pnSeed6_test + ARRAYLEN(pnSeed6_test));
 
@@ -425,8 +425,8 @@ public:
             0
         };
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,88);
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,90);
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,137);
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,142);
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,230);
         base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x35, 0x87, 0xCF};
         base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x35, 0x83, 0x94};

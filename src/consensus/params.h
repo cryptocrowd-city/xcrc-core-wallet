@@ -28,7 +28,7 @@ enum class Fork
   /**
    * Fork done after the token sale.  This removed the requirement that the
    * main (non-fakeheader) nonce must be zero in order to resolve
-   * https://github.com/cryptocrowd/cryptocrowd/issues/50.
+   * https://github.com/cryptocrowd-city/xcrc-core-wallet/issues/50.
    *
    * It also increases the block reward from 1 XCRC to a value calculated to
    * yield the correct total PoW supply.
@@ -104,7 +104,7 @@ public:
         switch (type)
         {
             case Fork::POST_ICO:
-                return height >= 440000;
+                return height >= 44000;   /* XCRC Set to 15 days */
             default:
                 assert (false);
         }
@@ -121,7 +121,7 @@ public:
         switch (type)
         {
             case Fork::POST_ICO:
-                return height >= 11000;
+                return height >= 2880;  /* XCRC Set to 1 day */
             default:
                 assert (false);
         }
