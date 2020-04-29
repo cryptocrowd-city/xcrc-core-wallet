@@ -132,9 +132,6 @@ CreateGenesisBlock (const uint32_t nTime, const uint32_t nNonce,
  */
 void MineGenesisBlock (CBlock& block, const Consensus::Params& consensus) 
  {
-//  consensus.hashGenesisBlock == uint256S("0x01");
-//  if (true && genesis.GetHash() != hashGenesisBlock)
-//  {
   std::cout << "Mining genesis block..." << std::endl;
 
   block.nTime = GetTime ();
@@ -153,7 +150,6 @@ void MineGenesisBlock (CBlock& block, const Consensus::Params& consensus)
   std::cout << "Block hash: " << block.GetHash ().GetHex () << std::endl;
   std::cout << "Merkle root: " << block.hashMerkleRoot.GetHex () << std::endl;
   exit (EXIT_SUCCESS);
-//  }
  }
 } // anonymous namespace
 
@@ -217,8 +213,30 @@ public:
                                       pszTimestampMainnet,
                                       uint160S (hexPremineAddressMainnet));
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x000003b9b1e36ebb64dfc12508fee8b207c5bf96b9af8a4dcfd5dd49904c4ac2"));
-        assert(genesis.hashMerkleRoot == uint256S("0x2c380e62f151f6ea10a554143046e00adf80b348d5d1fa758791430d1723a531"));
+        consensus.hashGenesisBlock == uint256S("0x01");
+        if (true && genesis.GetHash() != hashGenesisBlock)
+         { 
+          std::cout << "Mining genesis block..." << std::endl;
+
+          block.nTime = GetTime ();
+
+          auto& fakeHeader = block.pow.initFakeHeader (block);
+        while (!block.pow.checkProofOfWork (fakeHeader, consensus))
+         {
+          assert (fakeHeader.nNonce < std::numeric_limits<uint32_t>::max ());
+          ++fakeHeader.nNonce;
+          if (fakeHeader.nNonce % 1000 == 0)
+            std::cout << "  nNonce = " << fakeHeader.nNonce << "..." << std::endl;
+         }
+
+          std::cout << "Found nonce: " << fakeHeader.nNonce << std::endl;
+          std::cout << "nTime: " << block.nTime << std::endl;
+          std::cout << "Block hash: " << block.GetHash ().GetHex () << std::endl;
+          std::cout << "Merkle root: " << block.hashMerkleRoot.GetHex () << std::endl;
+          exit (EXIT_SUCCESS);
+         }
+//        assert(consensus.hashGenesisBlock == uint256S("0x01"));
+//        assert(genesis.hashMerkleRoot == uint256S("0x01"));
 
         vSeeds.emplace_back("xcrc.seed.cryptocrowd.city");
         /* vSeeds.emplace_back("seed.cryptocrowd.domob.eu"); */
@@ -305,12 +323,12 @@ public:
         m_assumed_blockchain_size = 1;
         m_assumed_chain_state_size = 1;
 
-        genesis = CreateGenesisBlock (1531470713, 767681, 0x1e0ffff0,
+        genesis = CreateGenesisBlock (1531470713, 343829, 0x1e0ffff0,
                                       pszTimestampTestnet,
                                       uint160S (hexPremineAddressMainnet));
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0000003b9b1e36ebb64dfc12508fee8b207c5bf96b9af8a4dcfd5dd49904c4ac2"));
-        assert(genesis.hashMerkleRoot == uint256S("0x2c380e62f151f6ea10a554143046e00adf80b348d5d1fa758791430d1723a531"));
+//        assert(consensus.hashGenesisBlock == uint256S("0x01"));
+//        assert(genesis.hashMerkleRoot == uint256S("0x01"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -382,10 +400,10 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x01");
+        consensus.nMinimumChainWork = uint256S("0x00");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x01");
+        consensus.defaultAssumeValid = uint256S("0x00");
 
         consensus.nAuxpowChainId = 1829;
 
@@ -406,8 +424,8 @@ public:
                                       pszTimestampTestnet,
                                       uint160S (hexPremineAddressRegtest));
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x"));
-        assert(genesis.hashMerkleRoot == uint256S("0x"));
+//        assert(consensus.hashGenesisBlock == uint256S("0x"));
+//        assert(genesis.hashMerkleRoot == uint256S("0x"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();      //!< Regtest mode doesn't have any DNS seeds.
@@ -455,16 +473,6 @@ public:
 
 void CRegTestParams::UpdateActivationParametersFromArgs(const ArgsManager& args)
 {
-    if (gArgs.IsArgSet("-genesisblock")) {
-        consensus.hashGenesisBlock == uint256S("0x01");
-          if (true && genesis.GetHash() != hashGenesisBlock)
-     {
-        MineGenesisBlock();
-        } else {
-          return 0;
-        }
-      
-    }
     if (gArgs.IsArgSet("-bip16height")) {
         int64_t height = gArgs.GetArg("-bip16height", consensus.BIP16Height);
         if (height < -1 || height >= std::numeric_limits<int>::max()) {
