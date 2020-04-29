@@ -213,9 +213,11 @@ public:
                                       pszTimestampMainnet,
                                       uint160S (hexPremineAddressMainnet));
         consensus.hashGenesisBlock = genesis.GetHash();
+// start generating
         consensus.hashGenesisBlock == uint256S("0x01");
-        if (true && genesis.GetHash() != hashGenesisBlock)
-         { 
+        std::cout << std::string("Begin calculating Mainnet Genesis Block:\n");
+        if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) {
+          
           std::cout << "Mining genesis block..." << std::endl;
 
           block.nTime = GetTime ();
@@ -233,8 +235,9 @@ public:
           std::cout << "nTime: " << block.nTime << std::endl;
           std::cout << "Block hash: " << block.GetHash ().GetHex () << std::endl;
           std::cout << "Merkle root: " << block.hashMerkleRoot.GetHex () << std::endl;
-          exit (EXIT_SUCCESS);
+         // exit (EXIT_SUCCESS);
          }
+         std::cout << std::string("Begin calculating Mainnet Genesis Block:\n");
 //        assert(consensus.hashGenesisBlock == uint256S("0x01"));
 //        assert(genesis.hashMerkleRoot == uint256S("0x01"));
 
