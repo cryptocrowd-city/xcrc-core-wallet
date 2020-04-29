@@ -80,11 +80,10 @@ jobs:
     name: Linux x86 64 Bit on Bionic
     dist: bionic
     before_deploy:
-    - cd $TRAVIS_BUILD_DIR/src; ls -lh;
+#    - cd $TRAVIS_BUILD_DIR/src; ls -lh;
     - mkdir $TRAVIS_BUILD_DIR/deploy
-    - cp $TRAVIS_BUILD_DIR/src/cryptocrowd-cli $TRAVIS_BUILD_DIR/src/cryptocrowd-tx $TRAVIS_BUILD_DIR/src/cryptocrowdd $TRAVIS_BUILD_DIR/src/qt/cryptocrowd-qt $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; 
-#    - if [[ "$LABEL" == "win32" ]]; then cp $TRAVIS_BUILD_DIR/src/cryptocrowd-cli.exe $TRAVIS_BUILD_DIR/src/cryptocrowd-tx.exe $TRAVIS_BUILD_DIR/src/cryptocrowdd.exe $TRAVIS_BUILD_DIR/src/qt/cryptocrowd-qt.exe $TRAVIS_BUILD_DIR/src/qt/cryptocrowd-wallet.exe $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; fi
-#    - if [[ "$LABEL" == "win64" ]]; then cp $TRAVIS_BUILD_DIR/src/cryptocrowd-cli.exe $TRAVIS_BUILD_DIR/src/cryptocrowd-tx.exe $TRAVIS_BUILD_DIR/src/cryptocrowdd.exe $TRAVIS_BUILD_DIR/src/qt/cryptocrowd-qt.exe $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; fi
+    - cp $TRAVIS_BUILD_DIR/src/cryptocrowd-cli $TRAVIS_BUILD_DIR/src/cryptocrowd-tx $TRAVIS_BUILD_DIR/src/cryptocrowdd $TRAVIS_BUILD_DIR/src/qt/cryptocrowd-qt $TRAVIS_BUILD_DIR/src/cryptocrowd-wallet $TRAVIS_BUILD_DIR/src/cryptocrowd-hash $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; 
+#    - cp $TRAVIS_BUILD_DIR/src/cryptocrowd-cli $TRAVIS_BUILD_DIR/src/cryptocrowd-tx $TRAVIS_BUILD_DIR/src/cryptocrowdd $TRAVIS_BUILD_DIR/src/qt/cryptocrowd-qt $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; 
     - cd $TRAVIS_BUILD_DIR/deploy
     - ls -lh;
 #    - if [[ "$LABEL" == "linux64" ]]; then tar -zvcf cryptocrowd-bin-${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-$LABEL.tar.gz *; fi
@@ -147,11 +146,10 @@ jobs:
     name: Win x86 64 Bit on Bionic
     dist: bionic
     before_deploy:
-    - cd $TRAVIS_BUILD_DIR/src; ls -lh;
+#    - cd $TRAVIS_BUILD_DIR/src; ls -lh;
     - mkdir $TRAVIS_BUILD_DIR/deploy
-#    - if [[ "$LABEL" == "linux64" ]]; then cp $TRAVIS_BUILD_DIR/src/cryptocrowd-cli $TRAVIS_BUILD_DIR/src/cryptocrowd-tx $TRAVIS_BUILD_DIR/src/cryptocrowdd $TRAVIS_BUILD_DIR/src/qt/cryptocrowd-qt $TRAVIS_BUILD_DIR/src/qt/cryptocrowd-wallet $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; fi
-#    - if [[ "$LABEL" == "win32" ]]; then cp $TRAVIS_BUILD_DIR/src/cryptocrowd-cli.exe $TRAVIS_BUILD_DIR/src/cryptocrowd-tx.exe $TRAVIS_BUILD_DIR/src/cryptocrowdd.exe $TRAVIS_BUILD_DIR/src/qt/cryptocrowd-qt.exe $TRAVIS_BUILD_DIR/src/qt/cryptocrowd-wallet.exe $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; fi
-    - cp $TRAVIS_BUILD_DIR/src/cryptocrowd-cli.exe $TRAVIS_BUILD_DIR/src/cryptocrowd-tx.exe $TRAVIS_BUILD_DIR/src/cryptocrowdd.exe $TRAVIS_BUILD_DIR/src/qt/cryptocrowd-qt.exe $TRAVIS_BUILD_DIR/src/qt/cryptocrowd-wallet.exe $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; 
+#    - cp $TRAVIS_BUILD_DIR/src/cryptocrowd-cli.exe $TRAVIS_BUILD_DIR/src/cryptocrowd-tx.exe $TRAVIS_BUILD_DIR/src/cryptocrowdd.exe $TRAVIS_BUILD_DIR/src/qt/cryptocrowd-qt.exe $TRAVIS_BUILD_DIR/src/qt/cryptocrowd-wallet.exe $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; 
+    - cp $TRAVIS_BUILD_DIR/src/cryptocrowd*.exe $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; 
     - cd $TRAVIS_BUILD_DIR/deploy
     - ls -lh;
 #    - if [[ "$LABEL" == "linux64" ]]; then tar -zvcf cryptocrowd-bin-${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-$LABEL.tar.gz *; fi
