@@ -27,14 +27,14 @@ namespace
 
 constexpr const char pszTimestampTestnet[] = "CRyptoCrowd Testnet";
 constexpr const char pszTimestampMainnet[]
-    = "CRCL #500,800: "
-      "1dd0b5a9166779f0bf9ce65ab03806499abbe6f74c894cab8a312882500183d0";
+    = "29.04.2020: "
+      "CNN - The world may never recover its thirst for oil";
 
 /* Premined amount is 222,222,222 XCRC.  This is the maximum possible number of
    coins needed in case everything is sold in the ICO.  If this is not the case
    and we need to reduce the coin supply, excessive coins will be burnt by
    sending to an unspendable OP_RETURN output.  */
-constexpr CAmount premineAmount = 222222222 * COIN;
+constexpr CAmount premineAmount = 200000000 * COIN;
 
 /*
 The premine on regtest is sent to a 1-of-2 multisig address.
@@ -55,7 +55,7 @@ final premine script will be:
   OP_HASH160 hexPremineAddress OP_EQUAL
 */
 constexpr const char hexPremineAddressRegtest[]
-    = "2b6defe41aa3aa47795b702c893c73e716d485ab";
+    = "72240bdb175944ac843ab2c64ea6fb0371323168";
 
 /*
 The premine on testnet and mainnet is sent to a 2-of-4 multisig address.  The
@@ -69,7 +69,7 @@ premine script is:
   OP_HASH160 hexPremineAddress OP_EQUAL
 */
 constexpr const char hexPremineAddressMainnet[]
-    = "8cb1c236d34c74221fe4163bbba739b52e95f484";
+    = "72240bdb175944ac843ab2c64ea6fb0371323168";
 
 CBlock CreateGenesisBlock(const CScript& genesisInputScript, const CScript& genesisOutputScript, uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
@@ -161,13 +161,13 @@ class CMainParams : public CChainParams {
 public:
     CMainParams() {
         strNetworkID = "main";
-        consensus.nSubsidyHalvingInterval = 4200000;
+        consensus.nSubsidyHalvingInterval = 4216320;
         /* The value of ~38 XCRC is calculated to yield the desired total
            PoW coin supply.  For the calculation, see here:
 
            https://github.com/cryptocrowd/cryptocrowd/issues/70#issuecomment-441292533
         */
-        consensus.initialSubsidy = 3829343460;
+        consensus.initialSubsidy = 10000000000;
         consensus.BIP16Height = 0;
         consensus.BIP34Height = 1;
         consensus.BIP65Height = 0;
@@ -201,10 +201,10 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 32-bit integer with any alignment.
          */
-        pchMessageStart[0] = 0xea;
-        pchMessageStart[1] = 0xae;
-        pchMessageStart[2] = 0xfd;
-        pchMessageStart[3] = 0x83;
+        pchMessageStart[0] = 0xa2;
+        pchMessageStart[1] = 0xf2;
+        pchMessageStart[2] = 0xf6;
+        pchMessageStart[3] = 0x93;
         nDefaultPort = 11998;
         nPruneAfterHeight = 100000;
         m_assumed_blockchain_size = 2;
@@ -245,9 +245,9 @@ public:
 
         chainTxData = ChainTxData{
             // Data from rpc: getchaintxstats 4096 a853c0581c3637726a769b77cadf185e09666742757ef2df00058e876cf25897
-            /* nTime    */ 1570402226,
-            /* nTxCount */ 1924375,
-            /* dTxRate  */ 0.07199120150565784,
+            /* nTime    */ 0, // 1570402226,
+            /* nTxCount */ 0, // 1924375,
+            /* dTxRate  */ 0 // 0.07199120150565784,
         };
     }
 
@@ -284,7 +284,7 @@ public:
         // The value is the chain work of the CRyptoCrowd testnet chain at height
         // 70,000 with best block hash:
         // e2c154dc8e223cef271b54174c9d66eaf718378b30977c3df115ded629f3edb1
-        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000ad96bc2631b9");
+        consensus.nMinimumChainWork = uint256S("0000000000000000000000000000000000000000000000000000000100010001");
 
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0xe2c154dc8e223cef271b54174c9d66eaf718378b30977c3df115ded629f3edb1"); // 70,000
@@ -293,11 +293,11 @@ public:
 
         consensus.rules.reset(new Consensus::TestNetConsensus());
 
-        pchMessageStart[0] = 0xcc;
-        pchMessageStart[1] = 0xbf;
-        pchMessageStart[2] = 0xb5;
-        pchMessageStart[3] = 0xfe;
-        nDefaultPort = 18394;
+        pchMessageStart[0] = 0xc8;
+        pchMessageStart[1] = 0xc3;
+        pchMessageStart[2] = 0x95;
+        pchMessageStart[3] = 0x87;
+        nDefaultPort = 19998;
         nPruneAfterHeight = 1000;
         m_assumed_blockchain_size = 1;
         m_assumed_chain_state_size = 1;
@@ -311,7 +311,7 @@ public:
 
         vFixedSeeds.clear();
         vSeeds.clear();
-        vSeeds.emplace_back("testnet.xcrc.seed.cryptocrowd.city");
+        vSeeds.emplace_back("xcrc.testnet.seed.cryptocrowd.city");
         /* vSeeds.emplace_back("seed.testnet.cryptocrowd.domob.eu"); */
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,137);
@@ -331,18 +331,18 @@ public:
 
 
         checkpointData = {
-            {
+/*            {
                 {     0, uint256S("3bcc29e821e7fbd374c7460306eb893725d69dbee87c4774cdcd618059b6a578")},
                 { 11000, uint256S("57670b799b6645c7776e9fdbd6abff510aaed9790625dd28072d0e87a7fafcf4")},
                 { 70000, uint256S("e2c154dc8e223cef271b54174c9d66eaf718378b30977c3df115ded629f3edb1")},
-            }
+            }  */
         };
 
         chainTxData = ChainTxData{
             // Data from rpc: getchaintxstats 4096 e2c154dc8e223cef271b54174c9d66eaf718378b30977c3df115ded629f3edb1
-            /* nTime    */ 1570129934,
-            /* nTxCount */ 72978,
-            /* dTxRate  */ 0.003022522434976898,
+            /* nTime    */ 0, // 1570129934,  
+            /* nTxCount */ 0, // 72978, 
+            /* dTxRate  */ 0 // 0.003022522434976898, 
         };
     }
 
@@ -388,11 +388,11 @@ public:
 
         consensus.rules.reset(new Consensus::RegTestConsensus());
 
-        pchMessageStart[0] = 0xcc;
-        pchMessageStart[1] = 0xbf;
-        pchMessageStart[2] = 0xb5;
-        pchMessageStart[3] = 0xda;
-        nDefaultPort = 18495;
+        pchMessageStart[0] = 0xce;
+        pchMessageStart[1] = 0xb3;
+        pchMessageStart[2] = 0xbb;
+        pchMessageStart[3] = 0xd4;
+        nDefaultPort = 18332;
         nPruneAfterHeight = 1000;
         m_assumed_blockchain_size = 0;
         m_assumed_chain_state_size = 0;
@@ -414,9 +414,9 @@ public:
         m_is_test_chain = true;
 
         checkpointData = {
-            {
+/*            {
                 {0, uint256S("18042820e8a9f538e77e93c500768e5be76720383cd17e9b419916d8f356c619")},
-            }
+            } */
         };
 
         chainTxData = ChainTxData{

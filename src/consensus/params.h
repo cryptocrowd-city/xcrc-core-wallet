@@ -104,7 +104,7 @@ public:
         switch (type)
         {
             case Fork::POST_ICO:
-                return height >= 44000;   /* XCRC Set to 15 days */
+                return height >= 86400;   /* XCRC Set to 31 days */
             default:
                 assert (false);
         }
@@ -121,7 +121,7 @@ public:
         switch (type)
         {
             case Fork::POST_ICO:
-                return height >= 2880;  /* XCRC Set to 1 day */
+                return height >= 120;  /* XCRC Set to 1 hour */
             default:
                 assert (false);
         }
