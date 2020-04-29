@@ -130,7 +130,7 @@ CreateGenesisBlock (const uint32_t nTime, const uint32_t nNonce,
  * Mines the genesis block (by finding a suitable nonce only).  When done, it
  * prints the found nonce and block hash and exits.
  */
-  hashGenesisBlock = uint256("0x01")
+  consensus.hashGenesisBlock = uint256("0x01");
   if (true && genesis.GetHash() != hashGenesisBlock)
 {
   std::cout << "Mining genesis block..." << std::endl;
