@@ -455,6 +455,16 @@ public:
 
 void CRegTestParams::UpdateActivationParametersFromArgs(const ArgsManager& args)
 {
+    if (gArgs.IsArgSet("-genesisblock")) {
+        consensus.hashGenesisBlock == uint256S("0x01");
+          if (true && genesis.GetHash() != hashGenesisBlock)
+     {
+        MineGenesisBlock ();
+        } else {
+          return 0;
+        }
+      
+    }
     if (gArgs.IsArgSet("-bip16height")) {
         int64_t height = gArgs.GetArg("-bip16height", consensus.BIP16Height);
         if (height < -1 || height >= std::numeric_limits<int>::max()) {
