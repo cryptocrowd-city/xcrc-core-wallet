@@ -459,7 +459,7 @@ void CRegTestParams::UpdateActivationParametersFromArgs(const ArgsManager& args)
         consensus.hashGenesisBlock == uint256S("0x01");
           if (true && genesis.GetHash() != hashGenesisBlock)
      {
-        MineGenesisBlock ();
+        MineGenesisBlock();
         } else {
           return 0;
         }
