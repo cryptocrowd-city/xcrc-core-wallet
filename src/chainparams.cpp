@@ -132,7 +132,7 @@ CreateGenesisBlock (const uint32_t nTime, const uint32_t nNonce,
  */
 void MineGenesisBlock (CBlock& block, const Consensus::Params& consensus) 
  {
-  consensus.hashGenesisBlock == uint256S("0x01");
+//  consensus.hashGenesisBlock == uint256S("0x01");
   if (true && genesis.GetHash() != hashGenesisBlock)
   {
   std::cout << "Mining genesis block..." << std::endl;
@@ -305,12 +305,12 @@ public:
         m_assumed_blockchain_size = 1;
         m_assumed_chain_state_size = 1;
 
-        genesis = CreateGenesisBlock (1531470713, 343829, 0x1e0ffff0,
+        genesis = CreateGenesisBlock (1531470713, 767681, 0x1e0ffff0,
                                       pszTimestampTestnet,
                                       uint160S (hexPremineAddressMainnet));
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x01"));
-        assert(genesis.hashMerkleRoot == uint256S("0x01"));
+        assert(consensus.hashGenesisBlock == uint256S("0000003b9b1e36ebb64dfc12508fee8b207c5bf96b9af8a4dcfd5dd49904c4ac2"));
+        assert(genesis.hashMerkleRoot == uint256S("0x2c380e62f151f6ea10a554143046e00adf80b348d5d1fa758791430d1723a531"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -382,10 +382,10 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x00");
+        consensus.nMinimumChainWork = uint256S("0x01");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x00");
+        consensus.defaultAssumeValid = uint256S("0x01");
 
         consensus.nAuxpowChainId = 1829;
 
