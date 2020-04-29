@@ -130,8 +130,11 @@ CreateGenesisBlock (const uint32_t nTime, const uint32_t nNonce,
  * Mines the genesis block (by finding a suitable nonce only).  When done, it
  * prints the found nonce and block hash and exits.
  */
+void MineGenesisBlock (CBlock& block, const Consensus::Params& consensus) 
+ {
+  consensus.hashGenesisBlock == uint256S("0x01");
   if (true && genesis.GetHash() != hashGenesisBlock)
-{
+  {
   std::cout << "Mining genesis block..." << std::endl;
 
   block.nTime = GetTime ();
@@ -150,8 +153,8 @@ CreateGenesisBlock (const uint32_t nTime, const uint32_t nNonce,
   std::cout << "Block hash: " << block.GetHash ().GetHex () << std::endl;
   std::cout << "Merkle root: " << block.hashMerkleRoot.GetHex () << std::endl;
   exit (EXIT_SUCCESS);
-}
-
+  }
+ }
 } // anonymous namespace
 
 /**
