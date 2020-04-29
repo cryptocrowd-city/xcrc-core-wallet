@@ -132,6 +132,9 @@ CreateGenesisBlock (const uint32_t nTime, const uint32_t nNonce,
  */
 void MineGenesisBlock (CBlock& block, const Consensus::Params& consensus) 
  {
+  consensus.hashGenesisBlock == uint256S("0x01");
+  if (true && genesis.GetHash() != hashGenesisBlock)
+  {
   std::cout << "Mining genesis block..." << std::endl;
 
   block.nTime = GetTime ();
@@ -150,6 +153,7 @@ void MineGenesisBlock (CBlock& block, const Consensus::Params& consensus)
   std::cout << "Block hash: " << block.GetHash ().GetHex () << std::endl;
   std::cout << "Merkle root: " << block.hashMerkleRoot.GetHex () << std::endl;
   exit (EXIT_SUCCESS);
+  }
  }
 } // anonymous namespace
 
@@ -213,33 +217,20 @@ public:
                                       pszTimestampMainnet,
                                       uint160S (hexPremineAddressMainnet));
         consensus.hashGenesisBlock = genesis.GetHash();
-// start generating
-        consensus.hashGenesisBlock == uint256S("0x01");
-        std::cout << std::string("Begin calculating Mainnet Genesis Block:\n");
-        if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) {
-          
-          std::cout << "Mining genesis block..." << std::endl;
-
-          block.nTime = GetTime ();
-
-          auto& fakeHeader = block.pow.initFakeHeader (block);
-        while (!block.pow.checkProofOfWork (fakeHeader, consensus))
-         {
-          assert (fakeHeader.nNonce < std::numeric_limits<uint32_t>::max ());
-          ++fakeHeader.nNonce;
-          if (fakeHeader.nNonce % 1000 == 0)
-            std::cout << "  nNonce = " << fakeHeader.nNonce << "..." << std::endl;
-         }
-
-          std::cout << "Found nonce: " << fakeHeader.nNonce << std::endl;
-          std::cout << "nTime: " << block.nTime << std::endl;
-          std::cout << "Block hash: " << block.GetHash ().GetHex () << std::endl;
-          std::cout << "Merkle root: " << block.hashMerkleRoot.GetHex () << std::endl;
-         // exit (EXIT_SUCCESS);
-         }
-         std::cout << std::string("Begin calculating Mainnet Genesis Block:\n");
-//        assert(consensus.hashGenesisBlock == uint256S("0x01"));
-//        assert(genesis.hashMerkleRoot == uint256S("0x01"));
+hashGenesisBlock = uint256("0x01")
+if (true && genesis.GetHash() != hashGenesisBlock)
+        {
+            Logprintf("recalculating params for mainnet.\n");
+            Logprintf("old mainnet genesis nonce: %s\n", genesis.nNonce.ToString().c_str());
+            Logprintf("old mainnet genesis hash:  %s\n", hashGenesisBlock.ToString().c_str());
+            // deliberately empty for loop finds nonce value.
+            for(genesis.nNonce == 0; genesis.GetHash() > bnProofOfWorkLimit; genesis.nNonce++){ } 
+            Logprintf("new mainnet genesis merkle root: %s\n", genesis.hashMerkleRoot.ToString().c_str());
+            Logprintf("new mainnet genesis nonce: %s\n", genesis.nNonce.ToString().c_str());
+            Logprintf("new mainnet genesis hash: %s\n", genesis.GetHash().ToString().c_str());
+        }
+        assert(consensus.hashGenesisBlock == uint256S("0x01"));
+        assert(genesis.hashMerkleRoot == uint256S("0x01"));
 
         vSeeds.emplace_back("xcrc.seed.cryptocrowd.city");
         /* vSeeds.emplace_back("seed.cryptocrowd.domob.eu"); */
