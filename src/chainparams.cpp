@@ -132,9 +132,7 @@ CreateGenesisBlock (const uint32_t nTime, const uint32_t nNonce,
  */
 void MineGenesisBlock (CBlock& block, const Consensus::Params& consensus) 
  {
-  consensus.hashGenesisBlock == uint256S("0x01");
-  if (true && genesis.GetHash() != hashGenesisBlock)
-  {
+
   std::cout << "Mining genesis block..." << std::endl;
 
   block.nTime = GetTime ();
@@ -154,7 +152,7 @@ void MineGenesisBlock (CBlock& block, const Consensus::Params& consensus)
   std::cout << "Merkle root: " << block.hashMerkleRoot.GetHex () << std::endl;
   exit (EXIT_SUCCESS);
   }
- }
+ 
 } // anonymous namespace
 
 /**
