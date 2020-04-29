@@ -130,7 +130,6 @@ CreateGenesisBlock (const uint32_t nTime, const uint32_t nNonce,
  * Mines the genesis block (by finding a suitable nonce only).  When done, it
  * prints the found nonce and block hash and exits.
  */
-  consensus.hashGenesisBlock = uint256("0x01");
   if (true && genesis.GetHash() != hashGenesisBlock)
 {
   std::cout << "Mining genesis block..." << std::endl;
@@ -215,8 +214,8 @@ public:
                                       pszTimestampMainnet,
                                       uint160S (hexPremineAddressMainnet));
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("000003b9b1e36ebb64dfc12508fee8b207c5bf96b9af8a4dcfd5dd49904c4ac2"));
-        assert(genesis.hashMerkleRoot == uint256S("2c380e62f151f6ea10a554143046e00adf80b348d5d1fa758791430d1723a531"));
+        assert(consensus.hashGenesisBlock == uint256S("0x000003b9b1e36ebb64dfc12508fee8b207c5bf96b9af8a4dcfd5dd49904c4ac2"));
+        assert(genesis.hashMerkleRoot == uint256S("0x2c380e62f151f6ea10a554143046e00adf80b348d5d1fa758791430d1723a531"));
 
         vSeeds.emplace_back("xcrc.seed.cryptocrowd.city");
         /* vSeeds.emplace_back("seed.cryptocrowd.domob.eu"); */
@@ -307,8 +306,8 @@ public:
                                       pszTimestampTestnet,
                                       uint160S (hexPremineAddressMainnet));
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x"));
-        assert(genesis.hashMerkleRoot == uint256S("0x"));
+        assert(consensus.hashGenesisBlock == uint256S("0x01"));
+        assert(genesis.hashMerkleRoot == uint256S("0x01"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
