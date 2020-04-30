@@ -215,8 +215,10 @@ public:
                                       pszTimestampMainnet,
                                       uint160S (hexPremineAddressMainnet));
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x01"));
-        assert(genesis.hashMerkleRoot == uint256S("0x01"));
+        printf("Block: %s\n", genesis.GetHash().GetHex().c_str());
+        printf("hashMerkleRoot: %s\n", genesis.hashMerkleRoot.GetHex().c_str());
+//        assert(consensus.hashGenesisBlock == uint256S("0x01"));
+//        assert(genesis.hashMerkleRoot == uint256S("0x01"));
 
         vSeeds.emplace_back("xcrc.seed.cryptocrowd.city");
         /* vSeeds.emplace_back("seed.cryptocrowd.domob.eu"); */
