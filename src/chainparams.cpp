@@ -446,7 +446,7 @@ public:
 
         UpdateActivationParametersFromArgs(args);
 
-        genesis = CreateGenesisBlock (1588219864, 0, 0x207fffff,
+        genesis = CreateGenesisBlock (1588273368, 0, 0x207fffff,
                                       pszTimestampTestnet,
                                       uint160S (hexPremineAddressRegtest));
         consensus.hashGenesisBlock = genesis.GetHash();
@@ -473,8 +473,8 @@ public:
         }
         std::cout << std::string("Finished calculating Regtest Genesis Block.\n");
 
-//        assert(consensus.hashGenesisBlock == uint256S("0xb29623289e3ac9f985c1800d9ff789365b4173aaccb464be623552d489ef43b8"));
-//        assert(genesis.hashMerkleRoot == uint256S("0x4daa612c1b11bebf80267f6f098a0d9f9c6a31423cf21686dccbfdddca4959f8"));
+        assert(consensus.hashGenesisBlock == uint256S("0x7a9ec0cbddc061db6f010a0e84e0011e1b695d24db4866529f8bbf1ce63ca72a"));
+        assert(genesis.hashMerkleRoot == uint256S("0x8b332715d6f4819a5d860345c794d7cb063cdc4863b6ff4d53f280d5ecf6e1b4"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();      //!< Regtest mode doesn't have any DNS seeds.
