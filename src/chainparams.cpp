@@ -237,7 +237,7 @@ public:
         std::cout << "Merkle root: " << genesis.hashMerkleRoot.GetHex () << std::endl;
         }
         std::cout << std::string("Finished calculating Mainnet Genesis Block.\n");
-*/        
+*/         
         assert(consensus.hashGenesisBlock == uint256S("0x3c42584b8155e2da491f3f06fe66930d2ac32de82a15b67bdbadaada6069ecc7"));
         assert(genesis.hashMerkleRoot == uint256S("0x324543fd065e691d9b2cf0077110393d9e12cbb58a76cca6f1b04e199a6b98ff"));
 
