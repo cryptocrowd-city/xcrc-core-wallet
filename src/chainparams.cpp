@@ -217,9 +217,8 @@ public:
         consensus.hashGenesisBlock = genesis.GetHash();
                 
         consensus.hashGenesisBlock = uint256S("0x");
-        std::cout << std::string("Begin calculating Mainnet Genesis Block:\n");
         if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) { 
-        std::cout << "Mining genesis block..." << std::endl;
+        std::cout << "Mining Mainnet genesis block..." << std::endl;
 
         genesis.nTime = GetTime ();
 
@@ -237,6 +236,7 @@ public:
         std::cout << "Block hash: " << genesis.GetHash ().GetHex () << std::endl;
         std::cout << "Merkle root: " << genesis.hashMerkleRoot.GetHex () << std::endl;
         }
+        std::cout << std::string("Finished calculating Mainnet Genesis Block:\n");
         
 //        assert(consensus.hashGenesisBlock == uint256S("0x"));
 //        assert(genesis.hashMerkleRoot == uint256S("0x"));
@@ -332,9 +332,8 @@ public:
         consensus.hashGenesisBlock = genesis.GetHash();
                 
         consensus.hashGenesisBlock = uint256S("0x");
-        std::cout << std::string("Begin calculating Mainnet Genesis Block:\n");
         if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) { 
-        std::cout << "Mining genesis block..." << std::endl;
+        std::cout << "Mining Testnet genesis block..." << std::endl;
 
         genesis.nTime = GetTime ();
 
@@ -352,6 +351,7 @@ public:
         std::cout << "Block hash: " << genesis.GetHash ().GetHex () << std::endl;
         std::cout << "Merkle root: " << genesis.hashMerkleRoot.GetHex () << std::endl;
         }
+        std::cout << std::string("Finished calculating Testnet Genesis Block:\n");
                 
 //        assert(consensus.hashGenesisBlock == uint256S("0x"));
 //        assert(genesis.hashMerkleRoot == uint256S("0x"));
@@ -451,9 +451,8 @@ public:
                                       uint160S (hexPremineAddressRegtest));
         consensus.hashGenesisBlock = genesis.GetHash();
         consensus.hashGenesisBlock = uint256S("0x");
-        std::cout << std::string("Begin calculating Mainnet Genesis Block:\n");
         if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) { 
-        std::cout << "Mining genesis block..." << std::endl;
+        std::cout << "Mining Regtest genesis block..." << std::endl;
 
         genesis.nTime = GetTime ();
 
@@ -471,6 +470,7 @@ public:
         std::cout << "Block hash: " << genesis.GetHash ().GetHex () << std::endl;
         std::cout << "Merkle root: " << genesis.hashMerkleRoot.GetHex () << std::endl;
         }
+        std::cout << std::string("Finished calculating Regtest Genesis Block:\n");
 
 //        assert(consensus.hashGenesisBlock == uint256S("0x"));
 //        assert(genesis.hashMerkleRoot == uint256S("0x"));
