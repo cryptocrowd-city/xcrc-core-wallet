@@ -238,8 +238,8 @@ public:
         }
         std::cout << std::string("Finished calculating Mainnet Genesis Block:\n");
         
-//        assert(consensus.hashGenesisBlock == uint256S("0x"));
-//        assert(genesis.hashMerkleRoot == uint256S("0x"));
+        assert(consensus.hashGenesisBlock == uint256S("0x"));
+        assert(genesis.hashMerkleRoot == uint256S("0x"));
 
         vSeeds.emplace_back("xcrc.seed.cryptocrowd.city");
         /* vSeeds.emplace_back("seed.cryptocrowd.domob.eu"); */
@@ -353,8 +353,8 @@ public:
         }
         std::cout << std::string("Finished calculating Testnet Genesis Block:\n");
                 
-//        assert(consensus.hashGenesisBlock == uint256S("0x"));
-//        assert(genesis.hashMerkleRoot == uint256S("0x"));
+        assert(consensus.hashGenesisBlock == uint256S("0x"));
+        assert(genesis.hashMerkleRoot == uint256S("0x"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -472,8 +472,8 @@ public:
         }
         std::cout << std::string("Finished calculating Regtest Genesis Block:\n");
 
-//        assert(consensus.hashGenesisBlock == uint256S("0x"));
-//        assert(genesis.hashMerkleRoot == uint256S("0x"));
+        assert(consensus.hashGenesisBlock == uint256S("0x"));
+        assert(genesis.hashMerkleRoot == uint256S("0x"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();      //!< Regtest mode doesn't have any DNS seeds.
