@@ -236,7 +236,7 @@ public:
         std::cout << "Block hash: " << genesis.GetHash ().GetHex () << std::endl;
         std::cout << "Merkle root: " << genesis.hashMerkleRoot.GetHex () << std::endl;
         }
-        std::cout << std::string("Finished calculating Mainnet Genesis Block.\n");
+//        std::cout << std::string("Finished calculating Mainnet Genesis Block.\n");
         
         assert(consensus.hashGenesisBlock == uint256S("0xb667ad2b68e1150541a40994fe4e614166d112b2209cad2aa943184a6f2c176f"));
         assert(genesis.hashMerkleRoot == uint256S("0xc3a595841e19f58a8b7f79c71395d70031e26e291a96c417b815c82840c15ee5"));
@@ -351,10 +351,10 @@ public:
         std::cout << "Block hash: " << genesis.GetHash ().GetHex () << std::endl;
         std::cout << "Merkle root: " << genesis.hashMerkleRoot.GetHex () << std::endl;
         }
-        std::cout << std::string("Finished calculating Testnet Genesis Block.\n");
+//        std::cout << std::string("Finished calculating Testnet Genesis Block.\n");
                 
-        assert(consensus.hashGenesisBlock == uint256S("0x0fc30539847129f8986fb5ce381ea9587faa19b8b819428b3d1ec93f70cdcca7"));
-        assert(genesis.hashMerkleRoot == uint256S("0xc3a595841e19f58a8b7f79c71395d70031e26e291a96c417b815c82840c15ee5"));
+//        assert(consensus.hashGenesisBlock == uint256S("0x0fc30539847129f8986fb5ce381ea9587faa19b8b819428b3d1ec93f70cdcca7"));
+//        assert(genesis.hashMerkleRoot == uint256S("0xc3a595841e19f58a8b7f79c71395d70031e26e291a96c417b815c82840c15ee5"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -472,8 +472,8 @@ public:
         }
         std::cout << std::string("Finished calculating Regtest Genesis Block.\n");
 
-        assert(consensus.hashGenesisBlock == uint256S("0x"));
-        assert(genesis.hashMerkleRoot == uint256S("0x"));
+//        assert(consensus.hashGenesisBlock == uint256S("0x"));
+//        assert(genesis.hashMerkleRoot == uint256S("0x"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();      //!< Regtest mode doesn't have any DNS seeds.
