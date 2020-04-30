@@ -130,7 +130,7 @@ CreateGenesisBlock (const uint32_t nTime, const uint32_t nNonce,
  * Mines the genesis block (by finding a suitable nonce only).  When done, it
  * prints the found nonce and block hash and exits.
  */
-MineGenesisBlock (CBlock& block, const Consensus::Params& consensus) 
+void MineGenesisBlock (CBlock& block, const Consensus::Params& consensus) 
  {
  
   std::cout << "Mining genesis block..." << std::endl;
