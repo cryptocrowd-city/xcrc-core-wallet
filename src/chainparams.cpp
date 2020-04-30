@@ -55,7 +55,7 @@ final premine script will be:
   OP_HASH160 hexPremineAddress OP_EQUAL
 */
 constexpr const char hexPremineAddressRegtest[]
-    = "72240bdb175944ac843ab2c64ea6fb0371323168";
+    = "12fa1562abc81e36c3250383281c6f07ff6cf712";
 
 /*
 The premine on testnet and mainnet is sent to a 2-of-4 multisig address.  The
@@ -69,7 +69,7 @@ premine script is:
   OP_HASH160 hexPremineAddress OP_EQUAL
 */
 constexpr const char hexPremineAddressMainnet[]
-    = "72240bdb175944ac843ab2c64ea6fb0371323168";
+    = "3c5e810c343ecbc38847df7714ae747772669ce0";
 
 CBlock CreateGenesisBlock(const CScript& genesisInputScript, const CScript& genesisOutputScript, uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
@@ -288,7 +288,7 @@ class CTestNetParams : public CChainParams {
 public:
     CTestNetParams() {
         strNetworkID = "test";
-        consensus.nSubsidyHalvingInterval = 4216320;
+        consensus.nSubsidyHalvingInterval = 2880;
         consensus.initialSubsidy = 10000000000; //10 * COIN;
         consensus.BIP16Height = 0;
         consensus.BIP34Height = 1;
@@ -451,7 +451,7 @@ public:
                                       uint160S (hexPremineAddressRegtest));
         consensus.hashGenesisBlock = genesis.GetHash();
 
-/*        consensus.hashGenesisBlock = uint256S("0x");
+        consensus.hashGenesisBlock = uint256S("0x");
         if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) { 
         std::cout << "Mining Regtest genesis block..." << std::endl;
 
@@ -472,7 +472,7 @@ public:
         std::cout << "Merkle root: " << genesis.hashMerkleRoot.GetHex () << std::endl;
         }
         std::cout << std::string("Finished calculating Regtest Genesis Block.\n");
-*/
+
         assert(consensus.hashGenesisBlock == uint256S("0xb29623289e3ac9f985c1800d9ff789365b4173aaccb464be623552d489ef43b8"));
         assert(genesis.hashMerkleRoot == uint256S("0x4daa612c1b11bebf80267f6f098a0d9f9c6a31423cf21686dccbfdddca4959f8"));
 
