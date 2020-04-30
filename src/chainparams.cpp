@@ -215,10 +215,30 @@ public:
                                       pszTimestampMainnet,
                                       uint160S (hexPremineAddressMainnet));
         consensus.hashGenesisBlock = genesis.GetHash();
-        printf("Block: %s\n", genesis.GetHash().GetHex().c_str());
-        printf("hashMerkleRoot: %s\n", genesis.hashMerkleRoot.GetHex().c_str());
-//        assert(consensus.hashGenesisBlock == uint256S("0x01"));
-//        assert(genesis.hashMerkleRoot == uint256S("0x01"));
+                
+        consensus.hashGenesisBlock = uint256S("0x");
+        std::cout << std::string("Begin calculating Mainnet Genesis Block:\n");
+        if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) { 
+        std::cout << "Mining genesis block..." << std::endl;
+
+        genesis.nTime = GetTime ();
+
+        auto& fakeHeader = genesis.pow.initFakeHeader (genesis);
+        while (!genesis.pow.checkProofOfWork (fakeHeader, consensus))
+          {
+            assert (fakeHeader.nNonce < std::numeric_limits<uint32_t>::max ());
+            ++fakeHeader.nNonce;
+            if (fakeHeader.nNonce % 1000 == 0)
+              std::cout << "  nNonce = " << fakeHeader.nNonce << "..." << std::endl;
+          }
+
+        std::cout << "Found nonce: " << fakeHeader.nNonce << std::endl;
+        std::cout << "nTime: " << genesis.nTime << std::endl;
+        std::cout << "Block hash: " << genesis.GetHash ().GetHex () << std::endl;
+        std::cout << "Merkle root: " << genesis.hashMerkleRoot.GetHex () << std::endl;
+        }
+        assert(consensus.hashGenesisBlock == uint256S("0x"));
+        assert(genesis.hashMerkleRoot == uint256S("0x"));
 
         vSeeds.emplace_back("xcrc.seed.cryptocrowd.city");
         /* vSeeds.emplace_back("seed.cryptocrowd.domob.eu"); */
@@ -309,8 +329,8 @@ public:
                                       pszTimestampTestnet,
                                       uint160S (hexPremineAddressMainnet));
         consensus.hashGenesisBlock = genesis.GetHash();
-//        assert(consensus.hashGenesisBlock == uint256S("0x01"));
-//        assert(genesis.hashMerkleRoot == uint256S("0x01"));
+        assert(consensus.hashGenesisBlock == uint256S("0x"));
+        assert(genesis.hashMerkleRoot == uint256S("0x"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -406,8 +426,8 @@ public:
                                       pszTimestampTestnet,
                                       uint160S (hexPremineAddressRegtest));
         consensus.hashGenesisBlock = genesis.GetHash();
-//        assert(consensus.hashGenesisBlock == uint256S("0x"));
-//        assert(genesis.hashMerkleRoot == uint256S("0x"));
+        assert(consensus.hashGenesisBlock == uint256S("0x"));
+        assert(genesis.hashMerkleRoot == uint256S("0x"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();      //!< Regtest mode doesn't have any DNS seeds.
