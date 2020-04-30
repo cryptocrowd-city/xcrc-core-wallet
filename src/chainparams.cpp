@@ -69,7 +69,7 @@ premine script is:
   OP_HASH160 hexPremineAddress OP_EQUAL
 */
 constexpr const char hexPremineAddressMainnet[]
-    = "3c5e810c343ecbc38847df7714ae747772669ce0";
+    = "72240bdb175944ac843ab2c64ea6fb0371323168";
 
 CBlock CreateGenesisBlock(const CScript& genesisInputScript, const CScript& genesisOutputScript, uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
@@ -156,7 +156,7 @@ void MineGenesisBlock (CBlock& block, const Consensus::Params& consensus)
 } // anonymous namespace
 
 /**
- * Main network   
+ * Main network
  */
 class CMainParams : public CChainParams {
 public:
@@ -446,7 +446,7 @@ public:
 
         UpdateActivationParametersFromArgs(args);
 
-        genesis = CreateGenesisBlock (1588275008, 1, 0x207fffff,
+        genesis = CreateGenesisBlock (1588219864, 0, 0x207fffff,
                                       pszTimestampTestnet,
                                       uint160S (hexPremineAddressRegtest));
         consensus.hashGenesisBlock = genesis.GetHash();
@@ -473,8 +473,8 @@ public:
         }
         std::cout << std::string("Finished calculating Regtest Genesis Block.\n");
 */
-        assert(consensus.hashGenesisBlock == uint256S("0x87b1b6b4c2b557916fc68997711ba79f0b69bc87e70ac36db3ce82eaab957127"));
-        assert(genesis.hashMerkleRoot == uint256S("0x8b332715d6f4819a5d860345c794d7cb063cdc4863b6ff4d53f280d5ecf6e1b4"));
+        assert(consensus.hashGenesisBlock == uint256S("0xb29623289e3ac9f985c1800d9ff789365b4173aaccb464be623552d489ef43b8"));
+        assert(genesis.hashMerkleRoot == uint256S("0x4daa612c1b11bebf80267f6f098a0d9f9c6a31423cf21686dccbfdddca4959f8"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();      //!< Regtest mode doesn't have any DNS seeds.
