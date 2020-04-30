@@ -149,7 +149,7 @@ jobs:
 #    - cd $TRAVIS_BUILD_DIR/src; ls -lh;
     - mkdir $TRAVIS_BUILD_DIR/deploy
 #    - cp $TRAVIS_BUILD_DIR/src/cryptocrowd-cli.exe $TRAVIS_BUILD_DIR/src/cryptocrowd-tx.exe $TRAVIS_BUILD_DIR/src/cryptocrowdd.exe $TRAVIS_BUILD_DIR/src/qt/cryptocrowd-qt.exe $TRAVIS_BUILD_DIR/src/qt/cryptocrowd-wallet.exe $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; 
-    - cp $TRAVIS_BUILD_DIR/src/cryptocrowd*.exe $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; 
+    - cp $TRAVIS_BUILD_DIR/src/cryptocrowd*.exe $TRAVIS_BUILD_DIR/src/qt/cryptocrowd-qt.exe $TRAVIS_BUILD_DIR/deploy; strip $TRAVIS_BUILD_DIR/deploy/*; 
     - cd $TRAVIS_BUILD_DIR/deploy
     - ls -lh;
 #    - if [[ "$LABEL" == "linux64" ]]; then tar -zvcf cryptocrowd-bin-${TRAVIS_BRANCH}.${TRAVIS_BUILD_NUMBER}-$LABEL.tar.gz *; fi
