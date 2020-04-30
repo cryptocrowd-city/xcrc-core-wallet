@@ -130,9 +130,9 @@ CreateGenesisBlock (const uint32_t nTime, const uint32_t nNonce,
  * Mines the genesis block (by finding a suitable nonce only).  When done, it
  * prints the found nonce and block hash and exits.
  */
-void MineGenesisBlock (CBlock& block, const Consensus::Params& consensus) 
+MineGenesisBlock (CBlock& block, const Consensus::Params& consensus) 
  {
-
+ 
   std::cout << "Mining genesis block..." << std::endl;
 
   block.nTime = GetTime ();
@@ -215,18 +215,6 @@ public:
                                       pszTimestampMainnet,
                                       uint160S (hexPremineAddressMainnet));
         consensus.hashGenesisBlock = genesis.GetHash();
-hashGenesisBlock = uint256("0x01")
-if (true && genesis.GetHash() != hashGenesisBlock)
-        {
-            Logprintf("recalculating params for mainnet.\n");
-            Logprintf("old mainnet genesis nonce: %s\n", genesis.nNonce.ToString().c_str());
-            Logprintf("old mainnet genesis hash:  %s\n", hashGenesisBlock.ToString().c_str());
-            // deliberately empty for loop finds nonce value.
-            for(genesis.nNonce == 0; genesis.GetHash() > bnProofOfWorkLimit; genesis.nNonce++){ } 
-            Logprintf("new mainnet genesis merkle root: %s\n", genesis.hashMerkleRoot.ToString().c_str());
-            Logprintf("new mainnet genesis nonce: %s\n", genesis.nNonce.ToString().c_str());
-            Logprintf("new mainnet genesis hash: %s\n", genesis.GetHash().ToString().c_str());
-        }
         assert(consensus.hashGenesisBlock == uint256S("0x01"));
         assert(genesis.hashMerkleRoot == uint256S("0x01"));
 
