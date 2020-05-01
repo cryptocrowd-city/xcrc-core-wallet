@@ -70,7 +70,7 @@ premine script is:
   OP_HASH160 hexPremineAddress OP_EQUAL
 */
 constexpr const char hexPremineAddressMainnet[]
-    = "7a3d24629b2d14de329e9d20fecd559239f010d0";
+    = "0bfcab0aacbf9ae83a7ca1941e19d50c682e7da7";
 
 CBlock CreateGenesisBlock(const CScript& genesisInputScript, const CScript& genesisOutputScript, uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
