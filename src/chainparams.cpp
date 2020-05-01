@@ -55,7 +55,7 @@ final premine script will be:
   OP_HASH160 hexPremineAddress OP_EQUAL
 */
 constexpr const char hexPremineAddressRegtest[]
-    = "0014113056f8212de2a75c0a7e87f21c94b116f4ca34";
+    = "3e04395f53eb2974720dbb484690ed1837818b8d";
 
 /*
 The premine on testnet and mainnet is sent to a 2-of-4 multisig address.  The
@@ -446,7 +446,7 @@ public:
 
         UpdateActivationParametersFromArgs(args);
 
-        genesis = CreateGenesisBlock (1588348432, 0, 0x207fffff,
+        genesis = CreateGenesisBlock (1588331987, 0, 0x207fffff,
                                       pszTimestampTestnet,
                                       uint160S (hexPremineAddressRegtest));
         consensus.hashGenesisBlock = genesis.GetHash();
@@ -473,8 +473,8 @@ public:
         }
         std::cout << std::string("Finished calculating Regtest Genesis Block.\n");
 //
-        assert(consensus.hashGenesisBlock == uint256S("0xc32e9cfd282811e1168d41d5778762810e1adb7c96b48ae6b124ab5e39e27be6"));
-        assert(genesis.hashMerkleRoot == uint256S("0x3360c38453f2f21765e92dd4b72a85948c35b90be8ea6a87e0f72932325398e7"));
+        assert(consensus.hashGenesisBlock == uint256S("0xf9e8797b7313cafcfb29a4597af3f4817caa608743bf816d88e8235d8e090463"));
+        assert(genesis.hashMerkleRoot == uint256S("0x49effbb2a0b9e1281ad9a703301c891d1caaac0ab506a8b786bb23e310f02227"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();      //!< Regtest mode doesn't have any DNS seeds.
