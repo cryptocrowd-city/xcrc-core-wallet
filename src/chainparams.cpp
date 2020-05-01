@@ -475,7 +475,7 @@ public:
         std::cout << std::string("Finished calculating Regtest Genesis Block.\n");
 //
 //        assert(consensus.hashGenesisBlock == uint256S("0xf9e8797b7313cafcfb29a4597af3f4817caa608743bf816d88e8235d8e090463"));
-//        assert(genesis.hashMerkleRoot == uint256S("0x49effbb2a0b9e1281ad9a703301c891d1caaac0ab506a8b786bb23e310f02227"));
+        assert(genesis.hashMerkleRoot == uint256S("0x49effbb2a0b9e1281ad9a703301c891d1caaac0ab506a8b786bb23e310f02227"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();      //!< Regtest mode doesn't have any DNS seeds.
