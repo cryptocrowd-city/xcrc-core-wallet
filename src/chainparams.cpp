@@ -55,7 +55,7 @@ final premine script will be:
   OP_HASH160 hexPremineAddress OP_EQUAL
 */
 constexpr const char hexPremineAddressRegtest[]
-    = "3e04395f53eb2974720dbb484690ed1837818b8d";
+    = "0014113056f8212de2a75c0a7e87f21c94b116f4ca34";
 
 /*
 The premine on testnet and mainnet is sent to a 2-of-4 multisig address.  The
@@ -206,7 +206,7 @@ public:
         pchMessageStart[1] = 0xf2;
         pchMessageStart[2] = 0xf6;
         pchMessageStart[3] = 0x93;
-        nDefaultPort = 11998;
+        nDefaultPort = 11999;
         nPruneAfterHeight = 100000;
         m_assumed_blockchain_size = 2;
         m_assumed_chain_state_size = 1;
@@ -245,8 +245,8 @@ public:
         /* vSeeds.emplace_back("seed.cryptocrowd.domob.eu"); */
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,75);
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,78);
-        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,80);
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,80);
+        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,78);
         /* FIXME: Update these below.  */
         base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x88, 0xE4, 0xAD};
         base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x88, 0x1E, 0xB2};
@@ -289,7 +289,7 @@ public:
     CTestNetParams() {
         strNetworkID = "test";
         consensus.nSubsidyHalvingInterval = 2880;
-        consensus.initialSubsidy = 10000000000; //10 * COIN;
+        consensus.initialSubsidy = 1000000000; //10 * COIN;
         consensus.BIP16Height = 0;
         consensus.BIP34Height = 1;
         consensus.BIP65Height = 0;
@@ -321,7 +321,7 @@ public:
         pchMessageStart[1] = 0xc3;
         pchMessageStart[2] = 0x95;
         pchMessageStart[3] = 0x87;
-        nDefaultPort = 19998;
+        nDefaultPort = 19999;
         nPruneAfterHeight = 1000;
         m_assumed_blockchain_size = 1;
         m_assumed_chain_state_size = 1;
@@ -362,8 +362,8 @@ public:
         /* vSeeds.emplace_back("seed.testnet.cryptocrowd.domob.eu"); */
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,137);
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,140);
-        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,142);
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,142);
+        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,140);
         /* FIXME: Update these below.  */
         base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x35, 0x87, 0xCF};
         base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x35, 0x83, 0x94};
@@ -406,10 +406,10 @@ class CRegTestParams : public CChainParams {
 public:
     explicit CRegTestParams(const ArgsManager& args) {
         strNetworkID = "regtest";
-        consensus.nSubsidyHalvingInterval = 150;
+        consensus.nSubsidyHalvingInterval = 100;
         // The subsidy for regtest net is kept same as upstream Bitcoin, so
         // that we don't have to update many of the tests unnecessarily.
-        consensus.initialSubsidy = 50 * COIN;
+        consensus.initialSubsidy = 1000000000; // 100 * COIN;
         consensus.BIP16Height = 0;
         consensus.BIP34Height = 500; // BIP34 activated on regtest (Used in functional tests)
         consensus.BIP65Height = 1351; // BIP65 activated on regtest (Used in functional tests)
@@ -439,7 +439,7 @@ public:
         pchMessageStart[1] = 0xb3;
         pchMessageStart[2] = 0xbb;
         pchMessageStart[3] = 0xd4;
-        nDefaultPort = 18332;
+        nDefaultPort = 18333;
         nPruneAfterHeight = 1000;
         m_assumed_blockchain_size = 0;
         m_assumed_chain_state_size = 0;
@@ -451,7 +451,7 @@ public:
                                       uint160S (hexPremineAddressRegtest));
         consensus.hashGenesisBlock = genesis.GetHash();
 //
-//        consensus.hashGenesisBlock = uint256S("0x");
+        consensus.hashGenesisBlock = uint256S("0x");
         if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) { 
         std::cout << "Mining Regtest genesis block..." << std::endl;
 
@@ -473,8 +473,8 @@ public:
         }
         std::cout << std::string("Finished calculating Regtest Genesis Block.\n");
 //
-        assert(consensus.hashGenesisBlock == uint256S("0xf9e8797b7313cafcfb29a4597af3f4817caa608743bf816d88e8235d8e090463"));
-        assert(genesis.hashMerkleRoot == uint256S("0x49effbb2a0b9e1281ad9a703301c891d1caaac0ab506a8b786bb23e310f02227"));
+//        assert(consensus.hashGenesisBlock == uint256S("0xf9e8797b7313cafcfb29a4597af3f4817caa608743bf816d88e8235d8e090463"));
+//        assert(genesis.hashMerkleRoot == uint256S("0x49effbb2a0b9e1281ad9a703301c891d1caaac0ab506a8b786bb23e310f02227"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();      //!< Regtest mode doesn't have any DNS seeds.
@@ -496,8 +496,8 @@ public:
         };
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,137);
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,140);
-        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,142);
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,142);
+        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,140);
         base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x35, 0x87, 0xCF};
         base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x35, 0x83, 0x94};
 

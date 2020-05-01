@@ -11,7 +11,7 @@
 /** Amount in satoshis (Can be negative) */
 typedef int64_t CAmount;
 
-static const CAmount COIN = 1000000;
+static const CAmount COIN = 100000000;
 
 /** No amount larger than this (in satoshi) is valid.  */
 static const CAmount MAX_MONEY = 1050000000 * COIN;
