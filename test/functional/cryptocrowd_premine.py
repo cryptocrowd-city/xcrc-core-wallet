@@ -11,13 +11,9 @@ from test_framework.util import *
 import codecs
 
 PREMINE_VALUE = Decimal ('222222222')
-PREMINE_ADDRESS = 'dHNvNaqcD7XPDnoRjAoyfcMpHRi5upJD7p'
-PREMINE_PRIVKEYS = ['b69iyynFSWcU54LqXisbbqZ8uTJ7Dawk3V3yhht6ykxgttqMQFjb',
-                    'b3fgAKVQpMj24gbuh6DiXVwCCjCbo1cWiZC2fXgWEU9nXy6sdxD5']
-PREMINE_PUBKEYS = [
-  '03c278d06b977e67b8ea45ef24e3c96a9258c47bc4cce3d0b497b690d672497b6e',
-  '0221ac9dc97fe12a98374344d08b458a9c2c1df9afb29dd6089b94a3b4dc9ad570',
-]
+PREMINE_ADDRESS = 'x8X42gzmcNiJ6uwKs4n6LCabD4Re9toWXv'
+PREMINE_PRIVKEYS = ['MqWQ3RdHpLn2KhKR3ojzn6DgDnWCB1xtiavW26G4aYKmMgAmhctY']
+PREMINE_PUBKEYS = ['02f2c2837ed5e9060c271d504303f4d9a87ac65a1ca4cf1100b7df31a4f732b325']
 
 class PremineTest(BitcoinTestFramework):
   def set_test_params(self):
