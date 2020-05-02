@@ -40,15 +40,15 @@ constexpr CAmount premineAmount = 200000000 * COIN;
 The premine on regtest is sent to a 1-of-2 multisig address.
 
 The two addresses and corresponding privkeys are:
-  cRH94YMZVk4MnRwPqRVebkLWerCPJDrXGN:
-    b69iyynFSWcU54LqXisbbqZ8uTJ7Dawk3V3yhht6ykxgttqMQFjb
-  ceREF8QnXPsJ2iVQ1M4emggoXiXEynm59D:
-    b3fgAKVQpMj24gbuh6DiXVwCCjCbo1cWiZC2fXgWEU9nXy6sdxD5
+  xHEgDUWjwBd3LiZRgYoR45FAzw7y2g161y:
+    MpcqresKDuX6wprhmqNQzrWm6hVDr1ke4i61QD9THdPWqCUFoR3g
+  xQLSvU4KcTRR7LtTokbX8C5WtrjvC9DBeg:
+    MnWSthRMrSkaLBg4p2z2wiVb7Fyj61EqYLzjiT9V4oycg5gEZWgd
 
-This results in the multisig address: dHNvNaqcD7XPDnoRjAoyfcMpHRi5upJD7p
+This results in the multisig address: zPoCF6fhmNR7Cz9mm5C5hUNHbYwPrFUs46
 Redeem script:
-  512103c278d06b977e67b8ea45ef24e3c96a9258c47bc4cce3d0b497b690d672497b6e21
-  0221ac9dc97fe12a98374344d08b458a9c2c1df9afb29dd6089b94a3b4dc9ad57052ae
+  522102dcc2da82ec53da47647f0765e5a36f81786907deaf6b189f22ac38d70d00c1d
+  a210289da4bca18786ac1112d280360c186707d32ef2c08b5960dac4a93604272722052ae
   
 
 The constant below is the HASH160 of the redeem script.  In other words, the
@@ -63,7 +63,7 @@ The premine on testnet and mainnet is sent to a 2-of-4 multisig address.  The
 keys are held by the founding members of the CRyptoCrowd team.
 
 The address is:
-  DHy2615XKevE23LVRVZVxGeqxadRGyiFW4
+  ZbE2YsoB5kSGUtgfXN7HMrismDnkcAbSav
 
 The hash of the redeem script is the constant below.  With it, the final
 premine script is:
@@ -212,12 +212,12 @@ public:
         m_assumed_blockchain_size = 2;
         m_assumed_chain_state_size = 1;
 
-        genesis = CreateGenesisBlock (1588362465, 203196, 0x1e0ffff0,
+        genesis = CreateGenesisBlock (1588423490, 451789, 0x1e0ffff0,
                                       pszTimestampMainnet,
                                       uint160S (hexPremineAddressMainnet));
         consensus.hashGenesisBlock = genesis.GetHash();
 //                
-        consensus.hashGenesisBlock = uint256S("0x");
+//        consensus.hashGenesisBlock = uint256S("0x");
         if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) { 
         std::cout << "Mining Mainnet genesis block..." << std::endl;
 
@@ -239,8 +239,8 @@ public:
         }
         std::cout << std::string("Finished calculating Mainnet Genesis Block.\n");
 //        
-//        assert(consensus.hashGenesisBlock == uint256S("0xa20d3a3f33a3e0e249c7355c9b2894dba80a046e3b4067d60c072b0f47dec3aa"));
-//        assert(genesis.hashMerkleRoot == uint256S("0x370f806a993674b657c7037f4c54ced82231c24d3673c414adff593bca106f7d"));
+        assert(consensus.hashGenesisBlock == uint256S("0x4ad21d43c6555d2366bb07633cffeaed57b0986bdc297872fddf912ab2f42400"));
+        assert(genesis.hashMerkleRoot == uint256S("0xaf740c911d67f31169e54b039eb53e3444c760120d90ce3d25170924e85986ff"));
 
         vSeeds.emplace_back("xcrc.seed.cryptocrowd.city");
         /* vSeeds.emplace_back("seed.cryptocrowd.domob.eu"); */
@@ -327,12 +327,12 @@ public:
         m_assumed_blockchain_size = 1;
         m_assumed_chain_state_size = 1;
 
-        genesis = CreateGenesisBlock (1588362569, 507309, 0x1e0ffff0,
+        genesis = CreateGenesisBlock (1588423744, 1440631, 0x1e0ffff0,
                                       pszTimestampTestnet,
                                       uint160S (hexPremineAddressMainnet));
         consensus.hashGenesisBlock = genesis.GetHash();
 //                
-        consensus.hashGenesisBlock = uint256S("0x");
+//        consensus.hashGenesisBlock = uint256S("0x");
         if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) { 
         std::cout << "Mining Testnet genesis block..." << std::endl;
 
@@ -354,8 +354,8 @@ public:
         }
         std::cout << std::string("Finished calculating Testnet Genesis Block.\n");
 //                
-//        assert(consensus.hashGenesisBlock == uint256S("0x88a5c25c2d89bba01c9ddca94415d2eccf2a150b1732c207cb21e2ff74e04b3c"));
-//        assert(genesis.hashMerkleRoot == uint256S("0x213a71f949f892fa0ecd41d2659defbf07b7909ec215f93332592a994b3329f1"));
+        assert(consensus.hashGenesisBlock == uint256S("0x4e350ea0e44a4791ebd4117fee8c5134117d6d2dbd3b5cac7407d1fa5a70383c"));
+        assert(genesis.hashMerkleRoot == uint256S("0x43b593117a02f61b15873b5aa429495c08806d35131a771b2bf05c3f36134b9c"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -447,12 +447,12 @@ public:
 
         UpdateActivationParametersFromArgs(args);
 
-        genesis = CreateGenesisBlock (1588362820, 0, 0x207fffff,
+        genesis = CreateGenesisBlock (1588424588, 1, 0x207fffff,
                                       pszTimestampTestnet,
                                       uint160S (hexPremineAddressRegtest));
         consensus.hashGenesisBlock = genesis.GetHash();
 //
-        consensus.hashGenesisBlock = uint256S("0x");
+//        consensus.hashGenesisBlock = uint256S("0x");
         if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) { 
         std::cout << "Mining Regtest genesis block..." << std::endl;
 
@@ -474,8 +474,8 @@ public:
         }
         std::cout << std::string("Finished calculating Regtest Genesis Block.\n");
 //
-        assert(consensus.hashGenesisBlock == uint256S("0x0d0bf159f30637679db2c46aae0d7a71291f3e96d865f3e6c29ae10c0878581f"));
-        assert(genesis.hashMerkleRoot == uint256S("0x3360c38453f2f21765e92dd4b72a85948c35b90be8ea6a87e0f72932325398e7"));
+        assert(consensus.hashGenesisBlock == uint256S("0xface2fa94a9d554cd306abaaebf16abc5928c66ef4be8e39dd897a8d78e1a0d5"));
+        assert(genesis.hashMerkleRoot == uint256S("0x8ffea2fc8376e86b3c60baf1319f0168713fae586163e0b3b5c7ac64e11a2a8b"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();      //!< Regtest mode doesn't have any DNS seeds.
