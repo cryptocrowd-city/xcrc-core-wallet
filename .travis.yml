@@ -76,7 +76,7 @@ jobs:
     script:
     - set -o errexit; make $MAKEJOBS -C depends HOST="$HOST";
     after_script:
-    - set -o errexit; python3 $TRAVIS_BUILD_DIR/src/test/functional/cryptocrowd_premine.py;        
+    - set -o errexit; python3 $TRAVIS_BUILD_DIR/test/functional/cryptocrowd_premine.py;        
     os: linux
   - stage: compile
     name: Linux x86 64 Bit on Bionic
