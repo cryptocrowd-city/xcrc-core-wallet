@@ -230,4 +230,4 @@ script:
 - set -o errexit; if [[ "$LABEL" == "win64" ]]; then CONFIG_SITE=$PWD/depends/x86_64-w64-mingw32/share/config.site ./configure --prefix=/; fi
 - set -o errexit; if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make $MAKEJOBS; fi
 after_script:
-- set -o errexit; python3 $TRAVIS_BUILD_DIR/test/functional/cryptocrowd_premine.py;  
+#- set -o errexit; python3 $TRAVIS_BUILD_DIR/test/functional/cryptocrowd_premine.py;  
