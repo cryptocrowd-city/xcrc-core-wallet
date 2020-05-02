@@ -74,9 +74,7 @@ jobs:
     before_script:
     - PATH=$(echo "$PATH" | sed -e 's/:\/mnt.*//g'); 
     script:
-    - set -o errexit; make $MAKEJOBS -C depends HOST="$HOST";
-    after_script:
-    - set -o errexit; python3 $TRAVIS_BUILD_DIR/test/functional/cryptocrowd_premine.py;        
+    - set -o errexit; make $MAKEJOBS -C depends HOST="$HOST";           
     os: linux
   - stage: compile
     name: Linux x86 64 Bit on Bionic
@@ -231,3 +229,5 @@ script:
 - set -o errexit; if [[ "$LABEL" == "win32" ]]; then CONFIG_SITE=$PWD/depends/i686-w64-mingw32/share/config.site ./configure --prefix=/; fi
 - set -o errexit; if [[ "$LABEL" == "win64" ]]; then CONFIG_SITE=$PWD/depends/x86_64-w64-mingw32/share/config.site ./configure --prefix=/; fi
 - set -o errexit; if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make $MAKEJOBS; fi
+after_script:
+- set -o errexit; python3 $TRAVIS_BUILD_DIR/test/functional/cryptocrowd_premine.py; 
