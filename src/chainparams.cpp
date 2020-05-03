@@ -212,11 +212,11 @@ public:
         m_assumed_blockchain_size = 2;
         m_assumed_chain_state_size = 1;
 
-        genesis = CreateGenesisBlock (1588423490, 451789, 0x1e0ffff0,
+        genesis = CreateGenesisBlock (1588510683, 1021671, 0x1e0ffff0,
                                       pszTimestampMainnet,
                                       uint160S (hexPremineAddressMainnet));
         consensus.hashGenesisBlock = genesis.GetHash();
-//                
+/*                
         consensus.hashGenesisBlock = uint256S("0x");
         if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) { 
         std::cout << "Mining Mainnet genesis block..." << std::endl;
@@ -238,9 +238,9 @@ public:
         std::cout << "Merkle root: " << genesis.hashMerkleRoot.GetHex () << std::endl;
         }
         std::cout << std::string("Finished calculating Mainnet Genesis Block.\n");
-//        
-//        assert(consensus.hashGenesisBlock == uint256S("0x4ad21d43c6555d2366bb07633cffeaed57b0986bdc297872fddf912ab2f42400"));
-//        assert(genesis.hashMerkleRoot == uint256S("0xaf740c911d67f31169e54b039eb53e3444c760120d90ce3d25170924e85986ff"));
+*/        
+        assert(consensus.hashGenesisBlock == uint256S("0x70cb59a1563bba03651f8be38677bc6da841e1fd117b8da85aafac26bc0f0e33"));
+        assert(genesis.hashMerkleRoot == uint256S("0xaf740c911d67f31169e54b039eb53e3444c760120d90ce3d25170924e85986ff"));
 
         vSeeds.emplace_back("xcrc.seed.cryptocrowd.city");
         /* vSeeds.emplace_back("seed.cryptocrowd.domob.eu"); */
@@ -327,11 +327,11 @@ public:
         m_assumed_blockchain_size = 1;
         m_assumed_chain_state_size = 1;
 
-        genesis = CreateGenesisBlock (1588423744, 1440631, 0x1e0ffff0,
+        genesis = CreateGenesisBlock (1588511194, 250272, 0x1e0ffff0,
                                       pszTimestampTestnet,
                                       uint160S (hexPremineAddressRegtest));
         consensus.hashGenesisBlock = genesis.GetHash();
-//                
+/*                
         consensus.hashGenesisBlock = uint256S("0x");
         if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) { 
         std::cout << "Mining Testnet genesis block..." << std::endl;
@@ -353,9 +353,9 @@ public:
         std::cout << "Merkle root: " << genesis.hashMerkleRoot.GetHex () << std::endl;
         }
         std::cout << std::string("Finished calculating Testnet Genesis Block.\n");
-//                
-//        assert(consensus.hashGenesisBlock == uint256S("0x4e350ea0e44a4791ebd4117fee8c5134117d6d2dbd3b5cac7407d1fa5a70383c"));
-//        assert(genesis.hashMerkleRoot == uint256S("0x43b593117a02f61b15873b5aa429495c08806d35131a771b2bf05c3f36134b9c"));
+*/                
+        assert(consensus.hashGenesisBlock == uint256S("0xef3e770ad7d81b12dbbde6952d468e4dc241cc1d2a875fcba663b0158c61174e"));
+        assert(genesis.hashMerkleRoot == uint256S("0x8ffea2fc8376e86b3c60baf1319f0168713fae586163e0b3b5c7ac64e11a2a8b"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -447,11 +447,11 @@ public:
 
         UpdateActivationParametersFromArgs(args);
 
-        genesis = CreateGenesisBlock (1588424588, 1, 0x207fffff,
+        genesis = CreateGenesisBlock (1588511318, 0, 0x207fffff,
                                       pszTimestampTestnet,
                                       uint160S (hexPremineAddressRegtest));
         consensus.hashGenesisBlock = genesis.GetHash();
-//
+/*
         consensus.hashGenesisBlock = uint256S("0x");
         if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) { 
         std::cout << "Mining Regtest genesis block..." << std::endl;
@@ -473,9 +473,9 @@ public:
         std::cout << "Merkle root: " << genesis.hashMerkleRoot.GetHex () << std::endl;
         }
         std::cout << std::string("Finished calculating Regtest Genesis Block.\n");
-//
-//        assert(consensus.hashGenesisBlock == uint256S("0xface2fa94a9d554cd306abaaebf16abc5928c66ef4be8e39dd897a8d78e1a0d5"));
-//        assert(genesis.hashMerkleRoot == uint256S("0x8ffea2fc8376e86b3c60baf1319f0168713fae586163e0b3b5c7ac64e11a2a8b"));
+*/
+        assert(consensus.hashGenesisBlock == uint256S("0x269e3eb53bcdca966b52e1099dcdfc11c19e07c3923a4cfdaf4d1529f85a9964"));
+        assert(genesis.hashMerkleRoot == uint256S("0x8ffea2fc8376e86b3c60baf1319f0168713fae586163e0b3b5c7ac64e11a2a8b"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();      //!< Regtest mode doesn't have any DNS seeds.
