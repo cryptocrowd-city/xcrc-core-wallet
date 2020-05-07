@@ -27,8 +27,8 @@ namespace
 
 constexpr const char pszTimestampTestnet[] = "CRyptoCrowd Testnet";
 constexpr const char pszTimestampMainnet[]
-    = "29.04.2020: "
-      "CNN - The world may never recover its thirst for oil";
+    = "07.05.2020: "
+      "CNN - Angela Merkel's legacy was doomed. Coronavirus saved it";
 
 /* Premined amount is 222,222,222 XCRC.  This is the maximum possible number of
    coins needed in case everything is sold in the ICO.  If this is not the case
@@ -216,7 +216,7 @@ public:
                                       pszTimestampMainnet,
                                       uint160S (hexPremineAddressMainnet));
         consensus.hashGenesisBlock = genesis.GetHash();
-/*                
+//                
         consensus.hashGenesisBlock = uint256S("0x");
         if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) { 
         std::cout << "Mining Mainnet genesis block..." << std::endl;
@@ -238,9 +238,9 @@ public:
         std::cout << "Merkle root: " << genesis.hashMerkleRoot.GetHex () << std::endl;
         }
         std::cout << std::string("Finished calculating Mainnet Genesis Block.\n");
-*/        
-        assert(consensus.hashGenesisBlock == uint256S("0x70cb59a1563bba03651f8be38677bc6da841e1fd117b8da85aafac26bc0f0e33"));
-        assert(genesis.hashMerkleRoot == uint256S("0xaf740c911d67f31169e54b039eb53e3444c760120d90ce3d25170924e85986ff"));
+//        
+//        assert(consensus.hashGenesisBlock == uint256S("0x70cb59a1563bba03651f8be38677bc6da841e1fd117b8da85aafac26bc0f0e33"));
+//        assert(genesis.hashMerkleRoot == uint256S("0xaf740c911d67f31169e54b039eb53e3444c760120d90ce3d25170924e85986ff"));
 
         vSeeds.emplace_back("xcrc.seed.cryptocrowd.city");
         /* vSeeds.emplace_back("seed.cryptocrowd.domob.eu"); */
@@ -331,7 +331,7 @@ public:
                                       pszTimestampTestnet,
                                       uint160S (hexPremineAddressRegtest));
         consensus.hashGenesisBlock = genesis.GetHash();
-/*                
+//                
         consensus.hashGenesisBlock = uint256S("0x");
         if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) { 
         std::cout << "Mining Testnet genesis block..." << std::endl;
@@ -353,9 +353,9 @@ public:
         std::cout << "Merkle root: " << genesis.hashMerkleRoot.GetHex () << std::endl;
         }
         std::cout << std::string("Finished calculating Testnet Genesis Block.\n");
-*/                
-        assert(consensus.hashGenesisBlock == uint256S("0xef3e770ad7d81b12dbbde6952d468e4dc241cc1d2a875fcba663b0158c61174e"));
-        assert(genesis.hashMerkleRoot == uint256S("0x8ffea2fc8376e86b3c60baf1319f0168713fae586163e0b3b5c7ac64e11a2a8b"));
+//                
+//        assert(consensus.hashGenesisBlock == uint256S("0xef3e770ad7d81b12dbbde6952d468e4dc241cc1d2a875fcba663b0158c61174e"));
+//        assert(genesis.hashMerkleRoot == uint256S("0x8ffea2fc8376e86b3c60baf1319f0168713fae586163e0b3b5c7ac64e11a2a8b"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -451,7 +451,7 @@ public:
                                       pszTimestampTestnet,
                                       uint160S (hexPremineAddressRegtest));
         consensus.hashGenesisBlock = genesis.GetHash();
-/*
+//
         consensus.hashGenesisBlock = uint256S("0x");
         if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) { 
         std::cout << "Mining Regtest genesis block..." << std::endl;
@@ -473,8 +473,8 @@ public:
         std::cout << "Merkle root: " << genesis.hashMerkleRoot.GetHex () << std::endl;
         }
         std::cout << std::string("Finished calculating Regtest Genesis Block.\n");
-*/
-        assert(consensus.hashGenesisBlock == uint256S("0x269e3eb53bcdca966b52e1099dcdfc11c19e07c3923a4cfdaf4d1529f85a9964"));
+//
+//        assert(consensus.hashGenesisBlock == uint256S("0x269e3eb53bcdca966b52e1099dcdfc11c19e07c3923a4cfdaf4d1529f85a9964"));
         assert(genesis.hashMerkleRoot == uint256S("0x8ffea2fc8376e86b3c60baf1319f0168713fae586163e0b3b5c7ac64e11a2a8b"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
