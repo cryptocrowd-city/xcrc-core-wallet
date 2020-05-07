@@ -189,10 +189,10 @@ public:
         // The value is the chain work of the CRyptoCrowd mainnet chain at height
         // 1,234,000, with best block hash:
         // a853c0581c3637726a769b77cadf185e09666742757ef2df00058e876cf25897
-        consensus.nMinimumChainWork = uint256S("0000000000000000000000000000000000000000000000000000000100010001");
+        consensus.nMinimumChainWork = uint256S("0x00");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0xa853c0581c3637726a769b77cadf185e09666742757ef2df00058e876cf25897"); // 1,234,000
+        consensus.defaultAssumeValid = uint256S("0x00"); // 1,234,000
 
         consensus.nAuxpowChainId = 1829;
 
@@ -309,10 +309,10 @@ public:
         // The value is the chain work of the CRyptoCrowd testnet chain at height
         // 70,000 with best block hash:
         // e2c154dc8e223cef271b54174c9d66eaf718378b30977c3df115ded629f3edb1
-        consensus.nMinimumChainWork = uint256S("0000000000000000000000000000000000000000000000000000000100010001");
+        consensus.nMinimumChainWork = uint256S("0x00");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0xe2c154dc8e223cef271b54174c9d66eaf718378b30977c3df115ded629f3edb1"); // 70,000
+        consensus.defaultAssumeValid = uint256S("0x00"); // 70,000
 
         consensus.nAuxpowChainId = 1829;
 
