@@ -10,12 +10,12 @@
 #endif //HAVE_CONFIG_H
 
 //! These need to be macros, as clientversion.cpp's and cryptocrowd*-res.rc's voodoo requires it
-#define CLIENT_VERSION_MAJOR 0
-#define CLIENT_VERSION_MINOR 3
-#define CLIENT_VERSION_REVISION 3
-#define CLIENT_VERSION_BUILD 322
-#define CLIENT_VERSION_IS_RELEASE false
-#define COPYRIGHT_YEAR 2020 
+//#define CLIENT_VERSION_MAJOR 0
+//#define CLIENT_VERSION_MINOR 3
+//#define CLIENT_VERSION_REVISION 3
+//#define CLIENT_VERSION_BUILD 322
+//#define CLIENT_VERSION_IS_RELEASE false
+//#define COPYRIGHT_YEAR 2020 
 
 // Check that required client information is defined
 #if !defined(CLIENT_VERSION_MAJOR) || !defined(CLIENT_VERSION_MINOR) || !defined(CLIENT_VERSION_REVISION) || !defined(CLIENT_VERSION_BUILD) || !defined(CLIENT_VERSION_IS_RELEASE) || !defined(COPYRIGHT_YEAR)
